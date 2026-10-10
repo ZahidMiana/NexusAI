@@ -20,14 +20,14 @@ export function LaunchFeed() {
   return (
     <ul className="space-y-2">
       {PRODUCT_LAUNCHES.map((launch) => (
-        <li key={launch.id} className="rounded-xl border border-zinc-800 bg-black/40 p-3 transition-colors hover:border-zinc-700">
+        <li key={launch.id} className="rounded-xl border border-line bg-inset p-3 transition-colors hover:border-line-strong">
           <div className="flex items-center justify-between gap-3">
             <div className="flex min-w-0 items-center gap-3">
               <Rocket className="h-4 w-4 shrink-0 text-cyber-pink" />
               <div className="min-w-0">
-                <p className="truncate font-tech text-sm tracking-wider text-zinc-100">{launch.name}</p>
-                <p className="truncate font-mono text-xs text-zinc-400">
-                  {launch.client} · <span className="text-zinc-300">{launch.metric}</span>
+                <p className="truncate font-tech text-sm tracking-wider text-fg-soft">{launch.name}</p>
+                <p className="truncate font-mono text-xs text-fg-muted">
+                  {launch.client} · <span className="text-fg-soft">{launch.metric}</span>
                 </p>
               </div>
             </div>
@@ -37,10 +37,10 @@ export function LaunchFeed() {
           </div>
           {launch.status === "DEPLOYING" && (
             <div className="mt-2 flex items-center gap-2">
-              <div className="h-1 flex-1 overflow-hidden rounded-full bg-zinc-900">
+              <div className="h-1 flex-1 overflow-hidden rounded-full bg-track">
                 <div
                   className="h-full rounded-full bg-cyber-pink transition-[width] duration-500 ease-hardware"
-                  style={{ width: `${progress}%`, boxShadow: "0 0 8px rgba(255,0,127,0.8)" }}
+                  style={{ width: `${progress}%`, boxShadow: "0 0 8px rgb(var(--accent-pink) / 0.8)" }}
                 />
               </div>
               <span className="w-10 text-right font-mono text-xs text-cyber-pink tabular-nums">{progress.toFixed(0)}%</span>

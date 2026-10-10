@@ -7,15 +7,18 @@ export interface GlitchTextProps {
   className?: string;
 }
 
-/** RGB-split glitch effect using two clipped, offset overlay copies. */
+/**
+ * RGB-split glitch using two clipped, offset copies. Bursts once after load
+ * and again on hover/focus, so it draws the eye without constant noise.
+ */
 export function GlitchText({ text, as: Tag = "span", className }: GlitchTextProps) {
   return (
-    <Tag className={cn("relative inline-block", className)} data-text={text}>
+    <Tag className={cn("glitch-host relative inline-block", className)}>
       <span className="relative z-10">{text}</span>
-      <span aria-hidden className="absolute inset-0 animate-glitch-a text-cyber-cyan mix-blend-screen select-none">
+      <span aria-hidden className="glitch-layer-a absolute inset-0 text-cyber-cyan mix-blend-screen select-none">
         {text}
       </span>
-      <span aria-hidden className="absolute inset-0 animate-glitch-b text-cyber-pink mix-blend-screen select-none">
+      <span aria-hidden className="glitch-layer-b absolute inset-0 text-cyber-pink mix-blend-screen select-none">
         {text}
       </span>
     </Tag>

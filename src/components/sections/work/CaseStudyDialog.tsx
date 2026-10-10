@@ -1,6 +1,7 @@
 "use client";
 
 import { CheckCircle2, Clock, Quote, Rocket } from "lucide-react";
+import { CountUp } from "@/components/effects/CountUp";
 import { Dialog } from "@/components/ui/Dialog";
 import { NeonButton } from "@/components/ui/NeonButton";
 import { useContactLauncher } from "@/context/ContactContext";
@@ -40,20 +41,21 @@ function CaseStudyBody({ study, titleId, onStartSimilar }: { study: CaseStudy; t
         <p className={cn("font-tech text-xs tracking-[0.14em] uppercase", tokens.text)}>
           Mission log · {study.industry} · {study.client}
         </p>
-        <h2 id={titleId} className="font-display text-3xl font-black tracking-wide text-white uppercase sm:text-4xl">
+        <h2 id={titleId} className="font-display text-3xl font-black tracking-wide text-fg uppercase sm:text-4xl">
           {study.title}
         </h2>
-        <p className="font-mono text-base leading-relaxed text-zinc-300">{study.summary}</p>
-        <p className="flex items-center gap-2 font-tech text-xs tracking-[0.12em] text-zinc-400 uppercase">
+        <p className="font-mono text-base leading-relaxed text-fg-soft">{study.summary}</p>
+        <p className="flex items-center gap-2 font-tech text-xs tracking-[0.12em] text-fg-muted uppercase">
           <Clock className="h-3.5 w-3.5" /> Delivered in {study.duration}
         </p>
       </header>
 
       <dl className="grid grid-cols-1 gap-3 sm:grid-cols-3">
         {study.results.map((metric) => (
-          <div key={metric.label} className={cn("flex flex-col-reverse rounded-xl border bg-black/40 p-4", tokens.borderSoft)}>
-              <dt className="mt-1 font-tech text-xs tracking-[0.1em] text-zinc-400 uppercase">{metric.label}</dt>
-              <dd className={cn("font-display text-3xl font-black", tokens.text, tokens.textGlow)}>{metric.value}</dd>
+          <div key={metric.label} className={cn("flex flex-col-reverse rounded-xl border bg-inset p-4", tokens.borderSoft)}>
+              <dt className="mt-1 font-tech text-xs tracking-[0.1em] text-fg-muted uppercase">{metric.label}</dt>
+              <dd className={cn("font-display text-3xl font-black", tokens.text, tokens.textGlow)}><CountUp value={metric.value} durationMs={900} />
+              </dd>
           </div>
         ))}
       </dl>
@@ -61,13 +63,13 @@ function CaseStudyBody({ study, titleId, onStartSimilar }: { study: CaseStudy; t
       <section className="grid gap-8 md:grid-cols-2">
         <div className="space-y-3">
           <h3 className="font-tech text-sm tracking-[0.14em] text-cyber-pink uppercase">The problem</h3>
-          <p className="font-mono text-sm leading-relaxed text-zinc-300">{study.problem}</p>
+          <p className="font-mono text-sm leading-relaxed text-fg-soft">{study.problem}</p>
         </div>
         <div className="space-y-3">
           <h3 className="font-tech text-sm tracking-[0.14em] text-cyber-lime uppercase">What we built</h3>
           <ul className="space-y-2">
             {study.solution.map((item) => (
-              <li key={item} className="flex gap-2 font-mono text-sm leading-relaxed text-zinc-300">
+              <li key={item} className="flex gap-2 font-mono text-sm leading-relaxed text-fg-soft">
                 <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-cyber-lime" />
                 {item}
               </li>
@@ -77,17 +79,17 @@ function CaseStudyBody({ study, titleId, onStartSimilar }: { study: CaseStudy; t
       </section>
 
       {study.quote && (
-        <blockquote className={cn("relative rounded-xl border bg-black/40 p-5 pl-12", tokens.borderSoft)}>
+        <blockquote className={cn("relative rounded-xl border bg-inset p-5 pl-12", tokens.borderSoft)}>
           <Quote className={cn("absolute top-5 left-4 h-5 w-5", tokens.text)} />
-          <p className="font-mono text-base leading-relaxed text-white">{study.quote}</p>
-          <footer className="mt-2 font-tech text-xs tracking-[0.12em] text-zinc-400 uppercase">{study.client}</footer>
+          <p className="font-mono text-base leading-relaxed text-fg">{study.quote}</p>
+          <footer className="mt-2 font-tech text-xs tracking-[0.12em] text-fg-muted uppercase">{study.client}</footer>
         </blockquote>
       )}
 
-      <footer className="flex flex-col gap-5 border-t border-zinc-800 pt-6 sm:flex-row sm:items-center sm:justify-between">
+      <footer className="flex flex-col gap-5 border-t border-line pt-6 sm:flex-row sm:items-center sm:justify-between">
         <ul className="flex flex-wrap gap-2" aria-label="Technology used">
           {study.stack.map((tech) => (
-            <li key={tech} className="rounded border border-zinc-700 bg-black/40 px-2 py-1 font-tech text-xs tracking-[0.1em] text-zinc-300 uppercase">
+            <li key={tech} className="rounded border border-line-strong bg-inset px-2 py-1 font-tech text-xs tracking-[0.1em] text-fg-soft uppercase">
               {tech}
             </li>
           ))}

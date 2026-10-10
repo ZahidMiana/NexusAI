@@ -12,7 +12,7 @@ export function TechStackSection() {
   const [selected, setSelected] = useState<TechItem>(ALL_TECH_ITEMS[0]);
 
   return (
-    <section id="stack" aria-labelledby="stack-heading" className="mx-auto max-w-7xl scroll-mt-28 px-4 pt-24 sm:px-6">
+    <section id="stack" aria-labelledby="stack-heading" className="mx-auto max-w-7xl scroll-mt-28 px-4 pt-28 sm:px-6 md:pt-36">
       <SectionHeading
         headingId="stack-heading"
         index="08"

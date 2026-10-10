@@ -15,7 +15,7 @@ export function CaseStudiesSection() {
   const [openStudy, setOpenStudy] = useState<CaseStudy | null>(null);
 
   return (
-    <section id="work" aria-labelledby="work-heading" className="mx-auto max-w-7xl scroll-mt-28 px-4 pt-24 sm:px-6">
+    <section id="work" aria-labelledby="work-heading" className="mx-auto max-w-7xl scroll-mt-28 px-4 pt-28 sm:px-6 md:pt-36">
       <SectionHeading
         headingId="work-heading"
         index="02"

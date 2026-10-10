@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { DecodeText } from "@/components/effects/DecodeText";
 import { accentTokens } from "@/lib/accent";
 import { cn } from "@/lib/cn";
 import type { Accent } from "@/types";
@@ -20,11 +21,11 @@ export function SectionHeading({ index, title, headingId, subtitle, accent = "cy
         <p className={cn("font-tech text-xs tracking-[0.14em] uppercase", tokens.text)}>
           {"// "}SECTOR_{index}
         </p>
-        <h2 id={headingId} className="mt-2 font-display text-2xl font-black tracking-wider text-white uppercase sm:text-3xl lg:text-4xl">
-          {title}
+        <h2 id={headingId} className="mt-2 font-display text-2xl font-black tracking-wider text-fg uppercase sm:text-3xl lg:text-4xl">
+          <DecodeText text={title} />
         </h2>
       </div>
-      {subtitle && <p className="max-w-md font-mono text-sm leading-relaxed text-zinc-300">{subtitle}</p>}
+      {subtitle && <p className="max-w-md font-mono text-sm leading-relaxed text-fg-soft">{subtitle}</p>}
     </header>
   );
 }

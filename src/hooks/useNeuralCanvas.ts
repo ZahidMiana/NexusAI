@@ -3,7 +3,8 @@
 import { useCallback, useEffect, useRef, useState, type PointerEvent, type RefObject } from "react";
 import { createNetwork, renderNetwork, stepNetwork, stimulate, type NetworkState } from "@/lib/neural/simulation";
 import type { PointerState } from "@/types";
-import { usePrefersReducedMotion } from "./useMediaQuery";
+import { readAccentPalette, type AccentPalette } from "@/lib/accent";
+import { useMotionAllowed, usePreferences } from "./usePreferences";
 
 /** How long a touch keeps the mesh excited after the finger lifts. */
 const TOUCH_LINGER_MS = 1600;
@@ -31,7 +32,9 @@ export function useNeuralCanvas(canvasRef: RefObject<HTMLCanvasElement | null>):
   const stimulusRef = useRef<{ x: number; y: number } | null>(null);
   const lingerRef = useRef<number | null>(null);
   const [active, setActive] = useState(false);
-  const reducedMotion = usePrefersReducedMotion();
+  const reducedMotion = !useMotionAllowed();
+  const { theme, style } = usePreferences();
+  const paletteRef = useRef<AccentPalette | null>(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -53,7 +56,8 @@ export function useNeuralCanvas(canvasRef: RefObject<HTMLCanvasElement | null>):
       canvas.height = Math.round(height * ratio);
       context.setTransform(ratio, 0, 0, ratio, 0, 0);
       state = createNetwork(width, height);
-      if (reducedMotion) renderNetwork(context, state, width, height, { x: 0, y: 0, active: false });
+      paletteRef.current = readAccentPalette();
+      if (reducedMotion) renderNetwork(context, state, width, height, { x: 0, y: 0, active: false }, paletteRef.current);
     };
 
     const loop = () => {
@@ -64,7 +68,7 @@ export function useNeuralCanvas(canvasRef: RefObject<HTMLCanvasElement | null>):
           stimulusRef.current = null;
         }
         stepNetwork(state, width, height, pointerRef.current);
-        renderNetwork(context, state, width, height, pointerRef.current);
+        renderNetwork(context, state, width, height, pointerRef.current, paletteRef.current ?? readAccentPalette());
       }
       frame = window.requestAnimationFrame(loop);
     };
@@ -84,7 +88,7 @@ export function useNeuralCanvas(canvasRef: RefObject<HTMLCanvasElement | null>):
       resizeObserver.disconnect();
       intersectionObserver.disconnect();
     };
-  }, [canvasRef, reducedMotion]);
+  }, [canvasRef, reducedMotion, theme, style]);
 
   useEffect(
     () => () => {

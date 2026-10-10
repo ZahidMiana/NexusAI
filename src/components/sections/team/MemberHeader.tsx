@@ -31,22 +31,22 @@ export function MemberHeader({ member, index, compact = false }: MemberHeaderPro
         <Avatar member={member} />
         <div className="min-w-0 flex-1">
           <div className="flex flex-wrap items-center gap-2">
-            <span className="font-tech text-xs tracking-[0.14em] text-zinc-400">OP_0{index + 1}</span>
+            <span className="font-tech text-xs tracking-[0.14em] text-fg-muted">OP_0{index + 1}</span>
             <span className="inline-flex items-center gap-1.5 rounded-full border border-cyber-pink/40 bg-cyber-pink/10 px-2 py-0.5 font-tech text-xs tracking-[0.12em] text-cyber-pink uppercase">
               <StatusDot accent="pink" className="h-1.5 w-1.5" />
               {member.status}
             </span>
           </div>
-          <h3 className="mt-1 truncate font-display text-xl font-black tracking-wide text-white uppercase">{member.name}</h3>
+          <h3 className="mt-1 truncate font-display text-xl font-black tracking-wide text-fg uppercase">{member.name}</h3>
           <p className={cn("font-tech text-xs tracking-[0.12em] uppercase", tokens.text)}>
-            {member.role} <span className="text-zinc-400">{member.handle}</span>
+            {member.role} <span className="text-fg-muted">{member.handle}</span>
           </p>
         </div>
       </div>
-      {!compact && <p className="font-mono text-sm leading-relaxed text-zinc-300">{member.bio}</p>}
+      {!compact && <p className="font-mono text-sm leading-relaxed text-fg-soft">{member.bio}</p>}
       <ul className="flex flex-wrap gap-1.5" aria-label={`${member.name} focus areas`}>
         {member.focus.map((focus) => (
-          <li key={focus} className="rounded border border-zinc-800 bg-black/40 px-2 py-0.5 font-tech text-xs tracking-[0.12em] text-zinc-400 uppercase">
+          <li key={focus} className="rounded border border-line bg-inset px-2 py-0.5 font-tech text-xs tracking-[0.12em] text-fg-muted uppercase">
             {focus}
           </li>
         ))}
@@ -66,7 +66,7 @@ function Avatar({ member }: { member: TeamMember }) {
   const tokens = accentTokens(member.accent);
   return (
     <div
-      className={cn("relative flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden border bg-black/60 font-display text-lg font-black", tokens.borderSoft, tokens.text, tokens.textGlow)}
+      className={cn("relative flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden border bg-inset font-display text-lg font-black", tokens.borderSoft, tokens.text, tokens.textGlow)}
       style={{ clipPath: HEXAGON }}
       aria-hidden={!member.photo}
     >
@@ -96,7 +96,7 @@ function SocialLinks({ member }: { member: TeamMember }) {
             target="_blank"
             rel="noopener noreferrer"
             aria-label={`${member.name} on ${SOCIAL_LABELS[brand]}`}
-            className="flex h-8 w-8 items-center justify-center rounded-lg border border-zinc-700 text-zinc-300 transition-colors hover:border-zinc-400 hover:text-white"
+            className="flex h-8 w-8 items-center justify-center rounded-lg border border-line-strong text-fg-soft transition-colors hover:border-line-strong hover:text-fg"
           >
             <BrandIcon brand={brand} className="h-4 w-4" />
           </a>

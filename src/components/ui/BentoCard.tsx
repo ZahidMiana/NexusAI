@@ -51,8 +51,8 @@ export function BentoCard({
   };
 
   const cardStyle = {
-    "--spot": `rgba(${tokens.rgb}, 0.9)`,
-    "--spot-soft": `rgba(${tokens.rgb}, 0.1)`,
+    "--spot": `rgb(${tokens.rgb} / 0.9)`,
+    "--spot-soft": `rgb(${tokens.rgb} / 0.1)`,
     transform: tilt ? "perspective(1200px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg))" : undefined,
     ...style,
   } as CSSProperties;
@@ -64,7 +64,7 @@ export function BentoCard({
       onPointerMove={handlePointerMove}
       onPointerLeave={handlePointerLeave}
       className={cn(
-        "group/bento relative isolate overflow-hidden rounded-2xl border border-zinc-800 bg-panel",
+        "bento group/bento relative isolate overflow-hidden rounded-2xl border border-line bg-panel",
         "transform-gpu transition-[transform,scale,box-shadow,border-color] duration-500 ease-hardware will-change-transform",
         scaleOnHover && "hover:scale-[1.012]",
         tokens.hoverBorder,
@@ -73,7 +73,7 @@ export function BentoCard({
       )}
       {...rest}
     >
-      <span aria-hidden className="pointer-events-none absolute inset-0 -z-10 bg-scanlines opacity-40" />
+      <span aria-hidden className="pointer-events-none absolute inset-0 -z-10 bg-scanlines opacity-20" />
       <span aria-hidden className="bento-spotlight-fill pointer-events-none absolute inset-0 -z-10 opacity-0 transition-opacity duration-500 group-hover/bento:opacity-100" />
       <span aria-hidden className="bento-spotlight-border pointer-events-none absolute inset-0 z-20 rounded-[inherit] opacity-0 transition-opacity duration-500 group-hover/bento:opacity-100" />
       <CornerBrackets accent={accent} />
@@ -98,7 +98,7 @@ function CornerBrackets({ accent }: { accent: Accent }) {
           key={position}
           aria-hidden
           className={cn(
-            "pointer-events-none absolute h-3 w-3 border-zinc-700 transition-colors duration-500",
+            "bento-bracket pointer-events-none absolute h-3 w-3 border-line-strong opacity-0 transition-[opacity,border-color] duration-500 group-hover/bento:opacity-100",
             position,
             groupHoverBorder,
           )}
@@ -118,9 +118,9 @@ export interface BentoLabelProps {
 export function BentoLabel({ index, children, accent = "cyan", className }: BentoLabelProps) {
   const tokens = accentTokens(accent);
   return (
-    <div className={cn("flex items-center gap-2 font-tech text-xs tracking-[0.14em] text-zinc-400 uppercase", className)}>
+    <div className={cn("flex items-center gap-2 font-tech text-xs tracking-[0.14em] text-fg-muted uppercase", className)}>
       {index && <span className={tokens.text}>{index}</span>}
-      <span aria-hidden className="h-px w-6 bg-zinc-700" />
+      <span aria-hidden className="h-px w-6 bg-line-strong" />
       <span>{children}</span>
     </div>
   );

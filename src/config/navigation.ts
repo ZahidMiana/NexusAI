@@ -8,10 +8,10 @@ export interface NavLink {
 
 export const NAV_LINKS: readonly NavLink[] = [
   { id: "work", code: "02", label: "Work", primary: true },
-  { id: "team", code: "03", label: "Operators", primary: true },
-  { id: "process", code: "04", label: "Process", primary: false },
-  { id: "services", code: "05", label: "Services", primary: true },
-  { id: "proof", code: "06", label: "Clients", primary: false },
+  { id: "proof", code: "03", label: "Clients", primary: false },
+  { id: "team", code: "04", label: "Operators", primary: true },
+  { id: "process", code: "05", label: "Process", primary: false },
+  { id: "services", code: "06", label: "Services", primary: true },
   { id: "terminal", code: "07", label: "Terminal", primary: false },
   { id: "stack", code: "08", label: "Stack", primary: false },
   { id: "faq", code: "09", label: "FAQ", primary: false },

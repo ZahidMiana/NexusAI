@@ -69,28 +69,28 @@ export function VisionScreen({ onBack }: VisionScreenProps) {
                   top: `${template.baseY + box.dy}%`,
                   width: `${template.width}%`,
                   height: `${template.height}%`,
-                  boxShadow: `0 0 10px rgba(${tokens.rgb}, 0.6), inset 0 0 10px rgba(${tokens.rgb}, 0.25)`,
+                  boxShadow: `0 0 10px rgb(${tokens.rgb} / 0.6), inset 0 0 10px rgb(${tokens.rgb} / 0.25)`,
                 }}
               >
-                <span className={cn("absolute -top-4 left-[-2px] rounded-t-sm px-1 font-tech text-[11px] whitespace-nowrap text-black", tokens.bg)}>
+                <span className={cn("absolute -top-4 left-[-2px] rounded-t-sm px-1 font-tech text-[11px] whitespace-nowrap text-on-accent", tokens.bg)}>
                   {template.label} {(box.confidence * 100).toFixed(0)}%
                 </span>
               </div>
             );
           })}
 
-        <div className="absolute top-2 left-2 rounded bg-black/70 px-1.5 py-0.5 font-tech text-[11px] text-cyber-lime">● REC · {fps.toFixed(0)} FPS</div>
-        <div className="absolute top-2 right-2 rounded bg-black/70 px-1.5 py-0.5 font-tech text-[11px] text-cyber-cyan">{(1000 / fps).toFixed(1)}ms</div>
+        <div className="absolute top-2 left-2 rounded bg-inset px-1.5 py-0.5 font-tech text-[11px] text-cyber-lime">● REC · {fps.toFixed(0)} FPS</div>
+        <div className="absolute top-2 right-2 rounded bg-inset px-1.5 py-0.5 font-tech text-[11px] text-cyber-cyan">{(1000 / fps).toFixed(1)}ms</div>
       </div>
 
-      <div className="flex items-center gap-2 border-t border-zinc-900 p-3">
+      <div className="flex items-center gap-2 border-t border-line p-3">
         <button
           type="button"
           onClick={() => setOverlays((value) => !value)}
           aria-pressed={overlays}
           className={cn(
             "flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border transition-colors",
-            overlays ? "border-cyber-lime bg-cyber-lime/10 text-cyber-lime" : "border-zinc-800 text-zinc-400",
+            overlays ? "border-cyber-lime bg-cyber-lime/10 text-cyber-lime" : "border-line text-fg-muted",
           )}
           aria-label={overlays ? "Hide detection overlays" : "Show detection overlays"}
         >
@@ -99,7 +99,7 @@ export function VisionScreen({ onBack }: VisionScreenProps) {
         <button
           type="button"
           onClick={() => setDetectorIndex((index) => (index + 1) % DETECTORS.length)}
-          className="flex-1 rounded-xl border border-zinc-800 py-2 font-tech text-[11px] tracking-[0.12em] text-zinc-300 transition-colors hover:border-cyber-pink/60 hover:text-cyber-pink"
+          className="flex-1 rounded-xl border border-line py-2 font-tech text-[11px] tracking-[0.12em] text-fg-soft transition-colors hover:border-cyber-pink/60 hover:text-cyber-pink"
         >
           MODEL: {detector.label}
         </button>

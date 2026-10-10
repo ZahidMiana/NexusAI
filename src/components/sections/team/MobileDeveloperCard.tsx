@@ -21,7 +21,7 @@ export function MobileDeveloperCard({ member, index }: MemberCardProps) {
   return (
     <BentoCard accent={member.accent} scaleOnHover={false} className="flex h-full flex-col gap-6 p-6">
       <div className="flex items-center justify-between">
-        <BentoLabel index="03.C" accent={member.accent}>
+        <BentoLabel index="04.C" accent={member.accent}>
           Edge Intelligence Rig
         </BentoLabel>
         <Smartphone className="h-5 w-5 text-cyber-lime drop-glow-lime" />
@@ -31,7 +31,7 @@ export function MobileDeveloperCard({ member, index }: MemberCardProps) {
         <div className="flex min-w-0 flex-1 flex-col gap-5">
           <MemberHeader member={member} index={index} />
           <DeviceTelemetry mode={mode} llmActive={llmActive} />
-          <p className="font-mono text-xs leading-relaxed text-zinc-300">
+          <p className="font-mono text-xs leading-relaxed text-fg-soft">
             {"// Tap an app inside the device to run a live on-device inference simulation."}
           </p>
         </div>

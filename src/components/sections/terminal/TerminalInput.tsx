@@ -13,9 +13,9 @@ export interface TerminalInputProps {
 
 export function TerminalInput({ inputRef, value, busy, onChange, onKeyDown }: TerminalInputProps) {
   return (
-    <label className="flex items-center gap-2 border-t border-zinc-800 bg-black/60 px-4 py-3 sm:px-6">
+    <label className="flex items-center gap-2 border-t border-line bg-inset px-4 py-3 sm:px-6">
       <span className="shrink-0 text-cyber-lime">guest@nexus</span>
-      <span className="shrink-0 text-zinc-400">~$</span>
+      <span className="shrink-0 text-fg-muted">~$</span>
       <input
         ref={inputRef}
         value={value}
@@ -26,7 +26,7 @@ export function TerminalInput({ inputRef, value, busy, onChange, onKeyDown }: Te
         autoCapitalize="off"
         aria-label="Terminal command input"
         placeholder="type /help and press enter"
-        className="min-w-0 flex-1 bg-transparent text-white caret-cyber-pink outline-none placeholder:text-zinc-500"
+        className="min-w-0 flex-1 bg-transparent text-fg caret-cyber-pink outline-none placeholder:text-fg-muted"
       />
       <span className={cn("shrink-0 font-tech text-xs tracking-[0.12em] uppercase", busy ? "text-cyber-pink animate-flicker" : "text-cyber-lime")}>
         {busy ? "streaming" : "ready"}

@@ -31,7 +31,7 @@ export function ArchitectureGraph() {
             <li key={layer.id} className="relative">
               {index < INFERENCE_ARCHITECTURE.length - 1 && (
                 <svg className="absolute top-full left-6 z-0 h-2 w-px overflow-visible" aria-hidden>
-                  <line x1="0" y1="0" x2="0" y2="8" stroke={tokens.hex} strokeWidth="1.5" strokeDasharray="3 3" className="animate-dash" />
+                  <line x1="0" y1="0" x2="0" y2="8" style={{ stroke: tokens.hex }} strokeWidth="1.5" strokeDasharray="3 3" className="animate-dash" />
                 </svg>
               )}
               <button
@@ -39,15 +39,15 @@ export function ArchitectureGraph() {
                 onClick={() => setSelected(layer.id)}
                 aria-pressed={isSelected}
                 className={cn(
-                  "relative z-10 flex w-full items-center justify-between gap-3 rounded-lg border bg-black/50 px-3 py-2 text-left transition-all duration-300 ease-hardware",
-                  isSelected ? cn(tokens.border, tokens.glow) : "border-zinc-800 hover:border-zinc-600",
+                  "relative z-10 flex w-full items-center justify-between gap-3 rounded-lg border bg-inset px-3 py-2 text-left transition-all duration-300 ease-hardware",
+                  isSelected ? cn(tokens.border, tokens.glow) : "border-line hover:border-line-strong",
                 )}
               >
                 <span className="flex items-center gap-3">
                   <span className={cn("font-tech text-xs tabular-nums", tokens.text)}>L{index + 1}</span>
-                  <span className="font-tech text-xs tracking-[0.12em] text-zinc-200 uppercase">{layer.label}</span>
+                  <span className="font-tech text-xs tracking-[0.12em] text-fg-soft uppercase">{layer.label}</span>
                 </span>
-                <span className="hidden truncate font-mono text-xs text-zinc-400 sm:inline">{layer.detail}</span>
+                <span className="hidden truncate font-mono text-xs text-fg-muted sm:inline">{layer.detail}</span>
               </button>
             </li>
           );
@@ -61,14 +61,14 @@ export function ArchitectureGraph() {
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: -12 }}
           transition={{ duration: 0.25 }}
-          className="rounded-xl border border-zinc-800 bg-black/50 p-4"
+          className="rounded-xl border border-line bg-inset p-4"
         >
           <p className={cn("flex items-center gap-1 font-tech text-xs tracking-[0.14em] uppercase", selectedTokens.text)}>
             <ChevronRight className="h-3.5 w-3.5" />
             {selectedLayer.label}
           </p>
-          <p className="mt-1 font-mono text-xs text-zinc-400">{selectedLayer.detail}</p>
-          <p className="mt-3 font-mono text-sm leading-relaxed text-zinc-300">{LAYER_NOTES[selectedLayer.id]}</p>
+          <p className="mt-1 font-mono text-xs text-fg-muted">{selectedLayer.detail}</p>
+          <p className="mt-3 font-mono text-sm leading-relaxed text-fg-soft">{LAYER_NOTES[selectedLayer.id]}</p>
           <div className="mt-4 flex items-center gap-2 font-tech text-xs tracking-[0.14em] text-cyber-lime uppercase">
             <span className="h-1.5 w-1.5 rounded-full bg-cyber-lime drop-glow-lime" /> Health check passing
           </div>

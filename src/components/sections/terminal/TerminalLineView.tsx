@@ -6,12 +6,12 @@ import { cn } from "@/lib/cn";
 import type { TerminalLine, TerminalTone } from "@/types";
 
 const TONE_CLASSES: Record<TerminalTone, string> = {
-  default: "text-zinc-300",
-  muted: "text-zinc-400",
+  default: "text-fg-soft",
+  muted: "text-fg-muted",
   cyan: "text-cyber-cyan text-glow-cyan",
   pink: "text-cyber-pink text-glow-pink",
   lime: "text-cyber-lime text-glow-lime",
-  error: "text-red-400",
+  error: "text-danger",
 };
 
 export interface TerminalLineViewProps {
@@ -34,8 +34,8 @@ export const TerminalLineView = memo(function TerminalLineView({ line, animate, 
     return (
       <div className="flex gap-2 pt-2 whitespace-pre-wrap break-words">
         <span className="shrink-0 text-cyber-lime">guest@nexus</span>
-        <span className="shrink-0 text-zinc-400">~$</span>
-        <span className="text-white">{line.text}</span>
+        <span className="shrink-0 text-fg-muted">~$</span>
+        <span className="text-fg">{line.text}</span>
       </div>
     );
   }

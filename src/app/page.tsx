@@ -1,6 +1,7 @@
 import { Footer } from "@/components/layout/Footer";
 import { GridBackground } from "@/components/layout/GridBackground";
 import { Navbar } from "@/components/layout/Navbar";
+import { BootSequence } from "@/components/effects/BootSequence";
 import { AppProviders } from "@/components/providers/AppProviders";
 import { ContactSection } from "@/components/sections/contact/ContactSection";
 import { FaqSection } from "@/components/sections/faq/FaqSection";
@@ -16,15 +17,16 @@ import { CaseStudiesSection } from "@/components/sections/work/CaseStudiesSectio
 export default function HomePage() {
   return (
     <AppProviders>
+      <BootSequence />
       <GridBackground />
       <Navbar />
       <main>
         <HeroSection />
         <CaseStudiesSection />
+        <ProofSection />
         <TeamSection />
         <ProcessSection />
         <ServicesSection />
-        <ProofSection />
         <TerminalSection />
         <TechStackSection />
         <FaqSection />

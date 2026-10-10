@@ -2,10 +2,10 @@
 
 import { useEffect, useRef } from "react";
 import { useActivity } from "@/context/ActivityContext";
-import { usePrefersReducedMotion } from "./useMediaQuery";
+import { useMotionAllowed } from "./usePreferences";
 
 export type IntervalKind =
-  /** Ambient telemetry: pauses off-screen, in hidden tabs and under reduced motion. */
+  /** Ambient telemetry: pauses off-screen, in hidden tabs, under reduced motion and in Calm mode. */
   | "decorative"
   /** User-initiated work (loading bars, demos): always runs while mounted. */
   | "functional";
@@ -18,8 +18,8 @@ export interface IntervalOptions {
 export function useInterval(callback: () => void, delay: number | null, { kind = "decorative" }: IntervalOptions = {}): void {
   const savedCallback = useRef(callback);
   const active = useActivity();
-  const reducedMotion = usePrefersReducedMotion();
-  const paused = kind === "decorative" && (!active || reducedMotion);
+  const motionAllowed = useMotionAllowed();
+  const paused = kind === "decorative" && (!active || !motionAllowed);
   const effectiveDelay = paused ? null : delay;
 
   useEffect(() => {

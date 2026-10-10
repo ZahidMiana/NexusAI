@@ -16,8 +16,8 @@ export interface TerminalWindowProps {
 export function TerminalWindow({ title, accent = "cyan", actions, className, bodyClassName, children }: TerminalWindowProps) {
   const tokens = accentTokens(accent);
   return (
-    <div className={cn("overflow-hidden rounded-xl border border-zinc-800 bg-black/70", className)}>
-      <div className="flex items-center justify-between gap-3 border-b border-zinc-800 bg-panel-raised/80 px-4 py-2.5">
+    <div className={cn("scheme-dark terminal-shell overflow-hidden rounded-xl border border-line bg-void", className)}>
+      <div className="flex items-center justify-between gap-3 border-b border-line bg-panel-raised/80 px-4 py-2.5">
         <div className="flex items-center gap-3">
           <div className="flex gap-1.5" aria-hidden>
             <span className="h-2.5 w-2.5 rounded-full bg-cyber-pink/80" />

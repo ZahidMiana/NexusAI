@@ -1,4 +1,5 @@
 import type { LucideIcon } from "lucide-react";
+import type { DesignStyleId, EffectsMode, ThemeId } from "@/lib/preferences/themes";
 
 /** Neon accent channels available throughout the design system. */
 export type Accent = "cyan" | "pink" | "lime";
@@ -61,7 +62,11 @@ export interface TerminalLine {
 export type TerminalLineDraft = Pick<TerminalLine, "text"> & Partial<Pick<TerminalLine, "tone">>;
 
 /** Side effects a command can request; the host UI decides how to fulfil them. */
-export type TerminalEffect = { type: "open-contact"; prefill?: ContactPrefill };
+export type TerminalEffect =
+  | { type: "open-contact"; prefill?: ContactPrefill }
+  | { type: "set-style"; style: DesignStyleId }
+  | { type: "set-theme"; theme: ThemeId }
+  | { type: "set-effects"; effects: EffectsMode };
 
 export interface CommandResult {
   lines: readonly TerminalLineDraft[];

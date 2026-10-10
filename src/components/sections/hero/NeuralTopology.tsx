@@ -35,8 +35,8 @@ export function NeuralTopology() {
 function SynapticLoad({ active }: { active: boolean }) {
   const load = useLiveMetric({ initial: 62, amplitude: active ? 9 : 3, min: active ? 70 : 40, max: active ? 99 : 72, intervalMs: 600 });
   return (
-    <div className="rounded-lg border border-zinc-800 bg-black/60 px-4 py-3 backdrop-blur-sm">
-      <p className="font-tech text-xs tracking-[0.14em] text-zinc-400 uppercase">Synaptic load</p>
+    <div className="rounded-lg border border-line bg-inset px-4 py-3 backdrop-blur-sm">
+      <p className="font-tech text-xs tracking-[0.14em] text-fg-muted uppercase">Synaptic load</p>
       <p className={cn("font-display text-2xl font-black tabular-nums", active ? "text-cyber-pink text-glow-pink" : "text-cyber-cyan text-glow-cyan")}>
         {load.toFixed(1)}%
       </p>
@@ -48,7 +48,7 @@ function StimulusHint({ active }: { active: boolean }) {
   const canHover = useCanHover();
   const idleHint = canHover ? "Hover · click to inject stimulus" : "Tap or drag to inject stimulus";
   return (
-    <p className="rounded-md border border-zinc-800 bg-black/60 px-3 py-1.5 font-tech text-xs tracking-[0.12em] text-zinc-300 uppercase backdrop-blur-sm">
+    <p className="rounded-md border border-line bg-inset px-3 py-1.5 font-tech text-xs tracking-[0.12em] text-fg-soft uppercase backdrop-blur-sm">
       {active ? "▲ Mesh excited — signals propagating" : idleHint}
     </p>
   );

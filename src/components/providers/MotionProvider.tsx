@@ -2,8 +2,10 @@
 
 import { MotionConfig } from "framer-motion";
 import type { ReactNode } from "react";
+import { usePreferences } from "@/hooks/usePreferences";
 
-/** Framer Motion follows the OS "reduce motion" setting site-wide. */
+/** Framer follows the OS setting, and is fully reduced in Calm effects mode. */
 export function MotionProvider({ children }: { children: ReactNode }) {
-  return <MotionConfig reducedMotion="user">{children}</MotionConfig>;
+  const { effects } = usePreferences();
+  return <MotionConfig reducedMotion={effects === "calm" ? "always" : "user"}>{children}</MotionConfig>;
 }

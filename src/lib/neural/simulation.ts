@@ -1,4 +1,4 @@
-import { accentRgba } from "@/lib/accent";
+import type { AccentPalette } from "@/lib/accent";
 import { pick, randomBetween } from "@/lib/math";
 import type { Accent, NeuralNode, NeuralSignal, PointerState } from "@/types";
 
@@ -138,15 +138,17 @@ export function stepNetwork(
   });
 }
 
-/** Draws the current network frame onto a 2D canvas context. */
+/** Draws the current network frame onto a 2D canvas context using the live theme palette. */
 export function renderNetwork(
   context: CanvasRenderingContext2D,
   state: NetworkState,
   width: number,
   height: number,
   pointer: PointerState,
+  palette: AccentPalette,
   config: NetworkConfig = DEFAULT_NETWORK_CONFIG,
 ): void {
+  const accentRgba = (accent: Accent, alpha: number) => `rgb(${palette[accent]} / ${alpha})`;
   context.clearRect(0, 0, width, height);
   const { nodes } = state;
 

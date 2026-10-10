@@ -16,15 +16,15 @@ export function Footer() {
           <FooterBlockTitle icon={<KeyRound className="h-4 w-4" />} index="11.A">
             Encrypted Uplinks
           </FooterBlockTitle>
-          <p className="mt-4 font-display text-2xl font-black tracking-wider text-white uppercase">
+          <p className="mt-4 font-display text-2xl font-black tracking-wider text-fg uppercase">
             Open a <span className="text-cyber-pink text-glow-pink">secure channel</span>
           </p>
-          <p className="mt-2 font-mono text-sm text-zinc-400">Hover to decrypt · click to copy to clipboard.</p>
+          <p className="mt-2 font-mono text-sm text-fg-muted">Hover to decrypt · click to copy to clipboard.</p>
           <div className="mt-5 grid gap-3 sm:grid-cols-2">
             <EncryptedMail label="General uplink" address={siteConfig.contact.email} accent="cyan" />
             <EncryptedMail label="Secure / PGP" address={siteConfig.contact.secureEmail} accent="pink" />
           </div>
-          <p className="mt-4 break-all font-mono text-xs text-zinc-400">PGP_FP :: {siteConfig.contact.pgpFingerprint}</p>
+          <p className="mt-4 break-all font-mono text-xs text-fg-muted">PGP_FP :: {siteConfig.contact.pgpFingerprint}</p>
           <OpenContactButton className="mt-5" />
         </BentoCard>
 
@@ -47,11 +47,11 @@ export function Footer() {
         </BentoCard>
       </div>
 
-      <div className="mt-10 flex flex-col items-center justify-between gap-4 border-t border-zinc-900 pt-6 sm:flex-row">
-        <span className="font-display text-sm font-black tracking-[0.14em] text-white">
+      <div className="mt-10 flex flex-col items-center justify-between gap-4 border-t border-line pt-6 sm:flex-row">
+        <span className="font-display text-sm font-black tracking-[0.14em] text-fg">
           <GlitchText text={siteConfig.brandMark} />
         </span>
-        <span className="font-tech text-xs tracking-[0.14em] text-zinc-400 uppercase">
+        <span className="font-tech text-xs tracking-[0.14em] text-fg-muted uppercase">
           End of transmission {"//"} all systems nominal
         </span>
       </div>
@@ -63,7 +63,7 @@ function FooterBlockTitle({ icon, index, children }: { icon: ReactNode; index: s
   return (
     <div className="flex items-center justify-between">
       <BentoLabel index={index}>{children}</BentoLabel>
-      <span className="text-zinc-400">{icon}</span>
+      <span className="text-fg-muted">{icon}</span>
     </div>
   );
 }

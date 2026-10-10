@@ -1,7 +1,8 @@
 "use client";
 
 import { useCallback, type PointerEvent, type RefObject } from "react";
-import { useCanHover, usePrefersReducedMotion } from "./useMediaQuery";
+import { useCanHover } from "./useMediaQuery";
+import { useMotionAllowed } from "./usePreferences";
 
 export interface SpotlightOptions {
   tilt?: boolean;
@@ -21,8 +22,8 @@ export interface SpotlightHandlers {
  */
 export function useSpotlight(ref: RefObject<HTMLElement | null>, { tilt = false, maxTilt = 4 }: SpotlightOptions = {}): SpotlightHandlers {
   const canHover = useCanHover();
-  const reducedMotion = usePrefersReducedMotion();
-  const tiltEnabled = tilt && canHover && !reducedMotion;
+  const motionAllowed = useMotionAllowed();
+  const tiltEnabled = tilt && canHover && motionAllowed;
 
   const onPointerMove = useCallback(
     (event: PointerEvent<HTMLElement>) => {

@@ -15,7 +15,7 @@ const NEXT_STEPS = [
 
 export function ContactSection() {
   return (
-    <section id={CONTACT_SECTION_ID} aria-labelledby="contact-heading" className="mx-auto max-w-7xl scroll-mt-24 px-4 pt-24 sm:px-6">
+    <section id={CONTACT_SECTION_ID} aria-labelledby="contact-heading" className="mx-auto max-w-7xl scroll-mt-24 px-4 pt-28 sm:px-6 md:pt-36">
       <SectionHeading
         headingId="contact-heading"
         index="10"
@@ -34,13 +34,13 @@ export function ContactSection() {
                     {index + 1}
                   </span>
                   <div>
-                    <p className="font-tech text-sm tracking-[0.1em] text-white uppercase">{step.title}</p>
-                    <p className="mt-1 font-mono text-sm leading-relaxed text-zinc-300">{step.detail}</p>
+                    <p className="font-tech text-sm tracking-[0.1em] text-fg uppercase">{step.title}</p>
+                    <p className="mt-1 font-mono text-sm leading-relaxed text-fg-soft">{step.detail}</p>
                   </div>
                 </li>
               ))}
             </ol>
-            <ul className="mt-auto space-y-3 border-t border-zinc-800 pt-6">
+            <ul className="mt-auto space-y-3 border-t border-line pt-6">
               <Assurance icon={<Clock className="h-4 w-4" />}>Reply within one business day</Assurance>
               <Assurance icon={<FileLock2 className="h-4 w-4" />}>NDA signed before any details</Assurance>
               <Assurance icon={<Handshake className="h-4 w-4" />}>You own all code and models</Assurance>
@@ -67,7 +67,7 @@ export function ContactSection() {
 
 function Assurance({ icon, children }: { icon: ReactNode; children: ReactNode }) {
   return (
-    <li className="flex items-center gap-3 font-mono text-sm text-zinc-200">
+    <li className="flex items-center gap-3 font-mono text-sm text-fg-soft">
       <span className="text-cyber-lime">{icon}</span>
       {children}
     </li>

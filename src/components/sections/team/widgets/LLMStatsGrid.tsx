@@ -27,8 +27,8 @@ export function LLMStatsGrid() {
 
   return (
     <div className="grid gap-4 sm:grid-cols-2">
-      <div className="space-y-3 rounded-xl border border-zinc-800 bg-black/40 p-4">
-        <div className="flex items-center justify-between font-tech text-xs tracking-[0.14em] text-zinc-400 uppercase">
+      <div className="space-y-3 rounded-xl border border-line bg-inset p-4">
+        <div className="flex items-center justify-between font-tech text-xs tracking-[0.14em] text-fg-muted uppercase">
           <span className="flex items-center gap-1.5">
             <Cpu className="h-3.5 w-3.5 text-cyber-cyan" /> GPU Fleet
           </span>
@@ -40,16 +40,16 @@ export function LLMStatsGrid() {
       </div>
 
       <div className="flex flex-col gap-4">
-        <div className="rounded-xl border border-zinc-800 bg-black/40 p-4">
-          <div className="flex items-center justify-between font-tech text-xs tracking-[0.14em] text-zinc-400 uppercase">
+        <div className="rounded-xl border border-line bg-inset p-4">
+          <div className="flex items-center justify-between font-tech text-xs tracking-[0.14em] text-fg-muted uppercase">
             <span className="flex items-center gap-1.5">
               <Activity className="h-3.5 w-3.5 text-cyber-pink" /> Token throughput
             </span>
             <span className="text-cyber-lime">LIVE</span>
           </div>
-          <p className="mt-2 font-display text-2xl font-black text-white tabular-nums">
+          <p className="mt-2 font-display text-2xl font-black text-fg tabular-nums">
             {formatInteger(currentThroughput)}
-            <span className="ml-1 font-tech text-xs font-normal text-zinc-400">tok/s</span>
+            <span className="ml-1 font-tech text-xs font-normal text-fg-muted">tok/s</span>
           </p>
           <Sparkline values={throughput} min={8000} max={15000} accent="pink" className="mt-2 h-12 w-full" />
         </div>
@@ -73,12 +73,12 @@ function GpuMeter({ id, initial }: { id: string; initial: number }) {
 function StatTile({ icon, label, value, accent }: { icon: ReactNode; label: string; value: string; accent: Accent }) {
   const tokens = accentTokens(accent);
   return (
-    <div className="rounded-xl border border-zinc-800 bg-black/40 p-3">
+    <div className="rounded-xl border border-line bg-inset p-3">
       <p className={cn("flex items-center gap-1 font-tech text-xs tracking-[0.12em] uppercase", tokens.text)}>
         {icon}
         {label}
       </p>
-      <p className="mt-1 truncate font-display text-base font-black text-white tabular-nums">{value}</p>
+      <p className="mt-1 truncate font-display text-sm font-black text-fg tabular-nums">{value}</p>
     </div>
   );
 }

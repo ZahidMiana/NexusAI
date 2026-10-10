@@ -12,12 +12,12 @@ export function PromptLine({ user = "root@nexus", command }: PromptLineProps) {
   const { output } = useTypewriter(command, { speed: 45, step: 1 });
 
   return (
-    <p className="flex flex-wrap items-center gap-x-2 font-mono text-xs text-zinc-400 sm:text-sm">
+    <p className="flex flex-wrap items-center gap-x-2 font-mono text-xs text-fg-muted sm:text-sm">
       <span className="text-cyber-lime">{user}</span>
-      <span className="text-zinc-400">:</span>
+      <span className="text-fg-muted">:</span>
       <span className="text-cyber-cyan">~</span>
       <span className="text-cyber-pink">$</span>
-      <span className="text-zinc-200">
+      <span className="text-fg-soft">
         {output}
         <span className="ml-0.5 inline-block h-4 w-2 translate-y-0.5 animate-blink bg-cyber-cyan" aria-hidden />
       </span>

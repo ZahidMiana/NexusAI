@@ -20,12 +20,14 @@ const SIZE_CLASSES: Record<NonNullable<NeonStyleProps["size"]>, string> = {
 export function neonClasses({ accent = "pink", variant = "outline", size = "md", pulse = false }: NeonStyleProps): string {
   const tokens = accentTokens(accent);
   const variantClasses = {
-    solid: cn(tokens.bg, "text-black border border-transparent hover:brightness-110", tokens.glow),
-    outline: cn("border bg-black/40", tokens.borderSoft, tokens.text, tokens.hoverBorder, tokens.hoverGlow, tokens.hoverBgSoft),
-    ghost: cn("border border-transparent text-zinc-400 hover:text-white", tokens.hoverBgSoft),
+    solid: cn(tokens.bg, "text-on-accent border border-transparent hover:brightness-110", tokens.glow),
+    outline: cn("border bg-inset", tokens.borderSoft, tokens.text, tokens.hoverBorder, tokens.hoverGlow, tokens.hoverBgSoft),
+    ghost: cn("border border-transparent text-fg-muted hover:text-fg", tokens.hoverBgSoft),
   }[variant];
 
   return cn(
+    "neon-btn",
+    `neon-btn-${variant}`,
     "relative inline-flex max-w-full items-center justify-center rounded-lg font-display font-semibold tracking-[0.12em] uppercase",
     "transform-gpu transition-all duration-300 ease-hardware active:scale-95 disabled:pointer-events-none disabled:opacity-40",
     SIZE_CLASSES[size],

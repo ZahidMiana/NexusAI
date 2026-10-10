@@ -30,10 +30,10 @@ export function RoiCalculator() {
 
   return (
     <div className="grid gap-4 sm:grid-cols-[1.3fr_1fr]">
-      <div className="space-y-4 rounded-xl border border-zinc-800 bg-black/40 p-4">
+      <div className="space-y-4 rounded-xl border border-line bg-inset p-4">
         {SLIDERS.map((slider) => (
           <label key={slider.key} className="block space-y-1.5">
-            <span className="flex items-center justify-between font-tech text-xs tracking-[0.12em] text-zinc-400 uppercase">
+            <span className="flex items-center justify-between font-tech text-xs tracking-[0.12em] text-fg-muted uppercase">
               {slider.label}
               <span className="text-cyber-pink tabular-nums">{slider.format(inputs[slider.key])}</span>
             </span>
@@ -67,8 +67,8 @@ export function RoiCalculator() {
 function RoiOutput({ label, value, accent }: { label: string; value: string; accent: Accent }) {
   const tokens = accentTokens(accent);
   return (
-    <div className="rounded-xl border border-zinc-800 bg-black/40 px-4 py-3">
-      <p className="font-tech text-xs tracking-[0.14em] text-zinc-400 uppercase">{label}</p>
+    <div className="rounded-xl border border-line bg-inset px-4 py-3">
+      <p className="font-tech text-xs tracking-[0.14em] text-fg-muted uppercase">{label}</p>
       <p className={cn("mt-1 truncate font-display text-lg font-black tabular-nums", tokens.text, tokens.textGlow)}>{value}</p>
     </div>
   );

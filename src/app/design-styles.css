@@ -1,0 +1,317 @@
+/*
+ * Design styles: Clay (default, light claymorphism), Cyber (dark neon) and
+ * Brutal (light neo-brutalism). Cyber values are the base on :root. Every component reads these tokens through Tailwind's
+ * inline theme, so switching <html data-style> re-skins the whole site.
+ *
+ * Specificity note: light-style accents use `html:root[...]` so they win over
+ * the Cyber colour-theme rules above.
+ */
+
+/* ───────────── Cyber colour themes (accent channels as RGB triplets) ───────────── */
+:root,
+:root[data-theme="cyber"] {
+  --accent-cyan: 0 240 255;
+  --accent-pink: 255 0 127;
+  --accent-lime: 57 255 20;
+  --accent-sun: 255 92 170;
+}
+:root[data-theme="synthwave"] {
+  --accent-cyan: 5 217 232;
+  --accent-pink: 255 42 109;
+  --accent-lime: 249 200 14;
+  --accent-sun: 249 200 14;
+}
+:root[data-theme="matrix"] {
+  --accent-cyan: 0 255 156;
+  --accent-pink: 204 255 0;
+  --accent-lime: 57 255 20;
+  --accent-sun: 57 255 20;
+}
+
+/* ───────────── Cyber (base tokens) ───────────── */
+:root {
+  --scheme: dark;
+  --bg: #050505;
+  --surface: #0d0d11;
+  --surface-raised: #13131a;
+  --inset: rgb(0 0 0 / 0.45);
+  --track: #18181b;
+  --fg: #ffffff;
+  --fg-soft: #d4d4d8;
+  --fg-muted: #a1a1aa;
+  --line: #27272a;
+  --line-strong: #3f3f46;
+  --on-accent: #000000;
+  --danger: #f87171;
+  --backdrop: rgb(5 5 5 / 0.8);
+  --nav-bg: rgb(0 0 0 / 0.5);
+  --nav-line: rgb(255 255 255 / 0.1);
+  --shadow-nav: 0 8px 40px rgb(0 0 0 / 0.6);
+
+  --font-display-active: var(--font-orbitron);
+  --font-body-active: var(--font-jetbrains);
+  --font-tech-active: var(--font-share-tech);
+
+  --r-sm: 0.25rem;
+  --r-md: 0.375rem;
+  --r-lg: 0.5rem;
+  --r-xl: 0.75rem;
+  --r-2xl: 1rem;
+}
+
+/* ───────────── Claymorphism (light) ───────────── */
+html:root[data-style="clay"] {
+  --scheme: light;
+  --bg: #ece7f8;
+  --surface: #f7f4fe;
+  --surface-raised: #ffffff;
+  --inset: #efeafb;
+  --track: #ddd5f2;
+  --fg: #251d3a;
+  --fg-soft: #433a5c;
+  --fg-muted: #635a7d;
+  --line: rgb(110 90 170 / 0.16);
+  --line-strong: rgb(110 90 170 / 0.32);
+  --on-accent: #ffffff;
+  --danger: #b91c1c;
+  --backdrop: rgb(60 45 100 / 0.35);
+  --nav-bg: rgb(247 244 254 / 0.8);
+  --nav-line: rgb(255 255 255 / 0.9);
+  --shadow-nav: 10px 10px 30px rgb(120 100 180 / 0.22), -8px -8px 24px rgb(255 255 255 / 0.85);
+
+  --accent-cyan: 21 94 117;
+  --accent-pink: 157 23 77;
+  --accent-lime: 22 101 52;
+
+  --clay-shadow: 12px 12px 28px rgb(120 100 180 / 0.24), -10px -10px 24px rgb(255 255 255 / 0.95), inset 2px 2px 3px rgb(255 255 255 / 0.9), inset -3px -3px 8px rgb(120 100 180 / 0.12);
+  --clay-shadow-hover: 16px 16px 36px rgb(120 100 180 / 0.3), -12px -12px 28px rgb(255 255 255 / 1), inset 2px 2px 3px rgb(255 255 255 / 0.9), inset -3px -3px 8px rgb(120 100 180 / 0.12);
+  --clay-pressed: inset 4px 4px 10px rgb(120 100 180 / 0.22), inset -4px -4px 10px rgb(255 255 255 / 0.9);
+
+  --font-display-active: var(--font-nunito);
+  --font-body-active: var(--font-nunito);
+  --font-tech-active: var(--font-nunito);
+
+  --r-sm: 0.5rem;
+  --r-md: 0.75rem;
+  --r-lg: 1rem;
+  --r-xl: 1.25rem;
+  --r-2xl: 1.75rem;
+}
+
+/* ───────────── Neo-Brutalism (light) ───────────── */
+html:root[data-style="brutal"] {
+  --scheme: light;
+  --bg: #fff4d6;
+  --surface: #ffffff;
+  --surface-raised: #ffe066;
+  --inset: #fffaea;
+  --track: #eadfc0;
+  --fg: #111111;
+  --fg-soft: #1f1f1f;
+  --fg-muted: #474747;
+  --line: #111111;
+  --line-strong: #111111;
+  --on-accent: #ffffff;
+  --danger: #b91c1c;
+  --backdrop: rgb(17 17 17 / 0.55);
+  --nav-bg: #ffffff;
+  --nav-line: #111111;
+  --shadow-nav: 5px 5px 0 #111111;
+
+  --accent-cyan: 29 78 216;
+  --accent-pink: 190 18 60;
+  --accent-lime: 22 101 52;
+
+  --font-display-active: var(--font-archivo);
+  --font-body-active: var(--font-grotesk);
+  --font-tech-active: var(--font-space-mono);
+
+  --r-sm: 0.125rem;
+  --r-md: 0.25rem;
+  --r-lg: 0.375rem;
+  --r-xl: 0.5rem;
+  --r-2xl: 0.625rem;
+}
+
+/*
+ * Device surfaces (terminal, phone mockup) stay dark in every style, like
+ * real hardware. In light styles they also restore bright neon accents and
+ * monospace type.
+ */
+.scheme-dark {
+  --scheme: dark;
+  --bg: #050505;
+  --surface: #0d0d11;
+  --surface-raised: #13131a;
+  --inset: rgb(0 0 0 / 0.45);
+  --track: #18181b;
+  --fg: #ffffff;
+  --fg-soft: #d4d4d8;
+  --fg-muted: #a1a1aa;
+  --line: #27272a;
+  --line-strong: #3f3f46;
+  --on-accent: #000000;
+  --danger: #f87171;
+  color-scheme: dark;
+}
+html:is([data-style="clay"], [data-style="brutal"]) .scheme-dark {
+  --accent-cyan: 0 240 255;
+  --accent-pink: 255 0 127;
+  --accent-lime: 57 255 20;
+  --font-body-active: var(--font-jetbrains);
+  --font-tech-active: var(--font-share-tech);
+}
+
+/* ───────────── Shared light-style behaviour ───────────── */
+
+/* Cyber-only atmosphere disappears in the light styles. */
+html:is([data-style="clay"], [data-style="brutal"]) :is(
+    .bg-scanlines,
+    .bento-spotlight-fill,
+    .bento-spotlight-border,
+    .bento-bracket,
+    .glitch-layer-a,
+    .glitch-layer-b,
+    .horizon-band,
+    .cursor-ring,
+    .bg-scan-band
+  ) {
+  display: none;
+}
+html:is([data-style="clay"], [data-style="brutal"]) :is(.text-glow-cyan, .text-glow-pink, .text-glow-lime, .hero-glow) {
+  text-shadow: none;
+  filter: none;
+}
+html:is([data-style="clay"], [data-style="brutal"]) :is(.drop-glow-cyan, .drop-glow-pink, .drop-glow-lime) {
+  filter: none;
+}
+html:is([data-style="clay"], [data-style="brutal"]) .animate-neon-pulse {
+  animation: none;
+}
+/* Neural canvas and 3D tilt are cyber flourishes; light cards stay flat and calm. */
+html:is([data-style="clay"], [data-style="brutal"]) .bento {
+  transform: none !important;
+}
+
+/* ───────────── Clay specifics ───────────── */
+html[data-style="clay"] .bg-grid-layer {
+  display: none;
+}
+html[data-style="clay"] .bg-glow-blob {
+  filter: blur(100px);
+}
+html[data-style="clay"] .bg-glow-blob[data-tint="cyan"] {
+  background-color: rgb(170 220 255 / 0.6);
+}
+html[data-style="clay"] .bg-glow-blob[data-tint="pink"] {
+  background-color: rgb(255 196 228 / 0.6);
+}
+html[data-style="clay"] .bg-glow-blob[data-tint="lime"] {
+  background-color: rgb(200 240 200 / 0.55);
+}
+html[data-style="clay"] :is(.glow-cyan, .glow-pink, .glow-lime, .hover\:glow-cyan:hover, .hover\:glow-pink:hover, .hover\:glow-lime:hover) {
+  box-shadow: var(--clay-shadow-hover);
+}
+html[data-style="clay"] .bento {
+  border-color: rgb(255 255 255 / 0.7);
+  box-shadow: var(--clay-shadow);
+}
+html[data-style="clay"] .bento:hover {
+  box-shadow: var(--clay-shadow-hover);
+  scale: 0.992;
+}
+html[data-style="clay"] .neon-btn {
+  border-radius: 9999px;
+  border-color: transparent;
+  box-shadow: var(--clay-shadow);
+}
+html[data-style="clay"] .neon-btn:hover {
+  box-shadow: var(--clay-shadow-hover);
+  scale: 1.02;
+}
+html[data-style="clay"] .neon-btn:active {
+  box-shadow: var(--clay-pressed);
+  scale: 0.98;
+}
+html[data-style="clay"] .neon-btn-outline {
+  background: var(--surface);
+}
+html[data-style="clay"] .field-control {
+  border-color: transparent;
+  background: var(--inset);
+  box-shadow: var(--clay-pressed);
+}
+html[data-style="clay"] .field-control:focus {
+  border-color: rgb(var(--accent-cyan) / 0.5);
+}
+html[data-style="clay"] :is(.neon-dialog, .popover-panel) {
+  border-color: rgb(255 255 255 / 0.8);
+  box-shadow: var(--clay-shadow-hover);
+}
+
+/* ───────────── Brutal specifics ───────────── */
+html[data-style="brutal"] .bg-grid-layer {
+  background-image:
+    linear-gradient(rgb(17 17 17 / 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(17 17 17 / 0.07) 1px, transparent 1px);
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+html[data-style="brutal"] .bg-glow-blob {
+  display: none;
+}
+html[data-style="brutal"] :is(.glow-cyan, .glow-pink, .glow-lime, .hover\:glow-cyan:hover, .hover\:glow-pink:hover, .hover\:glow-lime:hover) {
+  box-shadow: 5px 5px 0 #111111;
+}
+html[data-style="brutal"] .bento,
+html[data-style="brutal"] .bento:hover {
+  border-width: 3px;
+  border-color: #111111;
+  box-shadow: 6px 6px 0 #111111;
+}
+html[data-style="brutal"] .bento:hover {
+  translate: -3px -3px;
+  scale: 1;
+  box-shadow: 10px 10px 0 #111111;
+}
+html[data-style="brutal"] .neon-btn {
+  border: 2px solid #111111;
+  box-shadow: 4px 4px 0 #111111;
+}
+html[data-style="brutal"] .neon-btn:hover {
+  translate: -2px -2px;
+  box-shadow: 6px 6px 0 #111111;
+}
+html[data-style="brutal"] .neon-btn:active {
+  translate: 3px 3px;
+  scale: 1;
+  box-shadow: 0 0 0 #111111;
+}
+html[data-style="brutal"] .neon-btn-outline {
+  background: #ffffff;
+}
+html[data-style="brutal"] .field-control {
+  border-width: 2px;
+  border-color: #111111;
+  background: #ffffff;
+}
+html[data-style="brutal"] .field-control:focus {
+  box-shadow: 4px 4px 0 #111111;
+  border-color: #111111;
+}
+html[data-style="brutal"] :is(.neon-dialog, .popover-panel) {
+  border: 3px solid #111111;
+  box-shadow: 10px 10px 0 #111111;
+}
+html[data-style="brutal"] .scheme-dark.terminal-shell,
+html[data-style="brutal"] .phone-shell {
+  border: 3px solid #111111;
+  box-shadow: 8px 8px 0 #111111;
+}
+
+/* Phone mockup: the screen stays dark; the body follows the style. */
+html[data-style="clay"] .phone-shell {
+  border-color: rgb(255 255 255 / 0.9);
+  background: linear-gradient(160deg, #ffffff, #ddd5f2);
+  box-shadow: var(--clay-shadow-hover);
+}

@@ -1,13 +1,23 @@
 import type { Metadata, Viewport } from "next";
-import { JetBrains_Mono, Orbitron, Share_Tech_Mono } from "next/font/google";
+import { Archivo_Black, JetBrains_Mono, Nunito, Orbitron, Share_Tech_Mono, Space_Grotesk, Space_Mono } from "next/font/google";
 import type { ReactNode } from "react";
 import { MotionProvider } from "@/components/providers/MotionProvider";
 import { siteConfig } from "@/config/site";
+import Script from "next/script";
+import { DEFAULT_STYLE, preferenceBootScript } from "@/lib/preferences/themes";
 import "./globals.css";
+import "./design-styles.css";
 
 const orbitron = Orbitron({ subsets: ["latin"], weight: ["500", "700", "900"], variable: "--font-orbitron", display: "swap" });
 const jetbrains = JetBrains_Mono({ subsets: ["latin"], weight: ["400", "500", "700"], variable: "--font-jetbrains", display: "swap" });
 const shareTech = Share_Tech_Mono({ subsets: ["latin"], weight: "400", variable: "--font-share-tech", display: "swap" });
+// Fonts for the light design styles: not preloaded, fetched only when a style uses them.
+const nunito = Nunito({ subsets: ["latin"], weight: ["400", "600", "800", "900"], variable: "--font-nunito", display: "swap", preload: false });
+const archivo = Archivo_Black({ subsets: ["latin"], weight: "400", variable: "--font-archivo", display: "swap", preload: false });
+const grotesk = Space_Grotesk({ subsets: ["latin"], weight: ["400", "500", "700"], variable: "--font-grotesk", display: "swap", preload: false });
+const spaceMono = Space_Mono({ subsets: ["latin"], weight: ["400", "700"], variable: "--font-space-mono", display: "swap", preload: false });
+
+const FONT_VARIABLES = [orbitron, jetbrains, shareTech, nunito, archivo, grotesk, spaceMono].map((font) => font.variable).join(" ");
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
@@ -29,15 +39,20 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#050505",
+  themeColor: "#ece7f8",
   width: "device-width",
   initialScale: 1,
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" className={`${orbitron.variable} ${jetbrains.variable} ${shareTech.variable}`}>
+    // The inline script sets data-style/data-theme/data-fx/data-boot before hydration, hence suppressHydrationWarning.
+    <html lang="en" data-style={DEFAULT_STYLE} suppressHydrationWarning className={FONT_VARIABLES}>
       <body className="min-h-screen overflow-x-hidden">
+        {/* beforeInteractive: injected by Next outside React hydration, runs before paint. */}
+        <Script id="nexus-preferences" strategy="beforeInteractive">
+          {preferenceBootScript()}
+        </Script>
         <MotionProvider>{children}</MotionProvider>
       </body>
     </html>

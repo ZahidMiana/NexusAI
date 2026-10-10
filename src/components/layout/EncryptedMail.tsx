@@ -30,18 +30,18 @@ export function EncryptedMail({ label, address, accent }: EncryptedMailProps) {
       onBlur={() => setDecrypted(false)}
       onClick={() => copy(address)}
       className={cn(
-        "group flex w-full items-center justify-between gap-3 rounded-lg border border-zinc-800 bg-black/40 px-3 py-2.5 text-left transition-all duration-300",
+        "group flex w-full items-center justify-between gap-3 rounded-lg border border-line bg-inset px-3 py-2.5 text-left transition-all duration-300",
         tokens.hoverBorder,
       )}
       aria-label={`Copy ${label} address ${address}`}
     >
       <span className="min-w-0">
-        <span className="flex items-center gap-1.5 font-tech text-xs tracking-[0.14em] text-zinc-400 uppercase">
+        <span className="flex items-center gap-1.5 font-tech text-xs tracking-[0.14em] text-fg-muted uppercase">
           <Lock className="h-3 w-3" /> {label}
         </span>
-        <span className={cn("mt-1 block truncate font-mono text-sm", decrypted ? tokens.text : "text-zinc-400")}>{display}</span>
+        <span className={cn("mt-1 block truncate font-mono text-sm", decrypted ? tokens.text : "text-fg-muted")}>{display}</span>
       </span>
-      {copied ? <Check className="h-4 w-4 shrink-0 text-cyber-lime" /> : <Copy className="h-4 w-4 shrink-0 text-zinc-400 group-hover:text-zinc-300" />}
+      {copied ? <Check className="h-4 w-4 shrink-0 text-cyber-lime" /> : <Copy className="h-4 w-4 shrink-0 text-fg-muted group-hover:text-fg-soft" />}
     </button>
   );
 }

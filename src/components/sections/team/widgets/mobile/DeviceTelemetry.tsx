@@ -28,9 +28,9 @@ export function DeviceTelemetry({ mode, llmActive }: DeviceTelemetryProps) {
   const profile = PROFILES[effectiveMode];
 
   return (
-    <div className="space-y-3 rounded-xl border border-zinc-800 bg-black/40 p-4">
+    <div className="space-y-3 rounded-xl border border-line bg-inset p-4">
       <div className="flex items-center justify-between font-tech text-[11px] tracking-[0.14em] uppercase">
-        <span className="text-zinc-400">Device telemetry</span>
+        <span className="text-fg-muted">Device telemetry</span>
         <span className="text-cyber-lime">{profile.label}</span>
       </div>
       <LiveBar key={`npu-${effectiveMode}`} label="NPU" target={profile.npu} accent="lime" />

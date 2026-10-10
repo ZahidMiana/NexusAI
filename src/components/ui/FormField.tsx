@@ -2,10 +2,10 @@ import { forwardRef, type InputHTMLAttributes, type ReactNode, type SelectHTMLAt
 import { cn } from "@/lib/cn";
 
 const CONTROL_CLASSES =
-  "w-full rounded-lg border bg-black/50 px-3.5 py-2.5 font-mono text-sm text-white placeholder:text-zinc-500 transition-[border-color,box-shadow] duration-200 outline-none focus:border-cyber-cyan focus:shadow-[0_0_0_3px_rgba(0,240,255,0.15)]";
+  "field-control w-full rounded-lg border bg-inset px-3.5 py-2.5 font-mono text-sm text-fg placeholder:text-fg-muted transition-[border-color,box-shadow] duration-200 outline-none focus:border-cyber-cyan focus:shadow-[0_0_0_3px_rgb(var(--accent-cyan)_/_0.15)]";
 
 function controlClasses(invalid: boolean, extra?: string): string {
-  return cn(CONTROL_CLASSES, invalid ? "border-red-400/80" : "border-zinc-700 hover:border-zinc-500", extra);
+  return cn(CONTROL_CLASSES, invalid ? "border-danger/80" : "border-line-strong hover:border-line-strong", extra);
 }
 
 interface FieldShellProps {
@@ -21,16 +21,16 @@ interface FieldShellProps {
 export function FieldShell({ id, label, error, hint, optional, children }: FieldShellProps) {
   return (
     <div className="space-y-1.5">
-      <label htmlFor={id} className="flex items-baseline justify-between font-tech text-xs tracking-[0.12em] text-zinc-300 uppercase">
+      <label htmlFor={id} className="flex items-baseline justify-between font-tech text-xs tracking-[0.12em] text-fg-soft uppercase">
         <span>
           {label}
-          {optional && <span className="ml-1.5 normal-case tracking-normal text-zinc-400">(optional)</span>}
+          {optional && <span className="ml-1.5 normal-case tracking-normal text-fg-muted">(optional)</span>}
         </span>
-        {hint && <span className="font-mono normal-case tracking-normal text-zinc-400">{hint}</span>}
+        {hint && <span className="font-mono normal-case tracking-normal text-fg-muted">{hint}</span>}
       </label>
       {children}
       {error && (
-        <p id={`${id}-error`} role="alert" className="font-mono text-xs text-red-400">
+        <p id={`${id}-error`} role="alert" className="font-mono text-xs text-danger">
           {error}
         </p>
       )}

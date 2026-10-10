@@ -16,7 +16,7 @@ export function TerminalSection() {
   const focusInput = () => inputRef.current?.focus({ preventScroll: true });
 
   return (
-    <section id={TERMINAL_SECTION_ID} aria-labelledby="terminal-heading" className="mx-auto max-w-7xl scroll-mt-28 px-4 pt-24 sm:px-6">
+    <section id={TERMINAL_SECTION_ID} aria-labelledby="terminal-heading" className="mx-auto max-w-7xl scroll-mt-28 px-4 pt-28 sm:px-6 md:pt-36">
       <SectionHeading
         headingId="terminal-heading"
         index="07"
@@ -35,7 +35,7 @@ export function TerminalSection() {
         <TerminalWindow
           title="nexus@core: ~/uplink — zsh"
           accent="cyan"
-          actions={<SquareTerminal className="h-4 w-4 text-zinc-400" />}
+          actions={<SquareTerminal className="h-4 w-4 text-fg-muted" />}
           className="glow-cyan"
         >
           <TerminalOutput lines={lines} revealedCount={revealedCount} onLineRevealed={markLineRevealed} onActivate={focusInput} />

@@ -29,6 +29,8 @@ function edgeEndpoints(from: Point, to: Point, orientation: GraphOrientation): [
 
 const nodeById = new Map(WORKFLOW_NODES.map((node) => [node.id, node]));
 
+const PINK = accentTokens("pink").hex;
+
 export interface WorkflowGraphProps {
   orientation: GraphOrientation;
   litNodes: ReadonlySet<string>;
@@ -60,10 +62,9 @@ export function WorkflowGraph({ orientation, litNodes, litEdges, packetNodeId, d
             y1={start.y}
             x2={end.x}
             y2={end.y}
-            stroke={lit ? accentTokens("pink").hex : "#3f3f46"}
             strokeWidth={lit ? 0.7 : 0.4}
             strokeDasharray={lit ? "0" : "1.2 1.2"}
-            style={lit ? { filter: "drop-shadow(0 0 1.5px #FF007F)" } : undefined}
+            style={lit ? { stroke: PINK, filter: `drop-shadow(0 0 1.5px ${PINK})` } : { stroke: "var(--line-strong)" }}
             className="transition-all duration-300"
           />
         );
@@ -84,11 +85,10 @@ export function WorkflowGraph({ orientation, litNodes, litEdges, packetNodeId, d
       {packet && (
         <motion.circle
           r={1.4}
-          fill="#FF007F"
           initial={false}
           animate={{ cx: packet.x, cy: packet.y - NODE_HEIGHT / 2 - 1.8 }}
           transition={{ type: "spring", stiffness: 140, damping: 18 }}
-          style={{ filter: "drop-shadow(0 0 2px #FF007F)" }}
+          style={{ fill: PINK, filter: `drop-shadow(0 0 2px ${PINK})` }}
         />
       )}
     </svg>
@@ -129,11 +129,13 @@ function WorkflowNodeShape({ node, position, lit, current, disabled, onSelect }:
         width={NODE_WIDTH}
         height={NODE_HEIGHT}
         rx={1.2}
-        fill={lit ? `rgba(${tokens.rgb}, 0.18)` : "#0d0d11"}
-        stroke={lit || node.routable ? tokens.hex : "#52525b"}
-        strokeWidth={current ? 0.7 : 0.35}
+                strokeWidth={current ? 0.7 : 0.35}
         strokeDasharray={node.routable && !lit ? "1 0.8" : "0"}
-        style={lit ? { filter: `drop-shadow(0 0 2px ${tokens.hex})` } : undefined}
+        style={{
+          fill: lit ? `rgb(${tokens.rgb} / 0.18)` : "var(--surface)",
+          stroke: lit || node.routable ? tokens.hex : "var(--line-strong)",
+          filter: lit ? `drop-shadow(0 0 2px ${tokens.hex})` : undefined,
+        }}
         className="transition-all duration-300"
       />
       <text
@@ -141,7 +143,7 @@ function WorkflowNodeShape({ node, position, lit, current, disabled, onSelect }:
         y={position.y + 0.9}
         textAnchor="middle"
         fontSize={2.4}
-        fill={lit ? tokens.hex : "#d4d4d8"}
+        style={{ fill: lit ? tokens.hex : "var(--fg-soft)" }}
         className="pointer-events-none select-none font-tech tracking-wider"
       >
         {node.label}

@@ -40,7 +40,7 @@ export function MissionLog() {
   return (
     <BentoCard accent="lime" className="flex h-full flex-col gap-5 p-6">
       <div className="flex items-center justify-between">
-        <BentoLabel index="03.∑" accent="lime">
+        <BentoLabel index="04.∑" accent="lime">
           Squad Sync
         </BentoLabel>
         <Radar className="h-5 w-5 animate-flicker text-cyber-lime drop-glow-lime" />
@@ -65,7 +65,7 @@ function MissionFeed() {
   return (
     <>
       <div>
-        <p className="font-tech text-xs tracking-[0.14em] text-zinc-400 uppercase">Mesh uptime</p>
+        <p className="font-tech text-xs tracking-[0.14em] text-fg-muted uppercase">Mesh uptime</p>
         <p className="mt-1 font-display text-lg font-black text-cyber-lime text-glow-lime tabular-nums">{label ?? "syncing…"}</p>
       </div>
 
@@ -82,10 +82,10 @@ function MissionFeed() {
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.3 }}
-                className="rounded-lg border border-zinc-900 bg-black/40 px-3 py-2 font-mono text-xs"
+                className="rounded-lg border border-line bg-inset px-3 py-2 font-mono text-xs"
               >
                 <span className={cn("font-tech tracking-wider", tokens.text)}>{member.handle}</span>
-                <span className="block text-zinc-300">{entry.message}</span>
+                <span className="block text-fg-soft">{entry.message}</span>
               </motion.li>
             );
           })}

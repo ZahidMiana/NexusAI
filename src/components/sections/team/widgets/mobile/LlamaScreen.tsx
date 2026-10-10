@@ -61,7 +61,7 @@ export function LlamaScreen({ onBack, onActivityChange }: LlamaScreenProps) {
             onClick={() => setModel(candidate)}
             className={cn(
               "shrink-0 rounded-md border px-2 py-1 font-tech text-[11px] tracking-wider transition-colors disabled:opacity-50",
-              candidate.id === model.id ? "border-cyber-lime bg-cyber-lime/10 text-cyber-lime" : "border-zinc-800 text-zinc-400",
+              candidate.id === model.id ? "border-cyber-lime bg-cyber-lime/10 text-cyber-lime" : "border-line text-fg-muted",
             )}
           >
             {candidate.quantization}
@@ -70,11 +70,11 @@ export function LlamaScreen({ onBack, onActivityChange }: LlamaScreenProps) {
       </div>
 
       <div className="flex-1 space-y-2 overflow-y-auto px-3 text-[11px] leading-relaxed">
-        <div className="ml-auto max-w-[85%] rounded-2xl rounded-br-sm bg-cyber-lime/15 px-3 py-2 text-zinc-100">{ON_DEVICE_PROMPT}</div>
+        <div className="ml-auto max-w-[85%] rounded-2xl rounded-br-sm bg-cyber-lime/15 px-3 py-2 text-fg-soft">{ON_DEVICE_PROMPT}</div>
 
         {phase === "loading" && (
-          <div className="space-y-1 rounded-xl border border-zinc-800 bg-zinc-950 p-2">
-            <p className="font-tech text-[11px] text-zinc-400">
+          <div className="space-y-1 rounded-xl border border-line bg-zinc-950 p-2">
+            <p className="font-tech text-[11px] text-fg-muted">
               mmap {model.label} {model.quantization} · {model.sizeGb}GB
             </p>
             <div className="h-1 overflow-hidden rounded-full bg-zinc-900">
@@ -96,7 +96,7 @@ export function LlamaScreen({ onBack, onActivityChange }: LlamaScreenProps) {
             <Square className="h-3 w-3" /> STOP
           </button>
         ) : (
-          <button type="button" onClick={run} className="flex w-full items-center justify-center gap-2 rounded-xl bg-cyber-lime py-2 font-tech text-xs font-bold tracking-[0.12em] text-black glow-lime transition-transform active:scale-95">
+          <button type="button" onClick={run} className="flex w-full items-center justify-center gap-2 rounded-xl bg-cyber-lime py-2 font-tech text-xs font-bold tracking-[0.12em] text-on-accent glow-lime transition-transform active:scale-95">
             <Play className="h-3 w-3" /> {phase === "done" ? "RUN AGAIN" : "RUN ON-DEVICE"}
           </button>
         )}
@@ -110,7 +110,7 @@ function StreamingResponse({ model, onComplete }: { model: OnDeviceModel; onComp
   const { output, done } = useTypewriter(ON_DEVICE_RESPONSE, { speed: Math.max(8, Math.round(1000 / charsPerSecond)), step: 1, onComplete });
 
   return (
-    <div className="max-w-[90%] rounded-2xl rounded-bl-sm border border-zinc-800 bg-zinc-950 px-3 py-2 text-zinc-300">
+    <div className="max-w-[90%] rounded-2xl rounded-bl-sm border border-line bg-zinc-950 px-3 py-2 text-fg-soft">
       {output}
       {!done && <span className="ml-0.5 inline-block h-3 w-1.5 animate-blink bg-cyber-lime align-middle" />}
     </div>
@@ -121,7 +121,7 @@ function LlamaStats({ model, active }: { model: OnDeviceModel; active: boolean }
   const tps = useLiveMetric({ initial: model.tokensPerSecond, amplitude: 2, min: model.tokensPerSecond * 0.8, max: model.tokensPerSecond * 1.15, intervalMs: 400, paused: !active });
 
   return (
-    <dl className="grid grid-cols-3 gap-1 border-t border-zinc-900 px-3 py-2 text-center font-tech text-[11px] tracking-wider text-zinc-400 uppercase">
+    <dl className="grid grid-cols-3 gap-1 border-t border-line px-3 py-2 text-center font-tech text-[11px] tracking-wider text-fg-muted uppercase">
       <div>
         <dt>tok/s</dt>
         <dd className="text-xs text-cyber-lime tabular-nums">{active ? tps.toFixed(1) : "0.0"}</dd>

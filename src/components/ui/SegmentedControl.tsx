@@ -32,7 +32,7 @@ export function SegmentedControl<T extends string>({
   const tokens = accentTokens(accent);
 
   return (
-    <div role="tablist" aria-label={ariaLabel} className={cn("inline-flex rounded-lg border border-zinc-800 bg-black/50 p-1", className)}>
+    <div role="tablist" aria-label={ariaLabel} className={cn("inline-flex rounded-lg border border-line bg-inset p-1", className)}>
       {options.map((option) => {
         const selected = option.value === value;
         return (
@@ -44,7 +44,7 @@ export function SegmentedControl<T extends string>({
             onClick={() => onChange(option.value)}
             className={cn(
               "relative rounded-md px-3 py-1.5 font-tech text-xs tracking-[0.12em] uppercase transition-colors duration-300",
-              selected ? tokens.text : "text-zinc-400 hover:text-zinc-200",
+              selected ? tokens.text : "text-fg-muted hover:text-fg-soft",
             )}
           >
             {selected && (

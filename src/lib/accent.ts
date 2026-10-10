@@ -6,7 +6,9 @@ import type { Accent } from "@/types";
  * never hard-code colour classes themselves.
  */
 export interface AccentTokens {
+  /** Solid colour as a CSS value, e.g. for SVG `style={{ stroke }}`. */
   hex: string;
+  /** CSS variable holding the RGB triplet; use as `rgb(${rgb} / alpha)`. */
   rgb: string;
   text: string;
   textGlow: string;
@@ -26,8 +28,8 @@ export interface AccentTokens {
 
 export const ACCENT_TOKENS: Readonly<Record<Accent, AccentTokens>> = {
   cyan: {
-    hex: "#00F0FF",
-    rgb: "0, 240, 255",
+    hex: "rgb(var(--accent-cyan))",
+    rgb: "var(--accent-cyan)",
     text: "text-cyber-cyan",
     textGlow: "text-glow-cyan",
     bg: "bg-cyber-cyan",
@@ -44,8 +46,8 @@ export const ACCENT_TOKENS: Readonly<Record<Accent, AccentTokens>> = {
     hoverBgSoft: "hover:bg-cyber-cyan/10",
   },
   pink: {
-    hex: "#FF007F",
-    rgb: "255, 0, 127",
+    hex: "rgb(var(--accent-pink))",
+    rgb: "var(--accent-pink)",
     text: "text-cyber-pink",
     textGlow: "text-glow-pink",
     bg: "bg-cyber-pink",
@@ -62,8 +64,8 @@ export const ACCENT_TOKENS: Readonly<Record<Accent, AccentTokens>> = {
     hoverBgSoft: "hover:bg-cyber-pink/10",
   },
   lime: {
-    hex: "#39FF14",
-    rgb: "57, 255, 20",
+    hex: "rgb(var(--accent-lime))",
+    rgb: "var(--accent-lime)",
     text: "text-cyber-lime",
     textGlow: "text-glow-lime",
     bg: "bg-cyber-lime",
@@ -85,6 +87,16 @@ export function accentTokens(accent: Accent): AccentTokens {
   return ACCENT_TOKENS[accent];
 }
 
+/** Theme-aware colour for CSS contexts (inline styles, SVG `style`). */
 export function accentRgba(accent: Accent, alpha: number): string {
-  return `rgba(${ACCENT_TOKENS[accent].rgb}, ${alpha})`;
+  return `rgb(var(--accent-${accent}) / ${alpha})`;
+}
+
+export type AccentPalette = Record<Accent, string>;
+
+/** Resolves the live theme's RGB triplets, for canvas where CSS variables are unavailable. */
+export function readAccentPalette(element: Element = document.documentElement): AccentPalette {
+  const style = getComputedStyle(element);
+  const read = (accent: Accent) => style.getPropertyValue(`--accent-${accent}`).trim() || "255 255 255";
+  return { cyan: read("cyan"), pink: read("pink"), lime: read("lime") };
 }

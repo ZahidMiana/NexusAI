@@ -100,7 +100,7 @@ export function ContactForm() {
   return (
     <form ref={formRef} action={formAction} onSubmit={handleSubmit} noValidate className="space-y-5" aria-describedby={serverMessage ? "contact-form-status" : undefined}>
       {serverMessage && (
-        <p id="contact-form-status" role="alert" className="flex items-start gap-2 rounded-lg border border-red-400/50 bg-red-400/10 px-4 py-3 font-mono text-sm text-red-300">
+        <p id="contact-form-status" role="alert" className="flex items-start gap-2 rounded-lg border border-danger/50 bg-danger/10 px-4 py-3 font-mono text-sm text-danger">
           <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0" />
           {serverMessage}
         </p>
@@ -139,7 +139,7 @@ export function ContactForm() {
       </div>
 
       <div className="flex flex-col-reverse items-start gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <p className="min-w-0 font-mono text-xs leading-relaxed text-zinc-400">
+        <p className="min-w-0 font-mono text-xs leading-relaxed text-fg-muted">
           Protected by NDA on request. Prefer email? <a href={`mailto:${siteConfig.contact.email}`} className="text-cyber-cyan underline-offset-4 hover:underline">{siteConfig.contact.email}</a>
         </p>
         <NeonButton
@@ -164,12 +164,12 @@ function SuccessPanel({ ticket, onReset }: { ticket: string; onReset: () => void
   useEffect(() => headingRef.current?.focus(), []);
 
   return (
-    <div role="status" className="flex min-h-[28rem] flex-col items-start justify-center gap-5 rounded-xl border border-cyber-lime/40 bg-black/50 p-6 font-mono sm:p-8">
+    <div role="status" className="flex min-h-[28rem] flex-col items-start justify-center gap-5 rounded-xl border border-cyber-lime/40 bg-inset p-6 font-mono sm:p-8">
       <CheckCircle2 className="h-10 w-10 text-cyber-lime drop-glow-lime" />
-      <h3 ref={headingRef} tabIndex={-1} className="font-display text-2xl font-black tracking-wide text-white uppercase outline-none">
+      <h3 ref={headingRef} tabIndex={-1} className="font-display text-2xl font-black tracking-wide text-fg uppercase outline-none">
         Transmission received
       </h3>
-      <div className="space-y-1 text-sm text-zinc-300">
+      <div className="space-y-1 text-sm text-fg-soft">
         <p>
           <span className="text-cyber-lime">[ OK ]</span> Brief encrypted and delivered to the squad.
         </p>

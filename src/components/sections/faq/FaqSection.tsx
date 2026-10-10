@@ -17,11 +17,11 @@ export function FaqSection() {
   const { openContact } = useContactLauncher();
 
   return (
-    <section id="faq" aria-labelledby="faq-heading" className="mx-auto max-w-7xl scroll-mt-28 px-4 pt-24 sm:px-6">
+    <section id="faq" aria-labelledby="faq-heading" className="mx-auto max-w-7xl scroll-mt-28 px-4 pt-28 sm:px-6 md:pt-36">
       <SectionHeading headingId="faq-heading" index="09" title="Query Log" accent="pink" subtitle="Straight answers to what clients ask us most." />
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
         <Reveal className="lg:col-span-2">
-          <BentoCard accent="pink" scaleOnHover={false} className="divide-y divide-zinc-800 px-2 sm:px-4">
+          <BentoCard accent="pink" scaleOnHover={false} className="divide-y divide-line px-2 sm:px-4">
             {FAQ_ITEMS.map((item) => (
               <FaqRow key={item.id} item={item} open={openId === item.id} onToggle={() => setOpenId((current) => (current === item.id ? null : item.id))} />
             ))}
@@ -31,8 +31,8 @@ export function FaqSection() {
           <BentoCard accent="cyan" className="flex h-full flex-col gap-5 p-6">
             <BentoLabel index="09.B">Still unsure?</BentoLabel>
             <MessageSquare className="h-8 w-8 text-cyber-cyan drop-glow-cyan" />
-            <p className="font-display text-xl font-black tracking-wide text-white uppercase">Ask us anything</p>
-            <p className="font-mono text-sm leading-relaxed text-zinc-300">
+            <p className="font-display text-xl font-black tracking-wide text-fg uppercase">Ask us anything</p>
+            <p className="font-mono text-sm leading-relaxed text-fg-soft">
               Send a short note about your project. A real engineer replies within one business day.
             </p>
             <NeonButton accent="cyan" className="mt-auto w-full" onClick={() => openContact()}>
@@ -60,7 +60,7 @@ function FaqRow({ item, open, onToggle }: { item: FaqItem; open: boolean; onTogg
           aria-controls={panelId}
           className="flex w-full items-center justify-between gap-4 px-2 py-5 text-left"
         >
-          <span className="flex gap-3 font-mono text-sm text-white sm:text-base">
+          <span className="flex gap-3 font-mono text-sm text-fg sm:text-base">
             <span aria-hidden className="text-cyber-pink">{">"}</span>
             {item.question}
           </span>
@@ -79,7 +79,7 @@ function FaqRow({ item, open, onToggle }: { item: FaqItem; open: boolean; onTogg
             transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
             className="overflow-hidden"
           >
-            <p className="pr-8 pb-5 pl-7 font-mono text-sm leading-relaxed text-zinc-300">{item.answer}</p>
+            <p className="pr-8 pb-5 pl-7 font-mono text-sm leading-relaxed text-fg-soft">{item.answer}</p>
           </motion.div>
         )}
       </AnimatePresence>

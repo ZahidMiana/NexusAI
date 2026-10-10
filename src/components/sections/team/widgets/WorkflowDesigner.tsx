@@ -50,37 +50,37 @@ export function WorkflowDesigner() {
   return (
     <div className="space-y-4">
       <div className="flex flex-wrap items-center justify-between gap-2">
-        <p className="flex items-center gap-2 font-tech text-xs tracking-[0.12em] text-zinc-400 uppercase">
+        <p className="flex items-center gap-2 font-tech text-xs tracking-[0.12em] text-fg-muted uppercase">
           <MousePointerClick className="h-3.5 w-3.5 text-cyber-pink" /> Tap an agent node to route a task
         </p>
         <button
           type="button"
           onClick={reset}
           disabled={steps.length === 0}
-          className="flex items-center gap-1.5 font-tech text-xs tracking-[0.12em] text-zinc-400 uppercase transition-colors hover:text-cyber-cyan disabled:opacity-40"
+          className="flex items-center gap-1.5 font-tech text-xs tracking-[0.12em] text-fg-muted uppercase transition-colors hover:text-cyber-cyan disabled:opacity-40"
         >
           <RotateCcw className="h-3 w-3" /> Reset
         </button>
       </div>
 
-      <div className="rounded-xl border border-zinc-800 bg-black/50 p-2">
+      <div className="rounded-xl border border-line bg-inset p-2">
         {/* Both layouts are rendered; CSS picks one, so there is no hydration flash. */}
         <WorkflowGraph orientation="vertical" className="mx-auto max-w-xs sm:hidden" {...graphProps} />
         <WorkflowGraph orientation="horizontal" className="hidden sm:block" {...graphProps} />
       </div>
 
-      <ol className="min-h-[7.5rem] space-y-1 rounded-xl border border-zinc-800 bg-black/60 p-3 font-mono text-xs" aria-live="polite">
+      <ol className="min-h-[7.5rem] space-y-1 rounded-xl border border-line bg-inset p-3 font-mono text-xs" aria-live="polite">
         {steps.length === 0 ? (
-          <li className="text-zinc-400">{"// awaiting task injection…"}</li>
+          <li className="text-fg-muted">{"// awaiting task injection…"}</li>
         ) : (
           steps.slice(0, activeIndex + 1).map((nodeId, index) => (
             <motion.li
               key={`${nodeId}-${index}`}
               initial={{ opacity: 0, x: -6 }}
               animate={{ opacity: 1, x: 0 }}
-              className={cn(index === activeIndex ? "text-cyber-pink" : "text-zinc-300")}
+              className={cn(index === activeIndex ? "text-cyber-pink" : "text-fg-soft")}
             >
-              <span className="text-zinc-400">[{String(index).padStart(2, "0")}]</span> {describeStep(nodeId, agent)}
+              <span className="text-fg-muted">[{String(index).padStart(2, "0")}]</span> {describeStep(nodeId, agent)}
             </motion.li>
           ))
         )}

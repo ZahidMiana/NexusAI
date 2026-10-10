@@ -35,7 +35,7 @@ export function Dialog({ open, onClose, labelledBy, children, className }: Dialo
         if (event.target === ref.current) onClose();
       }}
       className={cn(
-        "neon-dialog m-auto max-h-[90dvh] w-[min(56rem,calc(100vw-2rem))] overflow-hidden rounded-2xl border border-zinc-800 bg-panel p-0 text-zinc-200 shadow-[0_0_80px_rgba(0,240,255,0.15)]",
+        "neon-dialog m-auto max-h-[90dvh] w-[min(56rem,calc(100vw-2rem))] overflow-hidden rounded-2xl border border-line bg-panel p-0 text-fg-soft shadow-[0_0_80px_rgb(var(--accent-cyan)_/_0.15)]",
         className,
       )}
     >
@@ -45,7 +45,7 @@ export function Dialog({ open, onClose, labelledBy, children, className }: Dialo
             type="button"
             onClick={onClose}
             aria-label="Close dialog"
-            className="absolute top-4 right-4 z-10 flex h-9 w-9 items-center justify-center rounded-lg border border-zinc-700 bg-black/60 text-zinc-300 transition-colors hover:border-cyber-pink hover:text-cyber-pink"
+            className="absolute top-4 right-4 z-10 flex h-9 w-9 items-center justify-center rounded-lg border border-line-strong bg-inset text-fg-soft transition-colors hover:border-cyber-pink hover:text-cyber-pink"
           >
             <X className="h-4 w-4" />
           </button>

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useInterval } from "./useInterval";
-import { usePrefersReducedMotion } from "./useMediaQuery";
+import { useMotionAllowed } from "./usePreferences";
 
 const GLYPHS = "ABCDEF0123456789#$%&@!?<>/\\=+*";
 
@@ -27,7 +27,7 @@ function mask(text: string): string {
  * static mask and an instant reveal.
  */
 export function useScramble(text: string, decrypt: boolean, speed = 28): string {
-  const reducedMotion = usePrefersReducedMotion();
+  const reducedMotion = !useMotionAllowed();
   const [display, setDisplay] = useState(() => mask(text));
   const [revealed, setRevealed] = useState(0);
   const [lastDecrypt, setLastDecrypt] = useState(decrypt);

@@ -18,17 +18,17 @@ export function SystemSignature() {
         <ShieldCheck className="h-4 w-4 drop-glow-lime" />
         Signature verified
       </div>
-      <dl className="grid grid-cols-[auto_1fr] gap-x-3 gap-y-1.5 text-zinc-400">
+      <dl className="grid grid-cols-[auto_1fr] gap-x-3 gap-y-1.5 text-fg-muted">
         <dt>SIG</dt>
-        <dd className="truncate text-zinc-300">{signature}</dd>
+        <dd className="truncate text-fg-soft">{signature}</dd>
         <dt>UPTIME</dt>
         <dd className="tabular-nums text-cyber-lime">{label ?? "syncing…"}</dd>
         <dt>EPOCH</dt>
-        <dd className="text-zinc-300">
+        <dd className="text-fg-soft">
           {FOUNDING_YEAR}–{currentYear}
         </dd>
       </dl>
-      <p className="text-zinc-400">
+      <p className="text-fg-muted">
         © {currentYear} {siteConfig.name}. All neural rights reserved.
       </p>
     </div>
