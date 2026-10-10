@@ -1,4 +1,5 @@
 import { aboutCommand } from "./commands/about";
+import { bookCommand } from "./commands/book";
 import { clearCommand } from "./commands/clear";
 import { contactCommand } from "./commands/contact";
 import { helpCommand } from "./commands/help";
@@ -20,12 +21,13 @@ export function createDefaultRegistry(): CommandRegistry {
     .register(stackCommand)
     .register(pingCommand)
     .register(contactCommand)
+    .register(bookCommand)
     .register(aboutCommand)
     .register(whoamiCommand)
     .register(clearCommand);
 }
 
-export const QUICK_COMMANDS = ["/help", "/team", "/stack", "/ping", "/contact", "/clear"] as const;
+export const QUICK_COMMANDS = ["/help", "/team", "/stack", "/ping", "/book", "/clear"] as const;
 
 export const BOOT_SEQUENCE = [
   { text: "NEXUS_OS v7.3.1 // kernel 6.13-nexus-rt", tone: "muted" },

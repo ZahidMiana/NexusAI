@@ -3,6 +3,7 @@
 import { createContext, useCallback, useContext, useMemo, useRef, useState, type ReactNode, type RefObject } from "react";
 import { useTerminalSession, type TerminalSession } from "@/hooks/useTerminalSession";
 import { BOOT_SEQUENCE, createDefaultRegistry, type CommandRegistry } from "@/lib/terminal";
+import type { TerminalEffect } from "@/types";
 
 export const TERMINAL_SECTION_ID = "terminal";
 
@@ -27,11 +28,13 @@ interface TerminalProviderProps {
   children: ReactNode;
   /** Injectable for tests or alternative command sets (Dependency Inversion). */
   registry?: CommandRegistry;
+  /** Fulfils side effects requested by commands (e.g. opening the contact form). */
+  onEffect?: (effect: TerminalEffect) => void;
 }
 
-export function TerminalProvider({ children, registry }: TerminalProviderProps) {
+export function TerminalProvider({ children, registry, onEffect }: TerminalProviderProps) {
   const [activeRegistry] = useState(() => registry ?? createDefaultRegistry());
-  const session = useTerminalSession(activeRegistry, BOOT_SEQUENCE);
+  const session = useTerminalSession(activeRegistry, BOOT_SEQUENCE, onEffect);
   const inputRef = useRef<HTMLInputElement | null>(null);
   const { run } = session;
 

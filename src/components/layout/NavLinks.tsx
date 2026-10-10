@@ -3,14 +3,16 @@ import { cn } from "@/lib/cn";
 
 export interface NavLinksProps {
   activeId: string | null;
-  layout: "row" | "stack";
+  layout: "row" | "grid";
   onNavigate?: () => void;
 }
 
 export function NavLinks({ activeId, layout, onNavigate }: NavLinksProps) {
+  const links = layout === "row" ? NAV_LINKS.filter((link) => link.primary) : NAV_LINKS;
+
   return (
-    <ul className={cn(layout === "row" ? "flex items-center gap-5" : "flex flex-col gap-1")}>
-      {NAV_LINKS.map((link, index) => {
+    <ul className={cn(layout === "row" ? "flex items-center gap-5" : "grid gap-1.5 sm:grid-cols-2 lg:grid-cols-3")}>
+      {links.map((link) => {
         const active = link.id === activeId;
         return (
           <li key={link.id}>
@@ -20,17 +22,15 @@ export function NavLinks({ activeId, layout, onNavigate }: NavLinksProps) {
               aria-current={active ? "location" : undefined}
               className={cn(
                 "relative font-tech tracking-[0.14em] uppercase transition-colors",
-                layout === "row"
-                  ? "py-1 text-xs"
-                  : "flex items-center justify-between rounded-lg border px-4 py-3 text-sm",
-                layout === "row" && (active ? "text-cyber-cyan text-glow-cyan" : "text-zinc-400 hover:text-cyber-cyan"),
-                layout === "stack" &&
-                  (active
-                    ? "border-cyber-cyan/50 bg-cyber-cyan/10 text-cyber-cyan"
-                    : "border-zinc-800 text-zinc-300 hover:border-zinc-600 hover:text-white"),
+                layout === "row" && cn("py-1 text-xs", active ? "text-cyber-cyan text-glow-cyan" : "text-zinc-400 hover:text-cyber-cyan"),
+                layout === "grid" &&
+                  cn(
+                    "flex items-center justify-between rounded-lg border px-4 py-3 text-sm",
+                    active ? "border-cyber-cyan/50 bg-cyber-cyan/10 text-cyber-cyan" : "border-zinc-800 text-zinc-300 hover:border-zinc-600 hover:text-white",
+                  ),
               )}
             >
-              {layout === "stack" && <span className="text-zinc-400">0{index + 2}</span>}
+              {layout === "grid" && <span className="text-zinc-400">{link.code}</span>}
               <span>{link.label}</span>
               {layout === "row" && active && <span aria-hidden className="absolute -bottom-1 left-0 h-px w-full bg-cyber-cyan shadow-[0_0_8px_#00F0FF]" />}
             </a>

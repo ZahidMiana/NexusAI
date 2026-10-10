@@ -15,7 +15,7 @@ export function TechStackSection() {
     <section id="stack" aria-labelledby="stack-heading" className="mx-auto max-w-7xl scroll-mt-28 px-4 pt-24 sm:px-6">
       <SectionHeading
         headingId="stack-heading"
-        index="04"
+        index="08"
         title="Tech Stack Matrix"
         accent="lime"
         subtitle="Every module is battle-tested in production. Select any badge to pull its expertise dossier."

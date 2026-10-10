@@ -40,7 +40,7 @@ export function MissionLog() {
   return (
     <BentoCard accent="lime" className="flex h-full flex-col gap-5 p-6">
       <div className="flex items-center justify-between">
-        <BentoLabel index="02.∑" accent="lime">
+        <BentoLabel index="03.∑" accent="lime">
           Squad Sync
         </BentoLabel>
         <Radar className="h-5 w-5 animate-flicker text-cyber-lime drop-glow-lime" />

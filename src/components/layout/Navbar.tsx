@@ -78,7 +78,8 @@ export function Navbar() {
             aria-expanded={menuOpen}
             aria-controls={MOBILE_MENU_ID}
             aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
-            className="flex h-9 w-9 items-center justify-center rounded-lg border border-zinc-700 text-zinc-200 transition-colors hover:border-cyber-pink/70 hover:text-cyber-pink xl:hidden"
+            title="All sectors"
+            className="flex h-9 w-9 items-center justify-center rounded-lg border border-zinc-700 text-zinc-200 transition-colors hover:border-cyber-pink/70 hover:text-cyber-pink"
           >
             {menuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
           </button>
@@ -93,9 +94,9 @@ export function Navbar() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -8, scale: 0.98 }}
             transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
-            className="mx-auto mt-2 max-w-7xl rounded-2xl border border-white/10 bg-black/85 p-4 shadow-[0_20px_60px_rgba(0,0,0,0.7)] backdrop-blur-xl xl:hidden"
+            className="mx-auto mt-2 max-w-7xl rounded-2xl border border-white/10 bg-black/85 p-4 shadow-[0_20px_60px_rgba(0,0,0,0.7)] backdrop-blur-xl"
           >
-            <NavLinks activeId={activeId} layout="stack" onNavigate={closeMenu} />
+            <NavLinks activeId={activeId} layout="grid" onNavigate={closeMenu} />
             <div className="mt-4 border-t border-zinc-800 pt-4 md:hidden">
               <TelemetryReadout layout="stack" />
             </div>

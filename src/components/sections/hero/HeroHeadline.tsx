@@ -1,14 +1,14 @@
 "use client";
 
-import { ArrowUpRight, Power } from "lucide-react";
+import { ArrowDownRight, Power } from "lucide-react";
 import { BentoCard, BentoLabel } from "@/components/ui/BentoCard";
-import { NeonButton } from "@/components/ui/NeonButton";
+import { NeonButton, NeonLink } from "@/components/ui/NeonButton";
 import { StatusDot } from "@/components/ui/StatusDot";
-import { useTerminalLauncher } from "@/context/TerminalContext";
+import { useContactLauncher } from "@/context/ContactContext";
 import { PromptLine } from "./PromptLine";
 
 export function HeroHeadline() {
-  const { openTerminal } = useTerminalLauncher();
+  const { openContact } = useContactLauncher();
 
   return (
     <BentoCard accent="pink" scaleOnHover={false} className="flex h-full min-h-[440px] flex-col justify-between gap-10 p-6 sm:p-8 lg:p-10">
@@ -31,31 +31,23 @@ export function HeroHeadline() {
           </span>{" "}
           <span className="text-cyber-pink text-glow-pink">Ecosystems.</span>
         </h1>
-        <p className="max-w-xl font-mono text-sm leading-relaxed text-zinc-300 sm:text-base">
-          Three elite AI engineers. One neural mesh. We design, ship and operate production LLM platforms, agentic
-          products and on-device intelligence — from GPU cluster to pocket.
+        <p className="max-w-xl font-mono text-base leading-relaxed text-white sm:text-lg">
+          We build production LLM platforms, AI agents and on device AI.
+        </p>
+        <p className="max-w-xl font-mono text-sm leading-relaxed text-zinc-300">
+          Three senior engineers who design, ship and run the whole system, from GPU cluster to pocket. Typical first
+          release in six to eight weeks.
         </p>
       </div>
 
       <div className="flex flex-wrap items-center gap-4">
-        <NeonButton
-          accent="pink"
-          variant="solid"
-          size="lg"
-          pulse
-          className="tracking-[0.1em] sm:tracking-[0.14em]"
-          icon={<Power className="h-4 w-4" />}
-          onClick={() => openTerminal("/contact")}
-        >
-          Initiate Protocol / Contact Us
+        <NeonButton accent="pink" variant="solid" size="lg" pulse className="tracking-[0.1em] sm:tracking-[0.14em]" icon={<Power className="h-4 w-4" />} onClick={() => openContact()}>
+          <span className="block">Initiate Protocol</span>
+          <span className="block font-mono text-[11px] font-medium tracking-normal normal-case opacity-80">Book a free 30 min call</span>
         </NeonButton>
-        <a
-          href="#team"
-          className="group inline-flex items-center gap-2 font-tech text-xs tracking-[0.14em] text-zinc-400 uppercase transition-colors hover:text-cyber-cyan"
-        >
-          Meet the operators
-          <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-        </a>
+        <NeonLink href="#work" accent="cyan" size="lg" icon={<ArrowDownRight className="h-4 w-4" />}>
+          View work
+        </NeonLink>
       </div>
     </BentoCard>
   );

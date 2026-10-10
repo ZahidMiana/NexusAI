@@ -17,6 +17,11 @@ export interface TeamMember {
   status: string;
   bio: string;
   focus: readonly string[];
+  /** Project type pre-selected when a visitor clicks "Hire for this". */
+  hireAs: ProjectTypeId;
+  /** Optional portrait (path under /public). Rendered with a neon duotone filter. */
+  photo?: string;
+  socials?: { github?: string; linkedin?: string };
 }
 
 /* ─────────────────────────── Tech stack ─────────────────────────── */
@@ -55,10 +60,14 @@ export interface TerminalLine {
 /** A line as authored by a command, before the terminal assigns identity. */
 export type TerminalLineDraft = Pick<TerminalLine, "text"> & Partial<Pick<TerminalLine, "tone">>;
 
+/** Side effects a command can request; the host UI decides how to fulfil them. */
+export type TerminalEffect = { type: "open-contact"; prefill?: ContactPrefill };
+
 export interface CommandResult {
   lines: readonly TerminalLineDraft[];
   /** When true the terminal wipes its scrollback before printing `lines`. */
   clearScreen?: boolean;
+  effect?: TerminalEffect;
 }
 
 export interface CommandDescriptor {
@@ -124,4 +133,79 @@ export interface PointerState {
   x: number;
   y: number;
   active: boolean;
+}
+
+/* ─────────────────────────── Contact / lead capture ─────────────────────────── */
+
+export type ProjectTypeId = "llm-platform" | "agentic-product" | "on-device" | "audit" | "other";
+
+export type EngagementId = "audit" | "sprint" | "squad";
+
+export interface ContactPrefill {
+  projectType?: ProjectTypeId;
+  engagement?: EngagementId;
+}
+
+/* ─────────────────────────── Case studies ─────────────────────────── */
+
+export interface CaseMetric {
+  label: string;
+  value: string;
+}
+
+export interface CaseStudy {
+  id: string;
+  title: string;
+  client: string;
+  industry: string;
+  accent: Accent;
+  summary: string;
+  problem: string;
+  solution: readonly string[];
+  results: readonly CaseMetric[];
+  stack: readonly string[];
+  duration: string;
+  quote?: string;
+  /** Pre-selected in the contact form from "Start a similar project". */
+  projectType: ProjectTypeId;
+}
+
+/* ─────────────────────────── Process / services / proof / FAQ ─────────────────────────── */
+
+export interface ProcessStep {
+  id: string;
+  code: string;
+  title: string;
+  duration: string;
+  accent: Accent;
+  description: string;
+  deliverables: readonly string[];
+}
+
+export interface ServicePlan {
+  id: EngagementId;
+  name: string;
+  tagline: string;
+  price: string;
+  priceNote: string;
+  timeline: string;
+  accent: Accent;
+  featured: boolean;
+  features: readonly string[];
+  projectType: ProjectTypeId;
+}
+
+export interface Testimonial {
+  id: string;
+  quote: string;
+  role: string;
+  company: string;
+  accent: Accent;
+  metric: string;
+}
+
+export interface FaqItem {
+  id: string;
+  question: string;
+  answer: string;
 }

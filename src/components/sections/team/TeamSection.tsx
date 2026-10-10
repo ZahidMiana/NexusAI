@@ -27,7 +27,7 @@ export function TeamSection() {
     <section id="team" aria-labelledby="team-heading" className="mx-auto max-w-7xl scroll-mt-28 px-4 pt-24 sm:px-6">
       <SectionHeading
         headingId="team-heading"
-        index="02"
+        index="03"
         title="The Elite AI Grid"
         accent="pink"
         subtitle="Three operators, three disciplines, one deployment pipeline. Every block below is a live, interactive instrument."

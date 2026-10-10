@@ -195,3 +195,34 @@
     display: none;
   }
 }
+
+/* ── Native dialog: backdrop, entrance animation, page scroll lock ── */
+.neon-dialog::backdrop {
+  background: rgba(5, 5, 5, 0.8);
+  backdrop-filter: blur(6px);
+}
+
+.neon-dialog[open] {
+  animation: dialog-in 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes dialog-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+html:has(.neon-dialog[open]) {
+  overflow: hidden;
+}
+
+/* Logo marquee pauses on hover/focus */
+.marquee-track:hover,
+.marquee-track:focus-within {
+  animation-play-state: paused;
+}

@@ -32,7 +32,7 @@ export function ProductEngineerCard({ member, index }: MemberCardProps) {
   return (
     <BentoCard accent={member.accent} scaleOnHover={false} className="flex h-full flex-col gap-6 p-6">
       <div className="flex items-center justify-between">
-        <BentoLabel index="02.B" accent={member.accent}>
+        <BentoLabel index="03.B" accent={member.accent}>
           Agentic Product Lab
         </BentoLabel>
         <Bot className="h-5 w-5 text-cyber-pink drop-glow-pink" />

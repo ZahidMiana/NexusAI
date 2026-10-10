@@ -3,7 +3,7 @@ import type { TerminalCommand } from "@/types";
 
 export const contactCommand: TerminalCommand = {
   name: "/contact",
-  aliases: ["/hire", "/initiate"],
+  aliases: ["/initiate"],
   description: "Open a secure uplink to the team",
   execute: () => ({
     lines: [
@@ -14,6 +14,7 @@ export const contactCommand: TerminalCommand = {
       { text: `  SECURE  :: ${siteConfig.contact.secureEmail}`, tone: "cyan" },
       { text: `  PGP     :: ${siteConfig.contact.pgpFingerprint}`, tone: "muted" },
       { text: "Channel open. Average response window: < 24h.", tone: "lime" },
+      { text: "Run /book to open the project intake form.", tone: "pink" },
     ],
   }),
 };

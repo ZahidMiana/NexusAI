@@ -2,7 +2,7 @@
 
 import { useCallback, useMemo, useReducer, useRef, useState, type KeyboardEvent } from "react";
 import { executeInput, type CommandRegistry } from "@/lib/terminal";
-import type { TerminalLine, TerminalLineDraft } from "@/types";
+import type { TerminalEffect, TerminalLine, TerminalLineDraft } from "@/types";
 
 const MAX_LINES = 240;
 
@@ -45,7 +45,11 @@ export interface TerminalSession {
  * Terminal state machine: scrollback, sequential typewriter reveal, command
  * history and autocomplete. Command semantics are delegated to the registry.
  */
-export function useTerminalSession(registry: CommandRegistry, bootLines: readonly TerminalLineDraft[]): TerminalSession {
+export function useTerminalSession(
+  registry: CommandRegistry,
+  bootLines: readonly TerminalLineDraft[],
+  onEffect?: (effect: TerminalEffect) => void,
+): TerminalSession {
   const idRef = useRef(0);
   const historyRef = useRef<string[]>([]);
   const historyCursorRef = useRef(-1);
@@ -77,6 +81,8 @@ export function useTerminalSession(registry: CommandRegistry, bootLines: readonl
       const echo = toLines([{ text: trimmed, tone: "pink" }], "input");
       const output = toLines(result.lines, "output");
 
+      if (result.effect) onEffect?.(result.effect);
+
       if (result.clearScreen) {
         dispatch({ type: "replace", lines: output });
         return;
@@ -84,7 +90,7 @@ export function useTerminalSession(registry: CommandRegistry, bootLines: readonl
 
       dispatch({ type: "append", lines: [...echo, ...output] });
     },
-    [registry, toLines],
+    [registry, toLines, onEffect],
   );
 
   const markLineRevealed = useCallback(() => dispatch({ type: "reveal" }), []);

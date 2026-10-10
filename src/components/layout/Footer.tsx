@@ -5,14 +5,15 @@ import { GlitchText } from "@/components/ui/GlitchText";
 import { siteConfig } from "@/config/site";
 import { CoordinationLog } from "./CoordinationLog";
 import { EncryptedMail } from "./EncryptedMail";
+import { OpenContactButton } from "./OpenContactButton";
 import { SystemSignature } from "./SystemSignature";
 
 export function Footer() {
   return (
-    <footer id="contact" className="relative mx-auto max-w-7xl px-4 pt-24 pb-10 sm:px-6">
+    <footer className="relative mx-auto max-w-7xl px-4 pt-24 pb-10 sm:px-6">
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         <BentoCard accent="pink" className="p-6 xl:col-span-2">
-          <FooterBlockTitle icon={<KeyRound className="h-4 w-4" />} index="05.A">
+          <FooterBlockTitle icon={<KeyRound className="h-4 w-4" />} index="11.A">
             Encrypted Uplinks
           </FooterBlockTitle>
           <p className="mt-4 font-display text-2xl font-black tracking-wider text-white uppercase">
@@ -24,10 +25,11 @@ export function Footer() {
             <EncryptedMail label="Secure / PGP" address={siteConfig.contact.secureEmail} accent="pink" />
           </div>
           <p className="mt-4 break-all font-mono text-xs text-zinc-400">PGP_FP :: {siteConfig.contact.pgpFingerprint}</p>
+          <OpenContactButton className="mt-5" />
         </BentoCard>
 
         <BentoCard accent="cyan" className="p-6">
-          <FooterBlockTitle icon={<Globe className="h-4 w-4" />} index="05.B">
+          <FooterBlockTitle icon={<Globe className="h-4 w-4" />} index="11.B">
             Global Coordination
           </FooterBlockTitle>
           <div className="mt-5">
@@ -36,7 +38,7 @@ export function Footer() {
         </BentoCard>
 
         <BentoCard accent="lime" className="p-6">
-          <FooterBlockTitle icon={<Radio className="h-4 w-4" />} index="05.C">
+          <FooterBlockTitle icon={<Radio className="h-4 w-4" />} index="11.C">
             System Signature
           </FooterBlockTitle>
           <div className="mt-5">

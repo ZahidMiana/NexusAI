@@ -23,7 +23,7 @@ export function FullStackEngineerCard({ member, index }: MemberCardProps) {
   return (
     <BentoCard accent={member.accent} scaleOnHover={false} className="flex h-full flex-col gap-6 p-6">
       <div className="flex items-center justify-between">
-        <BentoLabel index="02.A" accent={member.accent}>
+        <BentoLabel index="03.A" accent={member.accent}>
           LLM Deployment Core
         </BentoLabel>
         <Server className="h-5 w-5 text-cyber-cyan drop-glow-cyan" />

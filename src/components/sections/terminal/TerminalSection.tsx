@@ -19,14 +19,14 @@ export function TerminalSection() {
     <section id={TERMINAL_SECTION_ID} aria-labelledby="terminal-heading" className="mx-auto max-w-7xl scroll-mt-28 px-4 pt-24 sm:px-6">
       <SectionHeading
         headingId="terminal-heading"
-        index="03"
+        index="07"
         title="Live AI Terminal"
         accent="cyan"
         subtitle="Interrogate the mesh directly. Type a protocol or fire a rapid command chip — output streams in real time."
       />
       <BentoCard accent="cyan" scaleOnHover={false} className="p-4 sm:p-6">
         <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
-          <BentoLabel index="03.A">Command Uplink</BentoLabel>
+          <BentoLabel index="07.A">Command Uplink</BentoLabel>
           <span className="flex items-center gap-2 font-tech text-xs tracking-[0.14em] text-cyber-lime uppercase">
             <StatusDot accent="lime" /> Session encrypted
           </span>
