@@ -2,7 +2,7 @@
 
 import { Check, CornerDownLeft, Search } from "lucide-react";
 import { useEffect, useMemo, useRef, useState, type KeyboardEvent } from "react";
-import { TelemetryReadout } from "@/components/layout/TelemetryReadout";
+import { AvailabilityBadge } from "@/components/layout/AvailabilityBadge";
 import { useCommandPalette } from "@/context/CommandPaletteContext";
 import { useCanHover } from "@/hooks/useMediaQuery";
 import { cn } from "@/lib/cn";
@@ -151,7 +151,7 @@ function PaletteBody({ onClose }: { onClose: () => void }) {
       </ul>
 
       <div className="flex flex-wrap items-center justify-between gap-3 border-t border-line px-4 py-3">
-        <TelemetryReadout className="lg:hidden" />
+        <AvailabilityBadge className="lg:hidden" />
         <p className="hidden font-mono text-xs text-fg-muted md:block">
           <kbd className="text-fg-soft">↑↓</kbd> move · <kbd className="text-fg-soft">↵</kbd> select · <kbd className="text-fg-soft">esc</kbd> close
         </p>

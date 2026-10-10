@@ -1,9 +1,15 @@
+import { Coins, FileText, ScanEye, Server, ShieldAlert, Users } from "lucide-react";
 import type { CaseStudy } from "@/types";
 
-/** Real projects from the team. `owner` links to a member in data/team.ts. */
+/**
+ * Real projects from the team. `owner` links to a member in data/team.ts.
+ * Add `cover: "/work/<file>.png"` (in /public) for a screenshot and
+ * `links: { github, demo }` to show buttons in the case study dialog.
+ */
 export const CASE_STUDIES: readonly CaseStudy[] = [
   {
     id: "perp-dex",
+    icon: Coins,
     title: "Perp Exchange + AI Agent",
     client: "Final Year Project",
     industry: "DeFi / Web3",
@@ -28,6 +34,7 @@ export const CASE_STUDIES: readonly CaseStudy[] = [
   },
   {
     id: "documind",
+    icon: FileText,
     title: "DocuMind AI",
     client: "RAG Chatbot",
     industry: "Document AI",
@@ -52,6 +59,7 @@ export const CASE_STUDIES: readonly CaseStudy[] = [
   },
   {
     id: "ats",
+    icon: Users,
     title: "AI Resume Screening",
     client: "ATS System",
     industry: "HR Tech",
@@ -74,6 +82,7 @@ export const CASE_STUDIES: readonly CaseStudy[] = [
   },
   {
     id: "multimodal-retrieval",
+    icon: ScanEye,
     title: "Multimodal Retrieval",
     client: "Product Search",
     industry: "Search / AI",
@@ -96,6 +105,7 @@ export const CASE_STUDIES: readonly CaseStudy[] = [
   },
   {
     id: "llm-security-framework",
+    icon: ShieldAlert,
     title: "LLM & API Security Framework",
     client: "Security Tooling",
     industry: "AI Security",
@@ -118,6 +128,7 @@ export const CASE_STUDIES: readonly CaseStudy[] = [
   },
   {
     id: "security-homelab",
+    icon: Server,
     title: "Security Homelab & CTF",
     client: "Attack-Defense Lab",
     industry: "Offensive Security",

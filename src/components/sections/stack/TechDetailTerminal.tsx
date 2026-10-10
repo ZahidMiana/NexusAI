@@ -13,7 +13,7 @@ function buildLines(item: TechItem): TerminalLine[] {
   const filled = Math.round(item.proficiency / 5);
   const drafts: Omit<TerminalLine, "id">[] = [
     { kind: "input", text: `nexus explain --tech=${item.id}`, tone: "pink" },
-    { kind: "output", text: `▸ ${item.name.toUpperCase()} :: PRODUCTION DOSSIER`, tone: item.accent },
+    { kind: "output", text: `▸ ${item.name.toUpperCase()} :: HOW WE USE IT`, tone: item.accent },
     { kind: "output", text: item.summary, tone: "default" },
     { kind: "output", text: `  MASTERY  [${"█".repeat(filled)}${"░".repeat(20 - filled)}] ${item.proficiency}%`, tone: "lime" },
     { kind: "output", text: `  USED IN  ${item.usedIn.join(" · ")}`, tone: "muted" },

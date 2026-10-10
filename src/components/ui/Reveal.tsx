@@ -7,12 +7,14 @@ export interface RevealProps {
   children: ReactNode;
   delay?: number;
   className?: string;
+  id?: string;
 }
 
 /** Fades and lifts content into view the first time it enters the viewport. */
-export function Reveal({ children, delay = 0, className }: RevealProps) {
+export function Reveal({ children, delay = 0, className, id }: RevealProps) {
   return (
     <motion.div
+      id={id}
       className={className}
       initial={{ opacity: 0, y: 28 }}
       whileInView={{ opacity: 1, y: 0 }}

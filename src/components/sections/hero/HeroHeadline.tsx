@@ -7,27 +7,40 @@ import { NeonButton, NeonLink } from "@/components/ui/NeonButton";
 import { StatusDot } from "@/components/ui/StatusDot";
 import { useContactLauncher } from "@/context/ContactContext";
 import { useMagnetic } from "@/hooks/useMagnetic";
-import { PromptLine } from "./PromptLine";
+import { siteConfig } from "@/config/site";
+
+const SERVICES = ["LLM apps", "RAG pipelines", "AI agents", "AI security"] as const;
 
 export function HeroHeadline() {
   const { openContact } = useContactLauncher();
   const ctaRef = useRef<HTMLSpanElement>(null);
   const magnetic = useMagnetic(ctaRef);
+  const startConversation = () => {
+    const { bookingUrl } = siteConfig.contact;
+    if (bookingUrl) window.open(bookingUrl, "_blank", "noopener,noreferrer");
+    else openContact();
+  };
 
   return (
     <BentoCard accent="pink" scaleOnHover={false} className="flex h-full min-h-[440px] flex-col justify-between gap-10 p-6 sm:p-8 lg:p-10">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <BentoLabel index="00" accent="pink">
-          Agency Core
+          AI engineering studio
         </BentoLabel>
         <span className="flex items-center gap-2 rounded-full border border-cyber-lime/30 bg-cyber-lime/5 px-3 py-1 font-tech text-xs tracking-[0.14em] text-cyber-lime uppercase">
           <StatusDot accent="lime" />
-          Accepting Q1 missions
+          {siteConfig.availability}
         </span>
       </div>
 
       <div className="space-y-6">
-        <PromptLine command="nexus --init protocol=elite_ai --deploy=production" />
+        <ul className="flex flex-wrap gap-2" aria-label="What we do">
+          {SERVICES.map((service) => (
+            <li key={service} className="rounded-full border border-line px-3 py-1 font-tech text-xs tracking-[0.1em] text-fg-soft uppercase">
+              {service}
+            </li>
+          ))}
+        </ul>
         <h1 className="font-display text-4xl leading-[1.05] font-black tracking-tight text-fg uppercase sm:text-5xl lg:text-6xl">
           We Architect{" "}
           <span className="bg-gradient-to-r from-cyber-cyan via-fg to-cyber-cyan bg-clip-text text-transparent">
@@ -46,9 +59,9 @@ export function HeroHeadline() {
 
       <div className="flex flex-wrap items-center gap-4">
         <span ref={ctaRef} className="inline-flex transition-transform duration-200 ease-out" {...magnetic}>
-        <NeonButton accent="pink" variant="solid" size="lg" className="tracking-[0.1em] sm:tracking-[0.14em]" icon={<Power className="h-4 w-4" />} onClick={() => openContact()}>
-          <span className="block">Initiate Protocol</span>
-          <span className="block font-mono text-[11px] font-medium tracking-normal normal-case opacity-80">Book a free 30 min call</span>
+        <NeonButton accent="pink" variant="solid" size="lg" className="tracking-[0.1em] sm:tracking-[0.14em]" icon={<Power className="h-4 w-4" />} onClick={startConversation}>
+          <span className="block">Book a free call</span>
+          <span className="block font-mono text-[11px] font-medium tracking-normal normal-case opacity-80">30 min · no obligation</span>
         </NeonButton>
         </span>
         <NeonLink href="#work" accent="cyan" size="lg" icon={<ArrowDownRight className="h-4 w-4" />}>

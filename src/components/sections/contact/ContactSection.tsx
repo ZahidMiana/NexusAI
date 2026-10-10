@@ -1,10 +1,10 @@
-import { Clock, FileLock2, Handshake, Mail } from "lucide-react";
+import { CalendarClock, Clock, FileLock2, Handshake, Mail } from "lucide-react";
 import type { ReactNode } from "react";
 import { BentoCard, BentoLabel } from "@/components/ui/BentoCard";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { siteConfig } from "@/config/site";
-import { CONTACT_SECTION_ID } from "@/context/ContactContext";
+import { CONTACT_FORM_ID, CONTACT_SECTION_ID } from "@/context/ContactContext";
 import { ContactForm } from "./ContactForm";
 
 const NEXT_STEPS = [
@@ -19,7 +19,8 @@ export function ContactSection() {
       <SectionHeading
         headingId="contact-heading"
         index="10"
-        title="Initiate Protocol"
+        eyebrow="Contact"
+        title="Start a Project"
         accent="pink"
         subtitle="Tell us what you are building. You will hear back from an engineer within one business day."
       />
@@ -40,8 +41,19 @@ export function ContactSection() {
                 </li>
               ))}
             </ol>
+            {siteConfig.contact.bookingUrl && (
+              <a
+                href={siteConfig.contact.bookingUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-between rounded-xl border border-line bg-inset px-4 py-3 font-mono text-sm text-fg transition-colors hover:border-line-strong"
+              >
+                Prefer to talk? Book a 30 min call
+                <CalendarClock className="h-4 w-4 text-cyber-pink" aria-hidden />
+              </a>
+            )}
             <ul className="mt-auto space-y-3 border-t border-line pt-6">
-              <Assurance icon={<Clock className="h-4 w-4" />}>Reply within one business day</Assurance>
+              <Assurance icon={<Clock className="h-4 w-4" />}>{siteConfig.responseTime}</Assurance>
               <Assurance icon={<FileLock2 className="h-4 w-4" />}>NDA signed before any details</Assurance>
               <Assurance icon={<Handshake className="h-4 w-4" />}>You own all code and models</Assurance>
               <Assurance icon={<Mail className="h-4 w-4" />}>
@@ -52,7 +64,7 @@ export function ContactSection() {
             </ul>
           </BentoCard>
         </Reveal>
-        <Reveal delay={0.08} className="lg:col-span-3">
+        <Reveal delay={0.08} className="scroll-mt-24 lg:col-span-3" id={CONTACT_FORM_ID}>
           <BentoCard accent="pink" scaleOnHover={false} className="p-6 sm:p-8">
             <BentoLabel index="10.B" accent="pink" className="mb-6">
               Project intake

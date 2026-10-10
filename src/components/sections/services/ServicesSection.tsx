@@ -18,7 +18,8 @@ export function ServicesSection() {
       <SectionHeading
         headingId="services-heading"
         index="06"
-        title="Engagement Models"
+        eyebrow="Services"
+        title="Services & Pricing"
         accent="pink"
         subtitle="Pick the shape that fits your stage. Every engagement includes an NDA, full code ownership and weekly demos."
       />

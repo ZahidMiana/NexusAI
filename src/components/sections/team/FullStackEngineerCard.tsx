@@ -17,7 +17,7 @@ const VIEWS: readonly SegmentOption<View>[] = [
   { value: "architecture", label: "Arch Graph" },
 ];
 
-export function FullStackEngineerCard({ member, index }: MemberCardProps) {
+export function FullStackEngineerCard({ member }: MemberCardProps) {
   const [view, setView] = useState<View>("telemetry");
 
   return (
@@ -30,7 +30,7 @@ export function FullStackEngineerCard({ member, index }: MemberCardProps) {
       </div>
 
       <div className="grid gap-6 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.6fr)]">
-        <MemberHeader member={member} index={index} />
+        <MemberHeader member={member} />
         <div className="min-w-0 space-y-4">
           <SegmentedControl options={VIEWS} value={view} onChange={setView} accent={member.accent} ariaLabel="RAG and agent view" />
           <AnimatePresence mode="wait" initial={false}>

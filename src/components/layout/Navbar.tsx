@@ -8,7 +8,7 @@ import { useTerminalLauncher } from "@/context/TerminalContext";
 import { useActiveSection } from "@/hooks/useActiveSection";
 import { NavLinks } from "./NavLinks";
 import { StyleMenu } from "./StyleMenu";
-import { TelemetryReadout } from "./TelemetryReadout";
+import { AvailabilityBadge } from "./AvailabilityBadge";
 
 export function Navbar() {
   const { openTerminal } = useTerminalLauncher();
@@ -26,7 +26,7 @@ export function Navbar() {
         </a>
 
         <div className="hidden items-center gap-6 lg:flex">
-          <TelemetryReadout condensed />
+          <AvailabilityBadge className="xl:hidden 2xl:inline-flex" />
           <span aria-hidden className="hidden h-5 w-px bg-line-strong xl:block" />
           <div className="hidden xl:block">
             <NavLinks activeId={activeId} layout="row" />

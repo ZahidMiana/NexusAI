@@ -16,9 +16,10 @@ export function TechStackSection() {
       <SectionHeading
         headingId="stack-heading"
         index="08"
-        title="Tech Stack Matrix"
+        eyebrow="Stack"
+        title="Tech Stack"
         accent="lime"
-        subtitle="Every module is battle-tested in production. Select any badge to pull its expertise dossier."
+        subtitle="The tools we use in real projects. Select any item to see where and how we used it."
       />
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
         {TECH_CATEGORIES.map((category, index) => (

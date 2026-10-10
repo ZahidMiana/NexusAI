@@ -4,17 +4,15 @@ import type { TerminalCommand } from "@/types";
 export const contactCommand: TerminalCommand = {
   name: "/contact",
   aliases: ["/initiate"],
-  description: "Open a secure uplink to the team",
+  description: "Show how to reach the team",
   execute: () => ({
     lines: [
-      { text: "> INITIATING PROTOCOL :: SECURE_HANDSHAKE", tone: "pink" },
-      { text: "  ▸ Negotiating TLS 1.3 ........... OK", tone: "muted" },
-      { text: "  ▸ Exchanging PGP keys ........... OK", tone: "muted" },
-      { text: `  UPLINK  :: ${siteConfig.contact.email}`, tone: "cyan" },
-      { text: `  SECURE  :: ${siteConfig.contact.secureEmail}`, tone: "cyan" },
-      { text: `  PGP     :: ${siteConfig.contact.pgpFingerprint}`, tone: "muted" },
-      { text: "Channel open. Average response window: < 24h.", tone: "lime" },
-      { text: "Run /book to open the project intake form.", tone: "pink" },
+      { text: "> NexusAI contact", tone: "pink" },
+      { text: `  EMAIL     :: ${siteConfig.contact.email}`, tone: "cyan" },
+      ...(siteConfig.contact.bookingUrl ? [{ text: `  BOOK CALL :: ${siteConfig.contact.bookingUrl}`, tone: "cyan" as const }] : []),
+      { text: `  LOCATION  :: ${siteConfig.location.city} (${siteConfig.location.utcOffset})`, tone: "muted" },
+      { text: `${siteConfig.responseTime}.`, tone: "lime" },
+      { text: "Run /book to open the project form.", tone: "pink" },
     ],
   }),
 };

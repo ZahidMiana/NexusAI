@@ -1,6 +1,7 @@
 import { Footer } from "@/components/layout/Footer";
 import { GridBackground } from "@/components/layout/GridBackground";
 import { Navbar } from "@/components/layout/Navbar";
+import { StickyMobileCta } from "@/components/layout/StickyMobileCta";
 import { AppProviders } from "@/components/providers/AppProviders";
 import { ContactSection } from "@/components/sections/contact/ContactSection";
 import { FaqSection } from "@/components/sections/faq/FaqSection";
@@ -31,6 +32,7 @@ export default function HomePage() {
         <ContactSection />
       </main>
       <Footer />
+      <StickyMobileCta />
     </AppProviders>
   );
 }

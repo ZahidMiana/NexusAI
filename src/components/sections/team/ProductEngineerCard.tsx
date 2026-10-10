@@ -25,7 +25,7 @@ const PANELS: Record<View, () => React.JSX.Element> = {
   launches: LaunchFeed,
 };
 
-export function ProductEngineerCard({ member, index }: MemberCardProps) {
+export function ProductEngineerCard({ member }: MemberCardProps) {
   const [view, setView] = useState<View>("workflow");
   const Panel = PANELS[view];
 
@@ -38,7 +38,7 @@ export function ProductEngineerCard({ member, index }: MemberCardProps) {
         <Bot className="h-5 w-5 text-cyber-pink" />
       </div>
 
-      <MemberHeader member={member} index={index} />
+      <MemberHeader member={member} />
 
       <div className="space-y-4">
         <SegmentedControl options={VIEWS} value={view} onChange={setView} accent={member.accent} ariaLabel="Product lab view" />

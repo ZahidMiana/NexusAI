@@ -3,6 +3,7 @@ import { CountUp } from "@/components/effects/CountUp";
 import { BentoCard } from "@/components/ui/BentoCard";
 import { getMemberById } from "@/data/team";
 import { accentTokens } from "@/lib/accent";
+import { ProjectCover } from "./ProjectCover";
 import { cn } from "@/lib/cn";
 import type { CaseStudy } from "@/types";
 
@@ -25,9 +26,11 @@ export function CaseStudyCard({ study, index, featured, onOpen }: CaseStudyCardP
         aria-haspopup="dialog"
         className="flex h-full w-full flex-col gap-5 p-6 text-left"
       >
+        <ProjectCover study={study} className={featured ? "h-44 md:h-52" : "h-28"} sizes={featured ? "(min-width: 1280px) 600px, 100vw" : "(min-width: 1280px) 300px, 100vw"} />
+
         <div className="flex items-center justify-between gap-3">
           <span className={cn("font-tech text-xs tracking-[0.14em] uppercase", tokens.text)}>
-            LOG_{String(index + 1).padStart(2, "0")} · {study.industry}
+            Project {String(index + 1).padStart(2, "0")} · {study.industry}
           </span>
           <ArrowUpRight className={cn("h-5 w-5 text-fg-muted transition-all duration-300 group-hover/bento:-translate-y-0.5 group-hover/bento:translate-x-0.5", tokens.groupHoverText)} />
         </div>
@@ -87,7 +90,7 @@ export function CaseStudyCard({ study, index, featured, onOpen }: CaseStudyCardP
         </dl>
 
         <span className="font-tech text-xs tracking-[0.14em] text-fg-soft uppercase transition-colors group-hover/bento:text-fg">
-          Open mission log →
+          View case study →
         </span>
       </button>
     </BentoCard>

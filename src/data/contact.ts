@@ -17,7 +17,7 @@ export const PROJECT_TYPES: readonly Option<ProjectTypeId>[] = [
 export const ENGAGEMENTS: readonly Option<EngagementId>[] = [
   { value: "audit", label: "Architecture Audit" },
   { value: "sprint", label: "Fixed Scope Sprint" },
-  { value: "squad", label: "Embedded Squad" },
+  { value: "squad", label: "Embedded Team" },
 ];
 
 export const BUDGET_RANGES: readonly Option<string>[] = [

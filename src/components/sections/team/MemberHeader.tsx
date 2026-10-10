@@ -1,4 +1,4 @@
-import { Globe } from "lucide-react";
+import { FileText, Globe } from "lucide-react";
 import Image from "next/image";
 import { BrandIcon, type Brand } from "@/components/ui/BrandIcon";
 import { StatusDot } from "@/components/ui/StatusDot";
@@ -9,7 +9,6 @@ import { HireButton } from "./HireButton";
 
 export interface MemberHeaderProps {
   member: TeamMember;
-  index: number;
   compact?: boolean;
 }
 
@@ -23,7 +22,7 @@ function initials(name: string): string {
 }
 
 /** Shared identity block for every operator showcase card. */
-export function MemberHeader({ member, index, compact = false }: MemberHeaderProps) {
+export function MemberHeader({ member, compact = false }: MemberHeaderProps) {
   const tokens = accentTokens(member.accent);
 
   return (
@@ -32,7 +31,6 @@ export function MemberHeader({ member, index, compact = false }: MemberHeaderPro
         <Avatar member={member} />
         <div className="min-w-0 flex-1">
           <div className="flex flex-wrap items-center gap-2">
-            <span className="font-tech text-xs tracking-[0.14em] text-fg-muted">OP_0{index + 1}</span>
             <span className="inline-flex items-center gap-1.5 rounded-full border border-cyber-pink/40 bg-cyber-pink/10 px-2 py-0.5 font-tech text-xs tracking-[0.12em] text-cyber-pink uppercase">
               <StatusDot accent="pink" className="h-1.5 w-1.5" />
               {member.status}
@@ -54,6 +52,16 @@ export function MemberHeader({ member, index, compact = false }: MemberHeaderPro
       </ul>
       <div className="flex flex-wrap items-center gap-3">
         <HireButton member={member} />
+        {member.resumeUrl && (
+          <a
+            href={member.resumeUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex h-8 items-center gap-1.5 rounded-lg border border-line px-2.5 font-tech text-xs tracking-[0.12em] text-fg-soft uppercase transition-colors hover:border-line-strong hover:text-fg"
+          >
+            <FileText className="h-3.5 w-3.5" aria-hidden /> CV
+          </a>
+        )}
         <SocialLinks member={member} />
       </div>
     </div>

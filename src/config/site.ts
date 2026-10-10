@@ -5,16 +5,16 @@ export const siteConfig = {
   description:
     "NexusAI is a team of AI engineers and security specialists building production LLM apps, RAG pipelines and AI agents, and keeping them secure.",
   url: "https://nexus-ai.dev",
-  foundedAt: "2025-01-01T00:00:00Z",
+  location: { city: "Lahore, Pakistan", timeZone: "Asia/Karachi", utcOffset: "UTC+5" },
+  /** Shown in the navbar badge and the hero. */
+  availability: "Available for new projects",
+  responseTime: "Replies within one business day",
   contact: {
+    // TODO: replace with the real inbox before launch. Also set CONTACT_TO_EMAIL for the form.
     email: "uplink@nexus-ai.dev",
-    secureEmail: "secure@nexus-ai.dev",
-    pgpFingerprint: "9F2C 7A1E 44B0 D3C8 1E6F  A07B 5C2D 88E1 3B9A 6F04",
+    /** Optional Calendly (or similar) link. When set, "Book a call" buttons open it. */
+    bookingUrl: undefined as string | undefined,
   },
-  navTelemetry: [
-    { label: "SYSTEM", value: "ACTIVE", accent: "lime" },
-    { label: "CORE_TEMP", value: "NOMINAL", accent: "cyan" },
-  ],
 } as const;
 
 export type SiteConfig = typeof siteConfig;

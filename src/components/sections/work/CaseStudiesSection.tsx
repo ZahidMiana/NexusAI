@@ -26,9 +26,10 @@ export function CaseStudiesSection() {
       <SectionHeading
         headingId="work-heading"
         index="02"
-        title="Mission Logs"
+        eyebrow="Our work"
+        title="Selected Work"
         accent="cyan"
-        subtitle="Real projects from the team. The problem, what we built and what it achieved. Open any log for the full story."
+        subtitle="Real projects from the team: the problem, what we built and the result. Open any project for the full case study."
       />
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-4">
         {CASE_STUDIES.map((study, index) => (

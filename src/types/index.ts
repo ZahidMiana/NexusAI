@@ -23,6 +23,8 @@ export interface TeamMember {
   /** Optional portrait (path under /public). Rendered with a neon duotone filter. */
   photo?: string;
   socials?: { github?: string; linkedin?: string; website?: string };
+  /** Optional link to a CV / resume PDF (e.g. "/team/zahid-cv.pdf" in /public). */
+  resumeUrl?: string;
 }
 
 /* ─────────────────────────── Tech stack ─────────────────────────── */
@@ -161,6 +163,11 @@ export interface CaseMetric {
 export interface CaseStudy {
   id: string;
   title: string;
+  /** Icon used on the generated cover art when no screenshot is provided. */
+  icon: LucideIcon;
+  /** Optional screenshot or GIF under /public, e.g. "/work/documind.png". */
+  cover?: string;
+  links?: { github?: string; demo?: string };
   client: string;
   industry: string;
   accent: Accent;

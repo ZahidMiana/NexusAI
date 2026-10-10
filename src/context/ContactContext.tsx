@@ -4,6 +4,8 @@ import { createContext, useCallback, useContext, useMemo, useState, type ReactNo
 import type { ContactPrefill } from "@/types";
 
 export const CONTACT_SECTION_ID = "contact";
+/** The form card itself; on narrow screens it sits below the "what happens next" card. */
+export const CONTACT_FORM_ID = "project-intake";
 
 export interface ContactRequest {
   /** Increments on every open so repeated requests re-apply prefill and focus. */
@@ -23,7 +25,11 @@ export function ContactProvider({ children }: { children: ReactNode }) {
 
   const openContact = useCallback((prefill: ContactPrefill = {}) => {
     setRequest((current) => ({ id: (current?.id ?? 0) + 1, prefill }));
-    document.getElementById(CONTACT_SECTION_ID)?.scrollIntoView({ behavior: "smooth", block: "start" });
+    // Wide screens show the form beside the intro, so the section top is ideal.
+    // On phones the form is stacked lower, so scroll straight to it.
+    const wide = window.matchMedia("(min-width: 1024px)").matches;
+    const target = document.getElementById(wide ? CONTACT_SECTION_ID : CONTACT_FORM_ID) ?? document.getElementById(CONTACT_SECTION_ID);
+    target?.scrollIntoView({ behavior: "smooth", block: "start" });
   }, []);
 
   const launcher = useMemo(() => ({ openContact }), [openContact]);

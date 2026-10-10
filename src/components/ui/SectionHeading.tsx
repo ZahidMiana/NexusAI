@@ -6,6 +6,8 @@ import type { Accent } from "@/types";
 
 export interface SectionHeadingProps {
   index: string;
+  /** Short plain label above the title, e.g. "Our work". */
+  eyebrow: string;
   title: string;
   headingId?: string;
   subtitle?: ReactNode;
@@ -13,13 +15,13 @@ export interface SectionHeadingProps {
   className?: string;
 }
 
-export function SectionHeading({ index, title, headingId, subtitle, accent = "cyan", className }: SectionHeadingProps) {
+export function SectionHeading({ index, eyebrow, title, headingId, subtitle, accent = "cyan", className }: SectionHeadingProps) {
   const tokens = accentTokens(accent);
   return (
     <header className={cn("mb-8 flex flex-col gap-3 md:mb-10 md:flex-row md:items-end md:justify-between", className)}>
       <div>
         <p className={cn("font-tech text-xs tracking-[0.14em] uppercase", tokens.text)}>
-          {"// "}SECTOR_{index}
+          {index} · {eyebrow}
         </p>
         <h2 id={headingId} className="mt-2 font-display text-2xl font-black tracking-wider text-fg uppercase sm:text-3xl lg:text-4xl">
           <DecodeText text={title} />

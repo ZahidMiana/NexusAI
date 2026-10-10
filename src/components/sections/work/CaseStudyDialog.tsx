@@ -1,9 +1,11 @@
 "use client";
 
-import { CheckCircle2, Clock, Quote, Rocket } from "lucide-react";
+import { CheckCircle2, Clock, ExternalLink, Quote, Rocket } from "lucide-react";
+import { BrandIcon } from "@/components/ui/BrandIcon";
 import { CountUp } from "@/components/effects/CountUp";
 import { Dialog } from "@/components/ui/Dialog";
-import { NeonButton } from "@/components/ui/NeonButton";
+import { NeonButton, NeonLink } from "@/components/ui/NeonButton";
+import { ProjectCover } from "./ProjectCover";
 import { useContactLauncher } from "@/context/ContactContext";
 import { getMemberById } from "@/data/team";
 import { accentTokens } from "@/lib/accent";
@@ -38,9 +40,10 @@ function CaseStudyBody({ study, titleId, onStartSimilar }: { study: CaseStudy; t
 
   return (
     <article className="space-y-8 p-6 sm:p-10">
+      <ProjectCover study={study} className="h-40 sm:h-56" sizes="(min-width: 900px) 860px, 100vw" />
       <header className="space-y-3 pr-12">
         <p className={cn("font-tech text-xs tracking-[0.14em] uppercase", tokens.text)}>
-          Mission log · {study.industry} · {study.client}
+          Case study · {study.industry} · {study.client}
         </p>
         <h2 id={titleId} className="font-display text-3xl font-black tracking-wide text-fg uppercase sm:text-4xl">
           {study.title}
@@ -96,9 +99,21 @@ function CaseStudyBody({ study, titleId, onStartSimilar }: { study: CaseStudy; t
             </li>
           ))}
         </ul>
-        <NeonButton accent="pink" variant="solid" icon={<Rocket className="h-4 w-4" />} onClick={onStartSimilar}>
-          Start a similar project
-        </NeonButton>
+        <div className="flex flex-wrap gap-2">
+          {study.links?.github && (
+            <NeonLink href={study.links.github} target="_blank" rel="noopener noreferrer" accent="cyan" icon={<BrandIcon brand="github" className="h-4 w-4" />}>
+              GitHub
+            </NeonLink>
+          )}
+          {study.links?.demo && (
+            <NeonLink href={study.links.demo} target="_blank" rel="noopener noreferrer" accent="cyan" icon={<ExternalLink className="h-4 w-4" />}>
+              Live demo
+            </NeonLink>
+          )}
+          <NeonButton accent="pink" variant="solid" icon={<Rocket className="h-4 w-4" />} onClick={onStartSimilar}>
+            Start a similar project
+          </NeonButton>
+        </div>
       </footer>
     </article>
   );

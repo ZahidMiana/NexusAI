@@ -8,7 +8,7 @@ Built with Next.js, React, Tailwind CSS and Framer Motion.
 ## Features
 
 * **Hero section** with a clear pitch, a book a call button and an animated neural network
-* **Case studies**: six real projects from the team, each opening a full story
+* **Case studies**: six real projects from the team, each with a cover and a full story
 * **Team showcase** with a live demo for each member
   * Zahid Iqbal, Full Stack AI Engineer: RAG pipeline stats and agent architecture graph
   * Zeeshan Khalid, AI Security Engineer: prompt injection lab, OWASP LLM Top 10 audit and threat feed
@@ -24,7 +24,7 @@ Built with Next.js, React, Tailwind CSS and Framer Motion.
 * **Command palette** (Ctrl + K) to jump to any section, book a call or switch style
 * **Effects switch**: Full or Calm, where Calm turns off all ambient motion
 * **Small moments**: headings that decode and numbers that count up
-* **Mobile friendly** with touch support and readable text sizes
+* **Mobile friendly** with touch support, readable text and a sticky "Book a free call" button
 * **Accessible** with good contrast and support for reduced motion
 
 ## Tech Stack
@@ -127,6 +127,17 @@ Shortcuts: arrow keys for history, Tab to autocomplete. Press Ctrl + K anywhere 
 | Style list and default | `src/lib/preferences/styles.ts` |
 | Animations and effects | `src/app/globals.css` |
 | Terminal commands | `src/lib/terminal/commands` |
+
+## Before Launch
+
+| What | Where |
+| :--- | :--- |
+| Real contact email | `contact.email` in `src/config/site.ts` |
+| Calendly or booking link | `contact.bookingUrl` in `src/config/site.ts`. When set, every "Book a call" button opens it |
+| Availability text | `availability` in `src/config/site.ts` |
+| Project screenshots | Put images in `public/work/` and set `cover` in `src/data/caseStudies.ts` |
+| GitHub and demo links | `links` in `src/data/caseStudies.ts` |
+| Team photos and CV | `photo` and `resumeUrl` in `src/data/team.ts` |
 
 ## Adding a Team Member
 

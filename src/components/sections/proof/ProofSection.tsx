@@ -16,7 +16,8 @@ export function ProofSection() {
       <SectionHeading
         headingId="proof-heading"
         index="03"
-        title="Verified Credentials"
+        eyebrow="Credentials"
+        title="Experience & Credentials"
         accent="cyan"
         subtitle="The roles, certifications and leadership behind the work."
       />

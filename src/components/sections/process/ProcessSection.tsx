@@ -21,7 +21,8 @@ export function ProcessSection() {
       <SectionHeading
         headingId="process-heading"
         index="05"
-        title="Engagement Protocol"
+        eyebrow="Process"
+        title="How We Work"
         accent="lime"
         subtitle="Four phases from first call to a system your team owns. Weekly demos, no black boxes."
       />

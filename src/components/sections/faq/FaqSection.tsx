@@ -18,7 +18,7 @@ export function FaqSection() {
 
   return (
     <section id="faq" aria-labelledby="faq-heading" className="mx-auto max-w-7xl scroll-mt-28 px-4 pt-28 sm:px-6 md:pt-36">
-      <SectionHeading headingId="faq-heading" index="09" title="Query Log" accent="pink" subtitle="Straight answers to what clients ask us most." />
+      <SectionHeading headingId="faq-heading" index="09" eyebrow="FAQ" title="Common Questions" accent="pink" subtitle="Straight answers to what clients ask us most." />
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
         <Reveal className="lg:col-span-2">
           <BentoCard accent="pink" scaleOnHover={false} className="divide-y divide-line px-2 sm:px-4">

@@ -26,6 +26,7 @@ export function LLMStatsGrid() {
   const currentQueries = queries[queries.length - 1];
 
   return (
+    <div className="space-y-2">
     <div className="grid gap-4 sm:grid-cols-2">
       <div className="space-y-3 rounded-xl border border-line bg-inset p-4">
         <div className="flex items-center justify-between font-tech text-xs tracking-[0.14em] text-fg-muted uppercase">
@@ -57,6 +58,8 @@ export function LLMStatsGrid() {
           <StatTile icon={<Target className="h-3.5 w-3.5" />} label="Recall" value={recall.toFixed(2)} accent="pink" />
         </div>
       </div>
+    </div>
+    <p className="font-mono text-xs text-fg-muted">Simulated demo data, not live production metrics.</p>
     </div>
   );
 }

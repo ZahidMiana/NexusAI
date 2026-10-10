@@ -9,7 +9,7 @@ import { DeviceTelemetry } from "./widgets/mobile/DeviceTelemetry";
 import { MobileSimulator } from "./widgets/mobile/MobileSimulator";
 import type { DeviceMode } from "./widgets/mobile/types";
 
-export function MobileDeveloperCard({ member, index }: MemberCardProps) {
+export function MobileDeveloperCard({ member }: MemberCardProps) {
   const [mode, setMode] = useState<DeviceMode>("home");
   const [llmActive, setLlmActive] = useState(false);
 
@@ -29,7 +29,7 @@ export function MobileDeveloperCard({ member, index }: MemberCardProps) {
 
       <div className="flex flex-1 flex-col gap-6 xl:flex-row">
         <div className="flex min-w-0 flex-1 flex-col gap-5">
-          <MemberHeader member={member} index={index} />
+          <MemberHeader member={member} />
           <DeviceTelemetry mode={mode} llmActive={llmActive} />
           <p className="font-mono text-xs leading-relaxed text-fg-soft">
             {"// Tap an app inside the device to run a live on-device inference simulation."}

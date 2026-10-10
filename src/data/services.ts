@@ -38,8 +38,8 @@ export const SERVICE_PLANS: readonly ServicePlan[] = [
   },
   {
     id: "squad",
-    name: "Embedded Squad",
-    tagline: "Our operators working as part of your team.",
+    name: "Embedded Team",
+    tagline: "Our engineers working as part of your team.",
     price: "$38k",
     priceNote: "per month",
     timeline: "3 month minimum",

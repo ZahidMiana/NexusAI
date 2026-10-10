@@ -25,7 +25,7 @@ const PANELS: Record<View, () => React.JSX.Element> = {
   feed: ThreatFeed,
 };
 
-export function SecurityEngineerCard({ member, index }: MemberCardProps) {
+export function SecurityEngineerCard({ member }: MemberCardProps) {
   const [view, setView] = useState<View>("injection");
   const Panel = PANELS[view];
 
@@ -39,7 +39,7 @@ export function SecurityEngineerCard({ member, index }: MemberCardProps) {
       </div>
 
       <div className="grid gap-6 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.7fr)]">
-        <MemberHeader member={member} index={index} />
+        <MemberHeader member={member} />
         <div className="min-w-0 space-y-4">
           <SegmentedControl options={VIEWS} value={view} onChange={setView} accent={member.accent} ariaLabel="Security lab view" />
           <AnimatePresence mode="wait" initial={false}>

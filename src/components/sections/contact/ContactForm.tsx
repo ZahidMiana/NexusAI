@@ -152,7 +152,7 @@ export function ContactForm() {
           className="shrink-0 whitespace-nowrap"
           icon={pending ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}
         >
-          {pending ? "Transmitting…" : "Send transmission"}
+          {pending ? "Sending…" : "Send message"}
         </NeonButton>
       </div>
     </form>
@@ -167,18 +167,14 @@ function SuccessPanel({ ticket, onReset }: { ticket: string; onReset: () => void
     <div role="status" className="flex min-h-[28rem] flex-col items-start justify-center gap-5 rounded-xl border border-cyber-lime/40 bg-inset p-6 font-mono sm:p-8">
       <CheckCircle2 className="h-10 w-10 text-cyber-lime" />
       <h3 ref={headingRef} tabIndex={-1} className="font-display text-2xl font-black tracking-wide text-fg uppercase outline-none">
-        Transmission received
+        Message sent
       </h3>
-      <div className="space-y-1 text-sm text-fg-soft">
+      <div className="space-y-1.5 text-sm text-fg-soft">
+        <p>Thanks! Your project brief is with the team.</p>
         <p>
-          <span className="text-cyber-lime">[ OK ]</span> Brief encrypted and delivered to the squad.
+          Your reference: <span className="text-cyber-cyan">{ticket}</span>
         </p>
-        <p>
-          <span className="text-cyber-lime">[ OK ]</span> Ticket <span className="text-cyber-cyan">{ticket}</span> logged.
-        </p>
-        <p>
-          <span className="text-cyber-pink">[ ETA ]</span> A real engineer will reply within one business day.
-        </p>
+        <p>{siteConfig.responseTime}.</p>
       </div>
       <NeonButton accent="cyan" onClick={onReset}>
         Send another message
