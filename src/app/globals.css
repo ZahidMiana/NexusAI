@@ -1,0 +1,197 @@
+@import "tailwindcss";
+
+@theme {
+  --color-void: #050505;
+  --color-panel: #0d0d11;
+  --color-panel-raised: #13131a;
+  --color-cyber-cyan: #00f0ff;
+  --color-cyber-pink: #ff007f;
+  --color-cyber-lime: #39ff14;
+
+  --font-display: var(--font-orbitron), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, SFMono-Regular, monospace;
+  --font-tech: var(--font-share-tech), ui-monospace, monospace;
+
+  --ease-hardware: cubic-bezier(0.22, 1, 0.36, 1);
+
+  --animate-glitch-a: glitch-a 2.8s infinite steps(1);
+  --animate-glitch-b: glitch-b 3.2s infinite steps(1);
+  --animate-blink: blink 1s steps(1) infinite;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-neon-pulse: neon-pulse 2.4s ease-in-out infinite;
+  --animate-scan: scan 6s linear infinite;
+  --animate-dash: dash 1.2s linear infinite;
+  --animate-flicker: flicker 4s linear infinite;
+  --animate-marquee: marquee 40s linear infinite;
+
+  @keyframes glitch-a {
+    0%, 86%, 100% { clip-path: inset(0 0 0 0); transform: translate(0, 0); opacity: 0; }
+    87% { clip-path: inset(12% 0 58% 0); transform: translate(-3px, -1px); opacity: 0.9; }
+    90% { clip-path: inset(62% 0 8% 0); transform: translate(3px, 1px); opacity: 0.9; }
+    93% { clip-path: inset(32% 0 40% 0); transform: translate(-2px, 0); opacity: 0.9; }
+    96% { clip-path: inset(80% 0 2% 0); transform: translate(2px, -1px); opacity: 0.9; }
+  }
+
+  @keyframes glitch-b {
+    0%, 80%, 100% { clip-path: inset(0 0 0 0); transform: translate(0, 0); opacity: 0; }
+    81% { clip-path: inset(48% 0 30% 0); transform: translate(3px, 1px); opacity: 0.85; }
+    85% { clip-path: inset(6% 0 76% 0); transform: translate(-3px, 0); opacity: 0.85; }
+    89% { clip-path: inset(70% 0 12% 0); transform: translate(2px, 1px); opacity: 0.85; }
+  }
+
+  @keyframes blink {
+    0%, 50% { opacity: 1; }
+    50.01%, 100% { opacity: 0; }
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translate3d(0, 0, 0); }
+    50% { transform: translate3d(0, -8px, 0); }
+  }
+
+  @keyframes neon-pulse {
+    0%, 100% { box-shadow: 0 0 6px rgba(255, 0, 127, 0.55), 0 0 18px rgba(255, 0, 127, 0.35), inset 0 0 8px rgba(255, 0, 127, 0.25); }
+    50% { box-shadow: 0 0 12px rgba(255, 0, 127, 0.9), 0 0 38px rgba(255, 0, 127, 0.55), inset 0 0 14px rgba(255, 0, 127, 0.4); }
+  }
+
+  @keyframes scan {
+    0% { transform: translate3d(0, -100%, 0); }
+    100% { transform: translate3d(0, 100%, 0); }
+  }
+
+  @keyframes dash {
+    to { stroke-dashoffset: -24; }
+  }
+
+  @keyframes flicker {
+    0%, 19%, 21%, 23%, 54%, 56%, 100% { opacity: 1; }
+    20%, 22%, 55% { opacity: 0.45; }
+  }
+
+  @keyframes marquee {
+    0% { transform: translate3d(0, 0, 0); }
+    100% { transform: translate3d(-50%, 0, 0); }
+  }
+}
+
+/* ── Neon glow utilities (composable with hover:/focus:/group-hover:) ── */
+@utility glow-cyan {
+  box-shadow: 0 0 0 1px rgba(0, 240, 255, 0.35), 0 0 22px rgba(0, 240, 255, 0.28), 0 0 60px rgba(0, 240, 255, 0.12);
+}
+@utility glow-pink {
+  box-shadow: 0 0 0 1px rgba(255, 0, 127, 0.35), 0 0 22px rgba(255, 0, 127, 0.3), 0 0 60px rgba(255, 0, 127, 0.14);
+}
+@utility glow-lime {
+  box-shadow: 0 0 0 1px rgba(57, 255, 20, 0.35), 0 0 22px rgba(57, 255, 20, 0.26), 0 0 60px rgba(57, 255, 20, 0.12);
+}
+@utility text-glow-cyan {
+  text-shadow: 0 0 8px rgba(0, 240, 255, 0.75), 0 0 22px rgba(0, 240, 255, 0.35);
+}
+@utility text-glow-pink {
+  text-shadow: 0 0 8px rgba(255, 0, 127, 0.75), 0 0 22px rgba(255, 0, 127, 0.35);
+}
+@utility text-glow-lime {
+  text-shadow: 0 0 8px rgba(57, 255, 20, 0.75), 0 0 22px rgba(57, 255, 20, 0.35);
+}
+@utility drop-glow-cyan {
+  filter: drop-shadow(0 0 6px rgba(0, 240, 255, 0.85));
+}
+@utility drop-glow-pink {
+  filter: drop-shadow(0 0 6px rgba(255, 0, 127, 0.85));
+}
+@utility drop-glow-lime {
+  filter: drop-shadow(0 0 6px rgba(57, 255, 20, 0.85));
+}
+
+/* Digital grid matrix backdrop */
+@utility bg-matrix-grid {
+  background-image:
+    linear-gradient(rgba(0, 240, 255, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 240, 255, 0.045) 1px, transparent 1px);
+  background-size: 44px 44px;
+}
+
+@utility bg-scanlines {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.025) 0px,
+    rgba(255, 255, 255, 0.025) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    color-scheme: dark;
+  }
+
+  body {
+    background-color: var(--color-void);
+    color: #e4e4e7;
+    font-family: var(--font-mono);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background: rgba(255, 0, 127, 0.35);
+    color: #fff;
+  }
+
+  :focus-visible {
+    outline: 1px solid var(--color-cyber-cyan);
+    outline-offset: 2px;
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #050505;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #1f1f2a;
+    border-radius: 8px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #00f0ff55;
+  }
+
+  input[type="range"] {
+    accent-color: var(--color-cyber-pink);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ── Bento spotlight: radial glow + border-only highlight following the cursor ── */
+.bento-spotlight-fill {
+  background: radial-gradient(520px circle at var(--mx, 50%) var(--my, 50%), var(--spot-soft), transparent 45%);
+}
+
+.bento-spotlight-border {
+  padding: 1px;
+  background: radial-gradient(360px circle at var(--mx, 50%) var(--my, 50%), var(--spot), transparent 40%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+}
+
+@media (hover: none) {
+  .bento-spotlight-fill,
+  .bento-spotlight-border {
+    display: none;
+  }
+}

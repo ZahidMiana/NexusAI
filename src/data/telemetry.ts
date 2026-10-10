@@ -1,0 +1,96 @@
+import type { Accent } from "@/types";
+
+export interface HeroStat {
+  label: string;
+  value: string;
+  accent: Accent;
+}
+
+export const HERO_STATS: readonly HeroStat[] = [
+  { label: "MODELS_IN_PROD", value: "142", accent: "cyan" },
+  { label: "UPTIME_SLA", value: "99.99%", accent: "lime" },
+  { label: "TOKENS_SERVED", value: "38B+", accent: "pink" },
+  { label: "P95_LATENCY", value: "84ms", accent: "cyan" },
+];
+
+export interface ProductLaunch {
+  id: string;
+  name: string;
+  client: string;
+  metric: string;
+  status: "LIVE" | "DEPLOYING" | "CANARY";
+}
+
+export const PRODUCT_LAUNCHES: readonly ProductLaunch[] = [
+  { id: "l1", name: "ClaimPilot Agent", client: "Insurtech", metric: "-72% handling time", status: "LIVE" },
+  { id: "l2", name: "SupportSwarm v3", client: "SaaS Unicorn", metric: "81% auto-resolution", status: "CANARY" },
+  { id: "l3", name: "DealScout RAG", client: "PE Fund", metric: "3.4x analyst output", status: "DEPLOYING" },
+  { id: "l4", name: "CodeMedic Bot", client: "Fintech", metric: "1.2k PRs / month", status: "LIVE" },
+];
+
+export interface ArchitectureLayer {
+  id: string;
+  label: string;
+  detail: string;
+  accent: Accent;
+}
+
+export const INFERENCE_ARCHITECTURE: readonly ArchitectureLayer[] = [
+  { id: "client", label: "EDGE_CLIENT", detail: "Next.js RSC stream", accent: "cyan" },
+  { id: "gateway", label: "API_GATEWAY", detail: "Auth · rate-limit · routing", accent: "pink" },
+  { id: "orchestrator", label: "ORCHESTRATOR", detail: "LangGraph agents", accent: "lime" },
+  { id: "inference", label: "vLLM_CLUSTER", detail: "8× H100 · TP=4", accent: "cyan" },
+  { id: "memory", label: "VECTOR_MEMORY", detail: "Qdrant · 2.1B vectors", accent: "pink" },
+];
+
+export interface CoordinationNode {
+  id: string;
+  city: string;
+  timeZone: string;
+  role: string;
+  accent: Accent;
+}
+
+export const COORDINATION_NODES: readonly CoordinationNode[] = [
+  { id: "sfo", city: "SAN_FRANCISCO", timeZone: "America/Los_Angeles", role: "R&D Uplink", accent: "cyan" },
+  { id: "lon", city: "LONDON", timeZone: "Europe/London", role: "Client Ops", accent: "pink" },
+  { id: "dxb", city: "DUBAI", timeZone: "Asia/Dubai", role: "Edge Relay", accent: "lime" },
+  { id: "tyo", city: "TOKYO", timeZone: "Asia/Tokyo", role: "GPU Cluster", accent: "cyan" },
+];
+
+export interface OnDeviceModel {
+  id: string;
+  label: string;
+  quantization: string;
+  sizeGb: number;
+  tokensPerSecond: number;
+  ramGb: number;
+}
+
+export const ON_DEVICE_MODELS: readonly OnDeviceModel[] = [
+  { id: "q4", label: "Llama 3.2 3B", quantization: "Q4_K_M", sizeGb: 1.9, tokensPerSecond: 28, ramGb: 2.4 },
+  { id: "q8", label: "Llama 3.2 3B", quantization: "Q8_0", sizeGb: 3.4, tokensPerSecond: 17, ramGb: 3.9 },
+  { id: "q2", label: "Llama 3.2 1B", quantization: "Q2_K", sizeGb: 0.6, tokensPerSecond: 54, ramGb: 0.9 },
+];
+
+export const ON_DEVICE_PROMPT = "Summarise my meeting notes offline.";
+
+export const ON_DEVICE_RESPONSE =
+  "Three decisions locked: ship the beta Friday, move vector search on-device, and cut cloud inference spend by 40%. Action items assigned to design, mobile and infra. No data left this phone.";
+
+export interface DetectionTemplate {
+  id: string;
+  label: string;
+  accent: "cyan" | "pink" | "lime";
+  baseX: number;
+  baseY: number;
+  width: number;
+  height: number;
+}
+
+/** Percent-based boxes laid over the mock camera viewport. */
+export const DETECTION_TEMPLATES: readonly DetectionTemplate[] = [
+  { id: "d1", label: "person", accent: "lime", baseX: 10, baseY: 30, width: 32, height: 52 },
+  { id: "d2", label: "laptop", accent: "cyan", baseX: 52, baseY: 56, width: 36, height: 22 },
+  { id: "d3", label: "coffee_cup", accent: "pink", baseX: 62, baseY: 26, width: 16, height: 18 },
+];
