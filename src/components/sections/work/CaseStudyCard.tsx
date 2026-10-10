@@ -26,7 +26,7 @@ export function CaseStudyCard({ study, index, featured, onOpen }: CaseStudyCardP
         aria-haspopup="dialog"
         className="flex h-full w-full flex-col gap-5 p-6 text-left"
       >
-        <ProjectCover study={study} className={featured ? "h-44 md:h-52" : "h-28"} sizes={featured ? "(min-width: 1280px) 600px, 100vw" : "(min-width: 1280px) 300px, 100vw"} />
+        <ProjectCover study={study} className={featured ? "h-44 md:h-52 xl:h-72" : "h-28"} sizes={featured ? "(min-width: 1280px) 600px, 100vw" : "(min-width: 1280px) 300px, 100vw"} />
 
         <div className="flex items-center justify-between gap-3">
           <span className={cn("font-tech text-xs tracking-[0.14em] uppercase", tokens.text)}>

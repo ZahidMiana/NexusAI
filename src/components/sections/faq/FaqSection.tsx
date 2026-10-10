@@ -18,7 +18,7 @@ export function FaqSection() {
 
   return (
     <section id="faq" aria-labelledby="faq-heading" className="mx-auto max-w-7xl scroll-mt-28 px-4 pt-28 sm:px-6 md:pt-36">
-      <SectionHeading headingId="faq-heading" index="09" eyebrow="FAQ" title="Common Questions" accent="pink" subtitle="Straight answers to what clients ask us most." />
+      <SectionHeading headingId="faq-heading" index="07" eyebrow="FAQ" title="Common Questions" accent="pink" subtitle="Straight answers to what clients ask us most." />
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
         <Reveal className="lg:col-span-2">
           <BentoCard accent="pink" scaleOnHover={false} className="divide-y divide-line px-2 sm:px-4">
@@ -29,7 +29,7 @@ export function FaqSection() {
         </Reveal>
         <Reveal delay={0.1}>
           <BentoCard accent="cyan" className="flex h-full flex-col gap-5 p-6">
-            <BentoLabel index="09.B">Still unsure?</BentoLabel>
+            <BentoLabel index="07.B">Still unsure?</BentoLabel>
             <MessageSquare className="h-8 w-8 text-cyber-cyan" />
             <p className="font-display text-xl font-black tracking-wide text-fg uppercase">Ask us anything</p>
             <p className="font-mono text-sm leading-relaxed text-fg-soft">

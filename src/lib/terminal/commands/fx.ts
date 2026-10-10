@@ -1,4 +1,4 @@
-import { isEffectsMode } from "@/lib/preferences/styles";
+import { isEffectsMode } from "@/lib/preferences/effects";
 import type { TerminalCommand } from "@/types";
 
 export const fxCommand: TerminalCommand = {

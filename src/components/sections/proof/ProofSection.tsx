@@ -2,6 +2,8 @@ import { Award, BriefcaseBusiness, Users } from "lucide-react";
 import { BentoCard } from "@/components/ui/BentoCard";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { SWIPE_ITEM, SWIPE_ROW } from "@/components/ui/swipe";
+import { SwipeHint } from "@/components/ui/SwipeHint";
 import { CREDENTIALS, ORGANISATIONS } from "@/data/proof";
 import { getMemberById } from "@/data/team";
 import { accentTokens } from "@/lib/accent";
@@ -22,9 +24,12 @@ export function ProofSection() {
         subtitle="The roles, certifications and leadership behind the work."
       />
       <OrganisationMarquee />
-      <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <div className="mt-6">
+        <SwipeHint count={CREDENTIALS.length} />
+      </div>
+      <div className={cn(SWIPE_ROW, "md:grid md:grid-cols-2 lg:grid-cols-3")}>
         {CREDENTIALS.map((credential, index) => (
-          <Reveal key={credential.id} delay={index * 0.05}>
+          <Reveal key={credential.id} delay={index * 0.05} className={SWIPE_ITEM}>
             <CredentialCard credential={credential} />
           </Reveal>
         ))}

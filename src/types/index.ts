@@ -1,5 +1,5 @@
 import type { LucideIcon } from "lucide-react";
-import type { DesignStyleId, EffectsMode } from "@/lib/preferences/styles";
+import type { EffectsMode } from "@/lib/preferences/effects";
 
 /** Neon accent channels available throughout the design system. */
 export type Accent = "cyan" | "pink" | "lime";
@@ -67,7 +67,6 @@ export type TerminalLineDraft = Pick<TerminalLine, "text"> & Partial<Pick<Termin
 /** Side effects a command can request; the host UI decides how to fulfil them. */
 export type TerminalEffect =
   | { type: "open-contact"; prefill?: ContactPrefill }
-  | { type: "set-style"; style: DesignStyleId }
   | { type: "set-effects"; effects: EffectsMode };
 
 export interface CommandResult {
@@ -165,8 +164,12 @@ export interface CaseStudy {
   title: string;
   /** Icon used on the generated cover art when no screenshot is provided. */
   icon: LucideIcon;
-  /** Optional screenshot or GIF under /public, e.g. "/work/documind.png". */
+  /** Optional cover image under /public, e.g. "/work/documind.jpg". */
   cover?: string;
+  /** Short description of the cover image, used as alt text. */
+  coverAlt?: string;
+  /** Photographer credit for stock covers. */
+  coverCredit?: { name: string; url: string };
   links?: { github?: string; demo?: string };
   client: string;
   industry: string;

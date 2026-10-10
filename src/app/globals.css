@@ -206,3 +206,30 @@ html:has(.neon-dialog[open]) {
 html[data-fx="calm"] :is(.animate-marquee, .animate-scan, .animate-float, .animate-flicker, .animate-ping, .animate-dash) {
   animation: none !important;
 }
+
+/* Hide scrollbars on swipe rows while keeping them scrollable */
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* ── Hero entrance: CSS-only, starts on first paint (no JavaScript wait) ── */
+@keyframes hero-rise {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.hero-rise {
+  animation: hero-rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: var(--rise-delay, 0s);
+}
+html[data-fx="calm"] .hero-rise {
+  animation: none;
+}

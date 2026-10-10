@@ -7,7 +7,6 @@ import { useCommandPalette } from "@/context/CommandPaletteContext";
 import { useTerminalLauncher } from "@/context/TerminalContext";
 import { useActiveSection } from "@/hooks/useActiveSection";
 import { NavLinks } from "./NavLinks";
-import { StyleMenu } from "./StyleMenu";
 import { AvailabilityBadge } from "./AvailabilityBadge";
 
 export function Navbar() {
@@ -19,9 +18,9 @@ export function Navbar() {
     <header className="fixed inset-x-0 top-0 z-50 px-3 pt-3 sm:px-6 sm:pt-4">
       <nav
         aria-label="Primary"
-        className="mx-auto flex h-14 max-w-7xl items-center justify-between gap-3 rounded-2xl border border-[var(--nav-line)] bg-[var(--nav-bg)] px-4 shadow-[var(--shadow-nav)] backdrop-blur-xl sm:px-5"
+        className="mx-auto flex h-14 max-w-7xl items-center justify-between gap-3 rounded-full border-2 border-[var(--nav-line)] bg-[var(--nav-bg)] px-5 shadow-[var(--shadow-nav)] backdrop-blur-xl sm:px-7"
       >
-        <a href="#top" className="shrink-0 font-display text-sm font-black tracking-[0.2em] whitespace-nowrap text-fg sm:text-base" aria-label="NexusAI home">
+        <a href="#top" className="shrink-0 font-display text-sm font-black tracking-[0.2em] whitespace-nowrap text-fg sm:text-base" aria-label={`${siteConfig.brandMark} home`}>
           {siteConfig.brandMark}
         </a>
 
@@ -34,11 +33,10 @@ export function Navbar() {
         </div>
 
         <div className="flex items-center gap-2">
-          <StyleMenu />
           <button
             type="button"
             onClick={() => openTerminal()}
-            className="group flex items-center gap-2 rounded-lg border border-cyber-cyan/40 bg-cyber-cyan/5 px-3 py-1.5 font-tech text-xs tracking-[0.14em] text-cyber-cyan uppercase transition-all duration-300 ease-hardware hover:border-cyber-cyan hover:bg-cyber-cyan/10 hover:glow-cyan"
+            className="group flex items-center gap-2 rounded-full border border-cyber-cyan/40 bg-cyber-cyan/5 px-3 py-1.5 font-tech text-xs tracking-[0.14em] text-cyber-cyan uppercase transition-all duration-300 ease-hardware hover:border-cyber-cyan hover:bg-cyber-cyan/10 hover:glow-cyan"
             aria-label="Open live AI terminal"
           >
             <SquareTerminal className="h-4 w-4 transition-transform group-hover:rotate-6" />
@@ -50,8 +48,8 @@ export function Navbar() {
             onClick={openPalette}
             aria-haspopup="dialog"
             aria-expanded={open}
-            aria-label="Open menu and command palette (Ctrl+K)"
-            className="flex h-9 items-center gap-2 rounded-lg border border-line-strong px-2.5 text-fg-soft transition-colors hover:border-cyber-pink/70 hover:text-cyber-pink"
+            aria-label="Open menu and command palette ⌘K"
+            className="flex h-9 items-center gap-2 rounded-full border border-line-strong px-3 text-fg-soft transition-colors hover:border-cyber-pink/70 hover:text-cyber-pink"
           >
             <Menu className="h-4 w-4" />
             <kbd className="hidden font-tech text-xs text-fg-muted lg:inline">⌘K</kbd>

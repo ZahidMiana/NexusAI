@@ -7,24 +7,23 @@ Built with Next.js, React, Tailwind CSS and Framer Motion.
 
 ## Features
 
-* **Hero section** with a clear pitch, a book a call button and an animated neural network
+* **Hero section** with a clear pitch, a book a call button and an interactive animated neural network
 * **Case studies**: six real projects from the team, each with a cover and a full story
 * **Team showcase** with a live demo for each member
   * Zahid Iqbal, Full Stack AI Engineer: RAG pipeline stats and agent architecture graph
   * Zeeshan Khalid, AI Security Engineer: prompt injection lab, OWASP LLM Top 10 audit and threat feed
-* **Process timeline** that fills in as you scroll
-* **Services** with three engagement plans and starting prices
+* **Services and process**: three plans with starting prices and a four step delivery process
 * **Verified credentials**: real roles, certifications and leadership
-* **Live terminal** where you can type commands like `/help`, `/team` and `/book`
-* **Tech stack** grid where every badge opens a short expertise summary
+* **Tech stack and terminal playground**: tap any tool to see how we used it, or type commands like `/help`, `/team` and `/book`
 * **FAQ** with answers to common client questions
 * **Contact form** that emails you every new lead, with spam protection
 * **Footer** with encrypted email that unlocks on hover and live world clocks
-* **Two design styles**: Clay (soft claymorphism, default) and Brutal (bold neo brutalism), switched from the style button in the navbar
-* **Command palette** (Ctrl + K) to jump to any section, book a call or switch style
+* **Neo brutalist design**: cream paper, thick black borders, hard shadows and bold type, with a rounded pill navbar
+* **Command palette** (Ctrl + K) to jump to any section, book a call or switch effects
 * **Effects switch**: Full or Calm, where Calm turns off all ambient motion
 * **Small moments**: headings that decode and numbers that count up
-* **Mobile friendly** with touch support, readable text and a sticky "Book a free call" button
+* **Mobile friendly** with swipeable cards, touch support, readable text and a sticky "Book a free call" button
+* **Fast and findable**: Lighthouse 100 on desktop, social preview image, sitemap and structured data
 * **Accessible** with good contrast and support for reduced motion
 
 ## Tech Stack
@@ -86,10 +85,10 @@ The form checks every field in the browser and again on the server. It also has 
 | `/help` | List all commands |
 | `/team` | Show the team members |
 | `/stack` | Show the main technologies |
+| `/explain` | Explain how we use a tool, for example `/explain langgraph` |
 | `/ping` | Test latency across regions |
 | `/contact` | Show contact details |
 | `/book` | Open the contact form (try `/book on-device`) |
-| `/style` | Switch design style, for example `/style clay` |
 | `/fx` | Switch effects, `/fx calm` or `/fx full` |
 | `/about` | Show the agency mission |
 | `/whoami` | Show session info |
@@ -123,8 +122,7 @@ Shortcuts: arrow keys for history, Tab to autocomplete. Press Ctrl + K anywhere 
 | FAQ | `src/data/faq.ts` |
 | Tech stack items | `src/data/techStack.ts` |
 | Emails and site name | `src/config/site.ts` |
-| Design style tokens | `src/app/design-styles.css` |
-| Style list and default | `src/lib/preferences/styles.ts` |
+| Colors, fonts, borders and shadows | `src/app/design-styles.css` |
 | Animations and effects | `src/app/globals.css` |
 | Terminal commands | `src/lib/terminal/commands` |
 
@@ -132,10 +130,11 @@ Shortcuts: arrow keys for history, Tab to autocomplete. Press Ctrl + K anywhere 
 
 | What | Where |
 | :--- | :--- |
+| Site URL | Set `NEXT_PUBLIC_SITE_URL` (for example `https://yourdomain.com`) in your hosting settings |
 | Real contact email | `contact.email` in `src/config/site.ts` |
 | Calendly or booking link | `contact.bookingUrl` in `src/config/site.ts`. When set, every "Book a call" button opens it |
 | Availability text | `availability` in `src/config/site.ts` |
-| Project screenshots | Put images in `public/work/` and set `cover` in `src/data/caseStudies.ts` |
+| Project images | Covers are free Unsplash photos in `public/work/`. Replace with real screenshots any time via `cover` in `src/data/caseStudies.ts` |
 | GitHub and demo links | `links` in `src/data/caseStudies.ts` |
 | Team photos and CV | `photo` and `resumeUrl` in `src/data/team.ts` |
 
@@ -149,20 +148,9 @@ The product and mobile cards are ready for future members and appear as soon as 
 
 To add a new terminal command, create a file in `src/lib/terminal/commands` and register it in `src/lib/terminal/index.ts`.
 
-## Design Styles
+## Design
 
-The whole site can switch between two looks. The style button in the navbar shows the current style, and clicking it opens a menu with both:
-
-| Style | Look |
-| :--- | :--- |
-| Clay | Light pastel, soft puffy cards, rounded font (default) |
-| Brutal | Light cream, thick black borders, hard shadows, bold font |
-
-To change the default style, edit `DEFAULT_STYLE` in `src/lib/preferences/styles.ts`. To add a new style, add it to that file and add a token block for it in `src/app/design-styles.css`.
-
-Components never use fixed colors. They use design tokens such as `text-fg`, `bg-panel` and `border-line`, and each style sets its own values for colors, corner radius, shadows and fonts in `src/app/design-styles.css`. The terminal and phone demo stay dark in every style, like real devices. Every text element passes WCAG AA contrast in both styles.
-
-The chosen style is remembered for the next visit and applied before the page paints, so there is no flash.
+The whole look lives in one file, `src/app/design-styles.css`. Components never use fixed colors. They use design tokens such as `text-fg`, `bg-panel` and `border-line`, so changing a value in that file updates the entire site. The terminal and phone demo stay dark like real devices. Every text element passes WCAG AA contrast.
 
 ## Effects
 

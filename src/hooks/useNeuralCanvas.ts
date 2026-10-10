@@ -4,7 +4,7 @@ import { useCallback, useEffect, useRef, useState, type PointerEvent, type RefOb
 import { createNetwork, renderNetwork, stepNetwork, stimulate, type NetworkState } from "@/lib/neural/simulation";
 import type { PointerState } from "@/types";
 import { readAccentPalette, type AccentPalette } from "@/lib/accent";
-import { useMotionAllowed, usePreferences } from "./usePreferences";
+import { useMotionAllowed } from "./usePreferences";
 
 /** How long a touch keeps the mesh excited after the finger lifts. */
 const TOUCH_LINGER_MS = 1600;
@@ -33,7 +33,6 @@ export function useNeuralCanvas(canvasRef: RefObject<HTMLCanvasElement | null>):
   const lingerRef = useRef<number | null>(null);
   const [active, setActive] = useState(false);
   const reducedMotion = !useMotionAllowed();
-  const { style } = usePreferences();
   const paletteRef = useRef<AccentPalette | null>(null);
 
   useEffect(() => {
@@ -88,7 +87,7 @@ export function useNeuralCanvas(canvasRef: RefObject<HTMLCanvasElement | null>):
       resizeObserver.disconnect();
       intersectionObserver.disconnect();
     };
-  }, [canvasRef, reducedMotion, style]);
+  }, [canvasRef, reducedMotion]);
 
   useEffect(
     () => () => {

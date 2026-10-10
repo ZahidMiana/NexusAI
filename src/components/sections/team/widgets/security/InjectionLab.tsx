@@ -1,21 +1,16 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import { Loader2, ShieldAlert, ShieldCheck, ShieldX } from "lucide-react";
+import { Loader2, ShieldAlert } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { MetricBar } from "@/components/ui/MetricBar";
 import { NeonButton } from "@/components/ui/NeonButton";
 import { ATTACK_PRESETS } from "@/data/security";
 import { accentTokens } from "@/lib/accent";
 import { cn } from "@/lib/cn";
-import { analyzePrompt, type GuardrailResult, type Verdict } from "@/lib/security/guardrail";
-import type { Accent } from "@/types";
+import { analyzePrompt, type GuardrailResult } from "@/lib/security/guardrail";
+import { VERDICT_STYLE } from "./verdict";
 
-const VERDICT_STYLE: Record<Verdict, { label: string; accent: Accent; icon: typeof ShieldX }> = {
-  blocked: { label: "BLOCKED", accent: "pink", icon: ShieldX },
-  flagged: { label: "FLAGGED FOR REVIEW", accent: "cyan", icon: ShieldAlert },
-  allowed: { label: "ALLOWED", accent: "lime", icon: ShieldCheck },
-};
 
 /** Prompt injection firewall demo: pick or type a prompt and run the guardrail. */
 export function InjectionLab() {

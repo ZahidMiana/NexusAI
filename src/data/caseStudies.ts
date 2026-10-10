@@ -3,12 +3,16 @@ import type { CaseStudy } from "@/types";
 
 /**
  * Real projects from the team. `owner` links to a member in data/team.ts.
- * Add `cover: "/work/<file>.png"` (in /public) for a screenshot and
- * `links: { github, demo }` to show buttons in the case study dialog.
+ * Covers are free stock photos (Unsplash License) stored in /public/work;
+ * swap in real screenshots any time. `links` adds GitHub / demo buttons.
  */
 export const CASE_STUDIES: readonly CaseStudy[] = [
   {
     id: "perp-dex",
+    cover: "/work/perp-exchange.jpg",
+    coverAlt: "Crypto price chart on a trading screen",
+    coverCredit: { name: "Behnam Norouzi", url: "https://unsplash.com/photos/RDXcFY5g5O4" },
+    links: { github: "https://github.com/ZahidMiana/FYP" },
     icon: Coins,
     title: "Perp Exchange + AI Agent",
     client: "Final Year Project",
@@ -34,6 +38,10 @@ export const CASE_STUDIES: readonly CaseStudy[] = [
   },
   {
     id: "documind",
+    cover: "/work/documind.jpg",
+    coverAlt: "Open book, handwritten notes and a laptop on a desk",
+    coverCredit: { name: "Yen Vu", url: "https://unsplash.com/photos/TdgfSyDoWBE" },
+    links: { github: "https://github.com/ZahidMiana/Rag_Based_Chatbot" },
     icon: FileText,
     title: "DocuMind AI",
     client: "RAG Chatbot",
@@ -59,6 +67,10 @@ export const CASE_STUDIES: readonly CaseStudy[] = [
   },
   {
     id: "ats",
+    cover: "/work/resume-screening.jpg",
+    coverAlt: "People taking notes around a table during an interview",
+    coverCredit: { name: "Dylan Gillis", url: "https://unsplash.com/photos/KdeqA3aTnBY" },
+    links: { github: "https://github.com/ZahidMiana/AI_RESUME_SCREENING" },
     icon: Users,
     title: "AI Resume Screening",
     client: "ATS System",
@@ -82,6 +94,9 @@ export const CASE_STUDIES: readonly CaseStudy[] = [
   },
   {
     id: "multimodal-retrieval",
+    cover: "/work/multimodal-retrieval.jpg",
+    coverAlt: "A smartwatch product shot on a white background",
+    coverCredit: { name: "Jozsef Hocza", url: "https://unsplash.com/photos/h1MnFsRI-_I" },
     icon: ScanEye,
     title: "Multimodal Retrieval",
     client: "Product Search",
@@ -105,6 +120,9 @@ export const CASE_STUDIES: readonly CaseStudy[] = [
   },
   {
     id: "llm-security-framework",
+    cover: "/work/llm-security.jpg",
+    coverAlt: "A combination padlock resting on a computer keyboard",
+    coverCredit: { name: "Sasun Bughdaryan", url: "https://unsplash.com/photos/WUJmdr8pNwk" },
     icon: ShieldAlert,
     title: "LLM & API Security Framework",
     client: "Security Tooling",
@@ -128,6 +146,9 @@ export const CASE_STUDIES: readonly CaseStudy[] = [
   },
   {
     id: "security-homelab",
+    cover: "/work/security-homelab.jpg",
+    coverAlt: "Server racks with network cables and status lights",
+    coverCredit: { name: "Taylor Vick", url: "https://unsplash.com/photos/M5tzZtFCOfs" },
     icon: Server,
     title: "Security Homelab & CTF",
     client: "Attack-Defense Lab",

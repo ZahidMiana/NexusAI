@@ -61,7 +61,7 @@ export function HeroHeadline() {
         <span ref={ctaRef} className="inline-flex transition-transform duration-200 ease-out" {...magnetic}>
         <NeonButton accent="pink" variant="solid" size="lg" className="tracking-[0.1em] sm:tracking-[0.14em]" icon={<Power className="h-4 w-4" />} onClick={startConversation}>
           <span className="block">Book a free call</span>
-          <span className="block font-mono text-[11px] font-medium tracking-normal normal-case opacity-80">30 min · no obligation</span>
+          <span className="block font-mono text-xs font-medium tracking-normal normal-case">30 min · no obligation</span>
         </NeonButton>
         </span>
         <NeonLink href="#work" accent="cyan" size="lg" icon={<ArrowDownRight className="h-4 w-4" />}>

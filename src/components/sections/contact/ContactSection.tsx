@@ -18,7 +18,7 @@ export function ContactSection() {
     <section id={CONTACT_SECTION_ID} aria-labelledby="contact-heading" className="mx-auto max-w-7xl scroll-mt-24 px-4 pt-28 sm:px-6 md:pt-36">
       <SectionHeading
         headingId="contact-heading"
-        index="10"
+        index="08"
         eyebrow="Contact"
         title="Start a Project"
         accent="pink"
@@ -27,7 +27,7 @@ export function ContactSection() {
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-5">
         <Reveal className="lg:col-span-2">
           <BentoCard accent="cyan" className="flex h-full flex-col gap-6 p-6 sm:p-8">
-            <BentoLabel index="10.A">What happens next</BentoLabel>
+            <BentoLabel index="08.A">What happens next</BentoLabel>
             <ol className="space-y-5">
               {NEXT_STEPS.map((step, index) => (
                 <li key={step.title} className="flex gap-4">
@@ -66,7 +66,7 @@ export function ContactSection() {
         </Reveal>
         <Reveal delay={0.08} className="scroll-mt-24 lg:col-span-3" id={CONTACT_FORM_ID}>
           <BentoCard accent="pink" scaleOnHover={false} className="p-6 sm:p-8">
-            <BentoLabel index="10.B" accent="pink" className="mb-6">
+            <BentoLabel index="08.B" accent="pink" className="mb-6">
               Project intake
             </BentoLabel>
             <ContactForm />

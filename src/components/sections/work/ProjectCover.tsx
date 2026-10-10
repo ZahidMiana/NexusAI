@@ -11,7 +11,7 @@ export interface ProjectCoverProps {
 }
 
 /**
- * Visual header for a case study: the real screenshot when `cover` is set,
+ * Visual header for a case study: the cover image when `cover` is set,
  * otherwise generated art (accent tint, dot grid and the project icon) so
  * cards never look text-only.
  */
@@ -22,7 +22,7 @@ export function ProjectCover({ study, className, sizes = "(min-width: 1280px) 50
   return (
     <div className={cn("relative overflow-hidden rounded-xl border border-line", className)}>
       {study.cover ? (
-        <Image src={study.cover} alt={`Screenshot of ${study.title}`} fill sizes={sizes} className="object-cover object-top" />
+        <Image src={study.cover} alt={study.coverAlt ?? `Cover image for ${study.title}`} fill sizes={sizes} className="object-cover" />
       ) : (
         <div
           aria-hidden

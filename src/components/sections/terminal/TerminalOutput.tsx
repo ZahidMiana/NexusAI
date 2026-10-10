@@ -31,7 +31,7 @@ export function TerminalOutput({ lines, revealedCount, onLineRevealed, onActivat
       role="log"
       aria-live="polite"
       aria-label="Terminal output"
-      className="h-[22rem] overflow-y-auto px-4 py-4 leading-relaxed sm:h-[26rem] sm:px-6"
+      className="h-[18rem] overflow-y-auto px-4 py-4 leading-relaxed sm:h-[21rem] sm:px-6"
     >
       {visible.map((line, index) => (
         <TerminalLineView key={line.id} line={line} animate={index === revealedCount} onRevealed={onLineRevealed} />

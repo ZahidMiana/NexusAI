@@ -2,11 +2,11 @@ import { aboutCommand } from "./commands/about";
 import { bookCommand } from "./commands/book";
 import { clearCommand } from "./commands/clear";
 import { contactCommand } from "./commands/contact";
+import { explainCommand } from "./commands/explain";
 import { fxCommand } from "./commands/fx";
 import { helpCommand } from "./commands/help";
 import { pingCommand } from "./commands/ping";
 import { stackCommand } from "./commands/stack";
-import { styleCommand } from "./commands/style";
 import { teamCommand } from "./commands/team";
 import { whoamiCommand } from "./commands/whoami";
 import { CommandRegistry } from "./registry";
@@ -22,10 +22,10 @@ export function createDefaultRegistry(): CommandRegistry {
     .register(helpCommand)
     .register(teamCommand)
     .register(stackCommand)
+    .register(explainCommand)
     .register(pingCommand)
     .register(contactCommand)
     .register(bookCommand)
-    .register(styleCommand)
     .register(fxCommand)
     .register(aboutCommand)
     .register(whoamiCommand)

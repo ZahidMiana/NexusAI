@@ -1,52 +1,56 @@
 import type { Metadata, Viewport } from "next";
-import { Archivo_Black, JetBrains_Mono, Nunito, Share_Tech_Mono, Space_Grotesk, Space_Mono } from "next/font/google";
+import { Archivo_Black, JetBrains_Mono, Space_Grotesk, Space_Mono } from "next/font/google";
 import type { ReactNode } from "react";
 import { MotionProvider } from "@/components/providers/MotionProvider";
 import { siteConfig } from "@/config/site";
 import Script from "next/script";
-import { DEFAULT_STYLE, preferenceBootScript } from "@/lib/preferences/styles";
+import { preferenceBootScript } from "@/lib/preferences/effects";
 import "./globals.css";
 import "./design-styles.css";
 
 const jetbrains = JetBrains_Mono({ subsets: ["latin"], weight: ["400", "500", "700"], variable: "--font-jetbrains", display: "swap", preload: false });
-const shareTech = Share_Tech_Mono({ subsets: ["latin"], weight: "400", variable: "--font-share-tech", display: "swap", preload: false });
-// Clay (default) fonts load eagerly; Brutal fonts load only when that style is used.
-const nunito = Nunito({ subsets: ["latin"], weight: ["400", "600", "800", "900"], variable: "--font-nunito", display: "swap" });
-const archivo = Archivo_Black({ subsets: ["latin"], weight: "400", variable: "--font-archivo", display: "swap", preload: false });
-const grotesk = Space_Grotesk({ subsets: ["latin"], weight: ["400", "500", "700"], variable: "--font-grotesk", display: "swap", preload: false });
-const spaceMono = Space_Mono({ subsets: ["latin"], weight: ["400", "700"], variable: "--font-space-mono", display: "swap", preload: false });
+// Brutal design fonts load eagerly; the terminal font is only needed further down the page.
+const archivo = Archivo_Black({ subsets: ["latin"], weight: "400", variable: "--font-archivo", display: "swap" });
+const grotesk = Space_Grotesk({ subsets: ["latin"], weight: ["400", "500", "700"], variable: "--font-grotesk", display: "swap" });
+const spaceMono = Space_Mono({ subsets: ["latin"], weight: ["400", "700"], variable: "--font-space-mono", display: "swap" });
 
-const FONT_VARIABLES = [jetbrains, shareTech, nunito, archivo, grotesk, spaceMono].map((font) => font.variable).join(" ");
+const FONT_VARIABLES = [jetbrains, archivo, grotesk, spaceMono].map((font) => font.variable).join(" ");
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
-  title: `${siteConfig.name} — ${siteConfig.tagline}`,
+  title: {
+    default: `${siteConfig.name} · AI engineering & AI security studio`,
+    template: `%s · ${siteConfig.name}`,
+  },
   description: siteConfig.description,
-  keywords: ["AI engineering agency", "LLM deployment", "agentic AI", "on-device AI", "MLOps", "Next.js"],
+  keywords: ["AI engineering", "LLM applications", "RAG pipelines", "AI agents", "LangGraph", "AI security", "LLM red teaming", "OWASP LLM Top 10", "Lahore"],
+  alternates: { canonical: "/" },
   openGraph: {
-    title: `${siteConfig.name} — ${siteConfig.tagline}`,
+    title: `${siteConfig.name} · ${siteConfig.tagline}`,
     description: siteConfig.description,
-    url: siteConfig.url,
+    url: "/",
     siteName: siteConfig.name,
     type: "website",
+    locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: siteConfig.name,
+    title: `${siteConfig.name} · ${siteConfig.tagline}`,
     description: siteConfig.description,
   },
+  robots: { index: true, follow: true },
 };
 
 export const viewport: Viewport = {
-  themeColor: "#ece7f8",
+  themeColor: "#fff4d6",
   width: "device-width",
   initialScale: 1,
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    // The preference script sets data-style/data-fx before hydration, hence suppressHydrationWarning.
-    <html lang="en" data-style={DEFAULT_STYLE} suppressHydrationWarning className={FONT_VARIABLES}>
+    // The preference script sets data-fx before hydration, hence suppressHydrationWarning.
+    <html lang="en" suppressHydrationWarning className={FONT_VARIABLES}>
       <body className="min-h-screen overflow-x-hidden">
         {/* beforeInteractive: injected by Next outside React hydration, runs before paint. */}
         <Script id="nexus-preferences" strategy="beforeInteractive">

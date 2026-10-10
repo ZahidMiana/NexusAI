@@ -40,7 +40,17 @@ function CaseStudyBody({ study, titleId, onStartSimilar }: { study: CaseStudy; t
 
   return (
     <article className="space-y-8 p-6 sm:p-10">
-      <ProjectCover study={study} className="h-40 sm:h-56" sizes="(min-width: 900px) 860px, 100vw" />
+      <figure>
+        <ProjectCover study={study} className="h-40 sm:h-56" sizes="(min-width: 900px) 860px, 100vw" />
+        {study.coverCredit && (
+          <figcaption className="mt-1.5 text-right font-mono text-xs text-fg-muted">
+            Photo:{" "}
+            <a href={study.coverCredit.url} target="_blank" rel="noopener noreferrer" className="underline-offset-2 hover:underline">
+              {study.coverCredit.name} / Unsplash
+            </a>
+          </figcaption>
+        )}
+      </figure>
       <header className="space-y-3 pr-12">
         <p className={cn("font-tech text-xs tracking-[0.14em] uppercase", tokens.text)}>
           Case study · {study.industry} · {study.client}
