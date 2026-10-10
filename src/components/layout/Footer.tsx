@@ -1,7 +1,6 @@
 import { Globe, KeyRound, Radio } from "lucide-react";
 import type { ReactNode } from "react";
 import { BentoCard, BentoLabel } from "@/components/ui/BentoCard";
-import { GlitchText } from "@/components/ui/GlitchText";
 import { siteConfig } from "@/config/site";
 import { CoordinationLog } from "./CoordinationLog";
 import { EncryptedMail } from "./EncryptedMail";
@@ -17,7 +16,7 @@ export function Footer() {
             Encrypted Uplinks
           </FooterBlockTitle>
           <p className="mt-4 font-display text-2xl font-black tracking-wider text-fg uppercase">
-            Open a <span className="text-cyber-pink text-glow-pink">secure channel</span>
+            Open a <span className="text-cyber-pink">secure channel</span>
           </p>
           <p className="mt-2 font-mono text-sm text-fg-muted">Hover to decrypt · click to copy to clipboard.</p>
           <div className="mt-5 grid gap-3 sm:grid-cols-2">
@@ -49,7 +48,7 @@ export function Footer() {
 
       <div className="mt-10 flex flex-col items-center justify-between gap-4 border-t border-line pt-6 sm:flex-row">
         <span className="font-display text-sm font-black tracking-[0.14em] text-fg">
-          <GlitchText text={siteConfig.brandMark} />
+          {siteConfig.brandMark}
         </span>
         <span className="font-tech text-xs tracking-[0.14em] text-fg-muted uppercase">
           End of transmission {"//"} all systems nominal

@@ -1,7 +1,6 @@
 "use client";
 
 import { Menu, SquareTerminal } from "lucide-react";
-import { GlitchText } from "@/components/ui/GlitchText";
 import { NAV_SECTION_IDS } from "@/config/navigation";
 import { siteConfig } from "@/config/site";
 import { useCommandPalette } from "@/context/CommandPaletteContext";
@@ -23,7 +22,7 @@ export function Navbar() {
         className="mx-auto flex h-14 max-w-7xl items-center justify-between gap-3 rounded-2xl border border-[var(--nav-line)] bg-[var(--nav-bg)] px-4 shadow-[var(--shadow-nav)] backdrop-blur-xl sm:px-5"
       >
         <a href="#top" className="shrink-0 font-display text-sm font-black tracking-[0.2em] whitespace-nowrap text-fg sm:text-base" aria-label="NexusAI home">
-          <GlitchText text={siteConfig.brandMark} />
+          {siteConfig.brandMark}
         </a>
 
         <div className="hidden items-center gap-6 lg:flex">
@@ -42,7 +41,7 @@ export function Navbar() {
             className="group flex items-center gap-2 rounded-lg border border-cyber-cyan/40 bg-cyber-cyan/5 px-3 py-1.5 font-tech text-xs tracking-[0.14em] text-cyber-cyan uppercase transition-all duration-300 ease-hardware hover:border-cyber-cyan hover:bg-cyber-cyan/10 hover:glow-cyan"
             aria-label="Open live AI terminal"
           >
-            <SquareTerminal className="h-4 w-4 drop-glow-cyan transition-transform group-hover:rotate-6" />
+            <SquareTerminal className="h-4 w-4 transition-transform group-hover:rotate-6" />
             <span className="hidden sm:inline">Terminal</span>
           </button>
 

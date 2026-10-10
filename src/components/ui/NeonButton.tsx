@@ -7,7 +7,6 @@ export interface NeonStyleProps {
   accent?: Accent;
   variant?: "solid" | "outline" | "ghost";
   size?: "sm" | "md" | "lg";
-  pulse?: boolean;
 }
 
 const SIZE_CLASSES: Record<NonNullable<NeonStyleProps["size"]>, string> = {
@@ -17,7 +16,7 @@ const SIZE_CLASSES: Record<NonNullable<NeonStyleProps["size"]>, string> = {
 };
 
 /** Shared neon styling so buttons and links stay visually identical. */
-export function neonClasses({ accent = "pink", variant = "outline", size = "md", pulse = false }: NeonStyleProps): string {
+export function neonClasses({ accent = "pink", variant = "outline", size = "md" }: NeonStyleProps): string {
   const tokens = accentTokens(accent);
   const variantClasses = {
     solid: cn(tokens.bg, "text-on-accent border border-transparent hover:brightness-110", tokens.glow),
@@ -32,7 +31,6 @@ export function neonClasses({ accent = "pink", variant = "outline", size = "md",
     "transform-gpu transition-all duration-300 ease-hardware active:scale-95 disabled:pointer-events-none disabled:opacity-40",
     SIZE_CLASSES[size],
     variantClasses,
-    pulse && accent === "pink" && "animate-neon-pulse",
   );
 }
 
@@ -41,9 +39,9 @@ export interface NeonButtonProps extends NeonStyleProps, ButtonHTMLAttributes<HT
   children: ReactNode;
 }
 
-export function NeonButton({ accent, variant, size, pulse, icon, className, children, type = "button", ...rest }: NeonButtonProps) {
+export function NeonButton({ accent, variant, size, icon, className, children, type = "button", ...rest }: NeonButtonProps) {
   return (
-    <button type={type} className={cn(neonClasses({ accent, variant, size, pulse }), className)} {...rest}>
+    <button type={type} className={cn(neonClasses({ accent, variant, size }), className)} {...rest}>
       {icon}
       <span className="text-center">{children}</span>
     </button>
@@ -55,9 +53,9 @@ export interface NeonLinkProps extends NeonStyleProps, AnchorHTMLAttributes<HTML
   children: ReactNode;
 }
 
-export function NeonLink({ accent, variant, size, pulse, icon, className, children, ...rest }: NeonLinkProps) {
+export function NeonLink({ accent, variant, size, icon, className, children, ...rest }: NeonLinkProps) {
   return (
-    <a className={cn(neonClasses({ accent, variant, size, pulse }), className)} {...rest}>
+    <a className={cn(neonClasses({ accent, variant, size }), className)} {...rest}>
       {icon}
       <span className="text-center">{children}</span>
     </a>

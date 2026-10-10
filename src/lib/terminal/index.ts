@@ -8,9 +8,9 @@ import { pingCommand } from "./commands/ping";
 import { stackCommand } from "./commands/stack";
 import { styleCommand } from "./commands/style";
 import { teamCommand } from "./commands/team";
-import { themeCommand } from "./commands/theme";
 import { whoamiCommand } from "./commands/whoami";
 import { CommandRegistry } from "./registry";
+import { TEAM } from "@/data/team";
 
 export { CommandRegistry } from "./registry";
 export { executeInput } from "./executor";
@@ -26,7 +26,6 @@ export function createDefaultRegistry(): CommandRegistry {
     .register(contactCommand)
     .register(bookCommand)
     .register(styleCommand)
-    .register(themeCommand)
     .register(fxCommand)
     .register(aboutCommand)
     .register(whoamiCommand)
@@ -37,7 +36,7 @@ export const QUICK_COMMANDS = ["/help", "/team", "/stack", "/ping", "/book", "/c
 
 export const BOOT_SEQUENCE = [
   { text: "NEXUS_OS v7.3.1 // kernel 6.13-nexus-rt", tone: "muted" },
-  { text: "[ OK ] Neural mesh online · 3 operators linked", tone: "lime" },
-  { text: "[ OK ] Inference fabric warm · 8 GPUs ready", tone: "lime" },
+  { text: `[ OK ] Neural mesh online · ${TEAM.length} operators linked`, tone: "lime" },
+  { text: "[ OK ] RAG pipeline warm · guardrails armed", tone: "lime" },
   { text: "Type /help or tap a command chip to begin.", tone: "cyan" },
 ] as const;

@@ -12,7 +12,7 @@ export function HeroStats() {
         return (
           <BentoCard key={stat.label} accent={stat.accent} className="p-5">
             <p className="font-tech text-xs tracking-[0.14em] text-fg-muted uppercase">{stat.label}</p>
-            <p className={cn("mt-2 font-display text-3xl font-black", tokens.text, tokens.textGlow)}><CountUp value={stat.value} />
+            <p className={cn("mt-2 font-display text-3xl font-black", tokens.text)}><CountUp value={stat.value} />
             </p>
           </BentoCard>
         );

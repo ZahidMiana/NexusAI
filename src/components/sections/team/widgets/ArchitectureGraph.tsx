@@ -8,11 +8,11 @@ import { accentTokens } from "@/lib/accent";
 import { cn } from "@/lib/cn";
 
 const LAYER_NOTES: Record<string, string> = {
-  client: "Streams tokens over React Server Components with optimistic UI and edge caching.",
-  gateway: "JWT auth, per-tenant quotas, semantic cache lookup and model routing by cost/latency policy.",
-  orchestrator: "LangGraph state machine coordinating tool calls, retries and human-in-the-loop checkpoints.",
-  inference: "vLLM with PagedAttention, continuous batching and speculative decoding on tensor-parallel H100s.",
-  memory: "Hybrid dense + sparse retrieval with re-ranking and tenant-isolated namespaces.",
+  client: "Next.js chat UI that streams answers token by token and shows the source behind every citation.",
+  gateway: "FastAPI service with JWT authentication, role-based access control and per-user rate limits.",
+  orchestrator: "LangGraph agent graph with tools, persistent memory and human-in-the-loop checkpoints.",
+  inference: "Hybrid retrieval: ChromaDB dense vectors plus BM25 keyword search, merged and re-ranked for accuracy.",
+  memory: "Gemini or GPT models for generation, with Redis caching chat history and frequent answers.",
 };
 
 /** Interactive system architecture graph — click a layer to inspect it. */
@@ -70,7 +70,7 @@ export function ArchitectureGraph() {
           <p className="mt-1 font-mono text-xs text-fg-muted">{selectedLayer.detail}</p>
           <p className="mt-3 font-mono text-sm leading-relaxed text-fg-soft">{LAYER_NOTES[selectedLayer.id]}</p>
           <div className="mt-4 flex items-center gap-2 font-tech text-xs tracking-[0.14em] text-cyber-lime uppercase">
-            <span className="h-1.5 w-1.5 rounded-full bg-cyber-lime drop-glow-lime" /> Health check passing
+            <span className="h-1.5 w-1.5 rounded-full bg-cyber-lime" /> Health check passing
           </div>
         </motion.div>
       </AnimatePresence>

@@ -6,11 +6,12 @@ export interface HeroStat {
   accent: Accent;
 }
 
+/** Real numbers from the team's projects. */
 export const HERO_STATS: readonly HeroStat[] = [
-  { label: "MODELS_IN_PROD", value: "142", accent: "cyan" },
-  { label: "UPTIME_SLA", value: "99.99%", accent: "lime" },
-  { label: "TOKENS_SERVED", value: "38B+", accent: "pink" },
-  { label: "P95_LATENCY", value: "84ms", accent: "cyan" },
+  { label: "PROJECTS_SHIPPED", value: "8", accent: "cyan" },
+  { label: "RECORDS_INDEXED", value: "40k+", accent: "lime" },
+  { label: "ATS_ACCURACY", value: "92%", accent: "pink" },
+  { label: "HALLUCINATION_CUT", value: "-30%", accent: "cyan" },
 ];
 
 export interface ProductLaunch {
@@ -35,12 +36,13 @@ export interface ArchitectureLayer {
   accent: Accent;
 }
 
+/** Reference RAG + agent architecture the team ships. */
 export const INFERENCE_ARCHITECTURE: readonly ArchitectureLayer[] = [
-  { id: "client", label: "EDGE_CLIENT", detail: "Next.js RSC stream", accent: "cyan" },
-  { id: "gateway", label: "API_GATEWAY", detail: "Auth · rate-limit · routing", accent: "pink" },
-  { id: "orchestrator", label: "ORCHESTRATOR", detail: "LangGraph agents", accent: "lime" },
-  { id: "inference", label: "vLLM_CLUSTER", detail: "8× H100 · TP=4", accent: "cyan" },
-  { id: "memory", label: "VECTOR_MEMORY", detail: "Qdrant · 2.1B vectors", accent: "pink" },
+  { id: "client", label: "WEB_CLIENT", detail: "Next.js · streaming UI", accent: "cyan" },
+  { id: "gateway", label: "API_LAYER", detail: "FastAPI · JWT · RBAC", accent: "pink" },
+  { id: "orchestrator", label: "AGENT_GRAPH", detail: "LangGraph · tools · memory", accent: "lime" },
+  { id: "inference", label: "HYBRID_RETRIEVAL", detail: "ChromaDB + BM25 · rerank", accent: "cyan" },
+  { id: "memory", label: "LLM + CACHE", detail: "Gemini / GPT · Redis", accent: "pink" },
 ];
 
 export interface CoordinationNode {
@@ -51,11 +53,12 @@ export interface CoordinationNode {
   accent: Accent;
 }
 
+/** Team base plus the client time zones we cover. */
 export const COORDINATION_NODES: readonly CoordinationNode[] = [
-  { id: "sfo", city: "SAN_FRANCISCO", timeZone: "America/Los_Angeles", role: "R&D Uplink", accent: "cyan" },
-  { id: "lon", city: "LONDON", timeZone: "Europe/London", role: "Client Ops", accent: "pink" },
-  { id: "dxb", city: "DUBAI", timeZone: "Asia/Dubai", role: "Edge Relay", accent: "lime" },
-  { id: "tyo", city: "TOKYO", timeZone: "Asia/Tokyo", role: "GPU Cluster", accent: "cyan" },
+  { id: "lhr", city: "LAHORE", timeZone: "Asia/Karachi", role: "Team HQ", accent: "lime" },
+  { id: "lon", city: "LONDON", timeZone: "Europe/London", role: "Client hours", accent: "pink" },
+  { id: "nyc", city: "NEW_YORK", timeZone: "America/New_York", role: "Client hours", accent: "cyan" },
+  { id: "dxb", city: "DUBAI", timeZone: "Asia/Dubai", role: "Client hours", accent: "cyan" },
 ];
 
 export interface OnDeviceModel {

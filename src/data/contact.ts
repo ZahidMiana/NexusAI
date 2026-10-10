@@ -8,6 +8,7 @@ export interface Option<T extends string> {
 export const PROJECT_TYPES: readonly Option<ProjectTypeId>[] = [
   { value: "llm-platform", label: "LLM platform / RAG" },
   { value: "agentic-product", label: "AI agent product" },
+  { value: "security", label: "AI / LLM security audit" },
   { value: "on-device", label: "On device / mobile AI" },
   { value: "audit", label: "Architecture audit" },
   { value: "other", label: "Something else" },

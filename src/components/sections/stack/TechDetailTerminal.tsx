@@ -16,7 +16,7 @@ function buildLines(item: TechItem): TerminalLine[] {
     { kind: "output", text: `▸ ${item.name.toUpperCase()} :: PRODUCTION DOSSIER`, tone: item.accent },
     { kind: "output", text: item.summary, tone: "default" },
     { kind: "output", text: `  MASTERY  [${"█".repeat(filled)}${"░".repeat(20 - filled)}] ${item.proficiency}%`, tone: "lime" },
-    { kind: "output", text: `  RUNTIME  ${item.yearsInProduction} years in production`, tone: "muted" },
+    { kind: "output", text: `  USED IN  ${item.usedIn.join(" · ")}`, tone: "muted" },
     ...item.highlights.map((highlight) => ({ kind: "output" as const, text: `  ✓ ${highlight}`, tone: "cyan" as const })),
     { kind: "output", text: "EOF · ready for deployment.", tone: "muted" },
   ];

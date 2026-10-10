@@ -1,4 +1,4 @@
-import { isEffectsMode } from "@/lib/preferences/themes";
+import { isEffectsMode } from "@/lib/preferences/styles";
 import type { TerminalCommand } from "@/types";
 
 export const fxCommand: TerminalCommand = {
@@ -12,7 +12,7 @@ export const fxCommand: TerminalCommand = {
         lines: [
           { text: "Effects modes:", tone: "cyan" },
           { text: "  full ...... every animation and live widget" },
-          { text: "  calm ...... no ambient motion, glitches or textures" },
+          { text: "  calm ...... no ambient motion or live counters" },
           { text: "Usage: /fx calm", tone: "muted" },
         ],
       };

@@ -32,7 +32,7 @@ export function TechBadge({ item, selected, floatDelay, onSelect }: TechBadgePro
         )}
         style={{ animationDelay: `${floatDelay}s`, boxShadow: `0 0 18px rgb(${tokens.rgb} / ${selected ? 0.45 : 0.15})` }}
       >
-        <Icon className={cn("h-6 w-6", tokens.text, tokens.dropGlow)} />
+        <Icon className={cn("h-6 w-6", tokens.text)} />
       </span>
       <span className="text-center font-tech text-xs tracking-wider text-fg-soft">{item.name}</span>
       <span className="h-0.5 w-full overflow-hidden rounded-full bg-track">

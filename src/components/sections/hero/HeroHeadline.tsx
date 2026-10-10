@@ -30,23 +30,23 @@ export function HeroHeadline() {
         <PromptLine command="nexus --init protocol=elite_ai --deploy=production" />
         <h1 className="font-display text-4xl leading-[1.05] font-black tracking-tight text-fg uppercase sm:text-5xl lg:text-6xl">
           We Architect{" "}
-          <span className="hero-glow bg-gradient-to-r from-cyber-cyan via-fg to-cyber-cyan bg-clip-text text-transparent [filter:drop-shadow(0_0_18px_rgb(var(--accent-cyan)_/_0.45))]">
+          <span className="bg-gradient-to-r from-cyber-cyan via-fg to-cyber-cyan bg-clip-text text-transparent">
             Intelligent
           </span>{" "}
-          <span className="text-cyber-pink text-glow-pink">Ecosystems.</span>
+          <span className="text-cyber-pink">Ecosystems.</span>
         </h1>
         <p className="max-w-xl font-mono text-base leading-relaxed text-fg sm:text-lg">
-          We build production LLM platforms, AI agents and on device AI.
+          We build production LLM apps, RAG pipelines and AI agents, and we secure them.
         </p>
         <p className="max-w-xl font-mono text-sm leading-relaxed text-fg-soft">
-          Three senior engineers who design, ship and run the whole system, from GPU cluster to pocket. Typical first
-          release in six to eight weeks.
+          AI engineers and security specialists who design, ship and harden the whole system, from retrieval
+          pipeline to red-team audit. Typical first release in six to eight weeks.
         </p>
       </div>
 
       <div className="flex flex-wrap items-center gap-4">
         <span ref={ctaRef} className="inline-flex transition-transform duration-200 ease-out" {...magnetic}>
-        <NeonButton accent="pink" variant="solid" size="lg" pulse className="tracking-[0.1em] sm:tracking-[0.14em]" icon={<Power className="h-4 w-4" />} onClick={() => openContact()}>
+        <NeonButton accent="pink" variant="solid" size="lg" className="tracking-[0.1em] sm:tracking-[0.14em]" icon={<Power className="h-4 w-4" />} onClick={() => openContact()}>
           <span className="block">Initiate Protocol</span>
           <span className="block font-mono text-[11px] font-medium tracking-normal normal-case opacity-80">Book a free 30 min call</span>
         </NeonButton>

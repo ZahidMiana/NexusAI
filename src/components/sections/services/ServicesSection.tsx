@@ -53,7 +53,7 @@ function ServiceCard({ plan }: { plan: ServicePlan }) {
 
       <div>
         <p className="font-tech text-xs tracking-[0.12em] text-fg-muted uppercase">{plan.priceNote}</p>
-        <p className={cn("font-display text-4xl font-black", tokens.text, tokens.textGlow)}><CountUp value={plan.price} />
+        <p className={cn("font-display text-4xl font-black", tokens.text)}><CountUp value={plan.price} />
         </p>
         <p className="mt-1 font-mono text-sm text-fg-soft">Timeline: {plan.timeline}</p>
       </div>

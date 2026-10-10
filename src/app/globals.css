@@ -39,7 +39,6 @@
 
   --animate-blink: blink 1s steps(1) infinite;
   --animate-float: float 6s ease-in-out infinite;
-  --animate-neon-pulse: neon-pulse 2.4s ease-in-out infinite;
   --animate-scan: scan 6s linear infinite;
   --animate-dash: dash 1.2s linear infinite;
   --animate-flicker: flicker 4s linear infinite;
@@ -56,10 +55,6 @@
     50% { transform: translate3d(0, -8px, 0); }
   }
 
-  @keyframes neon-pulse {
-    0%, 100% { box-shadow: 0 0 6px rgb(var(--accent-pink) / 0.55), 0 0 18px rgb(var(--accent-pink) / 0.35), inset 0 0 8px rgb(var(--accent-pink) / 0.25); }
-    50% { box-shadow: 0 0 12px rgb(var(--accent-pink) / 0.9), 0 0 38px rgb(var(--accent-pink) / 0.55), inset 0 0 14px rgb(var(--accent-pink) / 0.4); }
-  }
 
   @keyframes scan {
     0% { transform: translate3d(0, -100%, 0); }
@@ -81,16 +76,18 @@
   }
 }
 
-/* ── Neon glow utilities (composable with hover:/focus:/group-hover:) ── */
+/* ── Elevation utilities: "selected / highlighted" surfaces, styled per design style ── */
 @utility glow-cyan {
-  box-shadow: 0 0 0 1px rgb(var(--accent-cyan) / 0.35), 0 0 22px rgb(var(--accent-cyan) / 0.28), 0 0 60px rgb(var(--accent-cyan) / 0.12);
+  box-shadow: var(--shadow-pop);
 }
 @utility glow-pink {
-  box-shadow: 0 0 0 1px rgb(var(--accent-pink) / 0.35), 0 0 22px rgb(var(--accent-pink) / 0.3), 0 0 60px rgb(var(--accent-pink) / 0.14);
+  box-shadow: var(--shadow-pop);
 }
 @utility glow-lime {
-  box-shadow: 0 0 0 1px rgb(var(--accent-lime) / 0.35), 0 0 22px rgb(var(--accent-lime) / 0.26), 0 0 60px rgb(var(--accent-lime) / 0.12);
+  box-shadow: var(--shadow-pop);
 }
+
+/* Neon text and icon glow, used only inside dark device mockups (terminal, phone). */
 @utility text-glow-cyan {
   text-shadow: 0 0 8px rgb(var(--accent-cyan) / 0.75), 0 0 22px rgb(var(--accent-cyan) / 0.35);
 }
@@ -118,15 +115,6 @@
   background-size: 44px 44px;
 }
 
-@utility bg-scanlines {
-  background-image: repeating-linear-gradient(
-    to bottom,
-    rgba(255, 255, 255, 0.025) 0px,
-    rgba(255, 255, 255, 0.025) 1px,
-    transparent 1px,
-    transparent 3px
-  );
-}
 
 @layer base {
   html {
@@ -183,26 +171,6 @@
   }
 }
 
-/* ── Bento spotlight: radial glow + border-only highlight following the cursor ── */
-.bento-spotlight-fill {
-  background: radial-gradient(520px circle at var(--mx, 50%) var(--my, 50%), var(--spot-soft), transparent 45%);
-}
-
-.bento-spotlight-border {
-  padding: 1px;
-  background: radial-gradient(360px circle at var(--mx, 50%) var(--my, 50%), var(--spot), transparent 40%);
-  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
-}
-
-@media (hover: none) {
-  .bento-spotlight-fill,
-  .bento-spotlight-border {
-    display: none;
-  }
-}
-
 /* ── Native dialog: backdrop, entrance animation, page scroll lock ── */
 .neon-dialog::backdrop {
   background: var(--backdrop);
@@ -234,159 +202,7 @@ html:has(.neon-dialog[open]) {
   animation-play-state: paused;
 }
 
-/* ── Glitch: one burst shortly after load, then only on hover/focus ── */
-@keyframes glitch-burst-a {
-  0%, 100% { clip-path: inset(0 0 0 0); transform: translate(0, 0); opacity: 0; }
-  10% { clip-path: inset(12% 0 58% 0); transform: translate(-3px, -1px); opacity: 0.9; }
-  30% { clip-path: inset(62% 0 8% 0); transform: translate(3px, 1px); opacity: 0.9; }
-  50% { clip-path: inset(32% 0 40% 0); transform: translate(-2px, 0); opacity: 0.9; }
-  70% { clip-path: inset(80% 0 2% 0); transform: translate(2px, -1px); opacity: 0.9; }
-  90% { opacity: 0; }
-}
-@keyframes glitch-burst-b {
-  0%, 100% { clip-path: inset(0 0 0 0); transform: translate(0, 0); opacity: 0; }
-  15% { clip-path: inset(48% 0 30% 0); transform: translate(3px, 1px); opacity: 0.85; }
-  40% { clip-path: inset(6% 0 76% 0); transform: translate(-3px, 0); opacity: 0.85; }
-  65% { clip-path: inset(70% 0 12% 0); transform: translate(2px, 1px); opacity: 0.85; }
-  85% { opacity: 0; }
-}
-.glitch-layer-a,
-.glitch-layer-b {
-  opacity: 0;
-}
-.glitch-layer-a {
-  animation: glitch-burst-a 0.8s steps(1) 1.6s 1;
-}
-.glitch-layer-b {
-  animation: glitch-burst-b 0.8s steps(1) 1.7s 1;
-}
-.glitch-host:hover .glitch-layer-a,
-:focus-visible > .glitch-host .glitch-layer-a {
-  animation: glitch-burst-a 0.8s steps(1) infinite;
-}
-.glitch-host:hover .glitch-layer-b,
-:focus-visible > .glitch-host .glitch-layer-b {
-  animation: glitch-burst-b 0.9s steps(1) infinite;
-}
-
-/* ── Calm effects mode: ambient animation and texture off, content intact ── */
-html[data-fx="calm"] .glitch-layer-a,
-html[data-fx="calm"] .glitch-layer-b,
-html[data-fx="calm"] .animate-marquee,
-html[data-fx="calm"] .animate-scan,
-html[data-fx="calm"] .animate-float,
-html[data-fx="calm"] .animate-flicker,
-html[data-fx="calm"] .animate-neon-pulse,
-html[data-fx="calm"] .animate-ping,
-html[data-fx="calm"] .animate-dash,
-html[data-fx="calm"] .horizon-floor {
+/* ── Calm effects mode: ambient animation off, content intact ── */
+html[data-fx="calm"] :is(.animate-marquee, .animate-scan, .animate-float, .animate-flicker, .animate-ping, .animate-dash) {
   animation: none !important;
-}
-html[data-fx="calm"] .bg-scanlines,
-html[data-fx="calm"] .bento-spotlight-fill,
-html[data-fx="calm"] .bento-spotlight-border {
-  display: none;
-}
-
-/* ── Boot intro (first visit per session) ── */
-.boot-overlay {
-  animation: boot-out 0.45s ease 1.55s forwards;
-}
-html[data-boot="done"] .boot-overlay {
-  display: none;
-}
-.boot-line {
-  opacity: 0;
-  animation: boot-line 0.25s ease forwards;
-}
-.boot-bar > span {
-  transform: scaleX(0);
-  transform-origin: left;
-  animation: boot-bar 1.3s cubic-bezier(0.22, 1, 0.36, 1) 0.15s forwards;
-}
-@keyframes boot-out {
-  to {
-    opacity: 0;
-    visibility: hidden;
-  }
-}
-@keyframes boot-line {
-  from {
-    opacity: 0;
-    transform: translateX(-6px);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-@keyframes boot-bar {
-  to {
-    transform: scaleX(1);
-  }
-}
-
-/* ── Synthwave horizon (band between hero and the next section) ── */
-.horizon-band {
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 25%, #000 75%, transparent);
-  mask-image: linear-gradient(90deg, transparent, #000 25%, #000 75%, transparent);
-}
-.horizon-sun {
-  opacity: 0.5;
-  background: linear-gradient(to bottom, rgb(var(--accent-sun)), rgb(var(--accent-pink)) 80%);
-  -webkit-mask-image: repeating-linear-gradient(to bottom, #000 0 14px, transparent 14px 20px);
-  mask-image: repeating-linear-gradient(to bottom, #000 0 14px, transparent 14px 20px);
-  filter: drop-shadow(0 0 40px rgb(var(--accent-pink) / 0.6));
-}
-.horizon-floor {
-  opacity: 0.45;
-  border-top: 1px solid rgb(var(--accent-pink) / 0.8);
-  background-image:
-    linear-gradient(rgb(var(--accent-pink) / 0.7) 1px, transparent 1px),
-    linear-gradient(90deg, rgb(var(--accent-pink) / 0.7) 1px, transparent 1px);
-  background-size: 56px 56px;
-  transform: perspective(240px) rotateX(55deg);
-  transform-origin: bottom center;
-  animation: horizon-scroll 3s linear infinite;
-}
-@keyframes horizon-scroll {
-  to {
-    background-position: 0 56px;
-  }
-}
-
-/* ── Cursor ring (desktop, full effects only) ── */
-.cursor-ring {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 90;
-  width: 28px;
-  height: 28px;
-  margin: -14px 0 0 -14px;
-  border: 1px solid rgb(var(--accent-cyan) / 0.7);
-  border-radius: 9999px;
-  pointer-events: none;
-  opacity: 0;
-  transition:
-    opacity 0.25s ease,
-    width 0.25s ease,
-    height 0.25s ease,
-    margin 0.25s ease,
-    border-color 0.25s ease,
-    background-color 0.25s ease;
-  will-change: transform;
-}
-.cursor-ring[data-visible="true"] {
-  opacity: 1;
-}
-.cursor-ring[data-hover="true"] {
-  width: 44px;
-  height: 44px;
-  margin: -22px 0 0 -22px;
-  border-color: rgb(var(--accent-pink) / 0.9);
-  background-color: rgb(var(--accent-pink) / 0.08);
-}
-html[data-fx="calm"] .cursor-ring {
-  display: none;
 }

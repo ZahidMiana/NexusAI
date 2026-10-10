@@ -1,3 +1,4 @@
+import { Globe } from "lucide-react";
 import Image from "next/image";
 import { BrandIcon, type Brand } from "@/components/ui/BrandIcon";
 import { StatusDot } from "@/components/ui/StatusDot";
@@ -66,7 +67,7 @@ function Avatar({ member }: { member: TeamMember }) {
   const tokens = accentTokens(member.accent);
   return (
     <div
-      className={cn("relative flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden border bg-inset font-display text-lg font-black", tokens.borderSoft, tokens.text, tokens.textGlow)}
+      className={cn("relative flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden border bg-inset font-display text-lg font-black", tokens.borderSoft, tokens.text)}
       style={{ clipPath: HEXAGON }}
       aria-hidden={!member.photo}
     >
@@ -82,10 +83,16 @@ function Avatar({ member }: { member: TeamMember }) {
   );
 }
 
-const SOCIAL_LABELS: Record<Brand, string> = { github: "GitHub", linkedin: "LinkedIn" };
+type SocialKey = Brand | "website";
+
+const SOCIAL_LABELS: Record<SocialKey, string> = { github: "GitHub", linkedin: "LinkedIn", website: "website" };
+
+function SocialIcon({ kind }: { kind: SocialKey }) {
+  return kind === "website" ? <Globe className="h-4 w-4" aria-hidden /> : <BrandIcon brand={kind} className="h-4 w-4" />;
+}
 
 function SocialLinks({ member }: { member: TeamMember }) {
-  const entries = Object.entries(member.socials ?? {}).filter((entry): entry is [Brand, string] => Boolean(entry[1]));
+  const entries = Object.entries(member.socials ?? {}).filter((entry): entry is [SocialKey, string] => Boolean(entry[1]));
   if (entries.length === 0) return null;
   return (
     <ul className="flex items-center gap-2">
@@ -98,7 +105,7 @@ function SocialLinks({ member }: { member: TeamMember }) {
             aria-label={`${member.name} on ${SOCIAL_LABELS[brand]}`}
             className="flex h-8 w-8 items-center justify-center rounded-lg border border-line-strong text-fg-soft transition-colors hover:border-line-strong hover:text-fg"
           >
-            <BrandIcon brand={brand} className="h-4 w-4" />
+            <SocialIcon kind={brand} />
           </a>
         </li>
       ))}

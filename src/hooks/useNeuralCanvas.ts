@@ -33,7 +33,7 @@ export function useNeuralCanvas(canvasRef: RefObject<HTMLCanvasElement | null>):
   const lingerRef = useRef<number | null>(null);
   const [active, setActive] = useState(false);
   const reducedMotion = !useMotionAllowed();
-  const { theme, style } = usePreferences();
+  const { style } = usePreferences();
   const paletteRef = useRef<AccentPalette | null>(null);
 
   useEffect(() => {
@@ -88,7 +88,7 @@ export function useNeuralCanvas(canvasRef: RefObject<HTMLCanvasElement | null>):
       resizeObserver.disconnect();
       intersectionObserver.disconnect();
     };
-  }, [canvasRef, reducedMotion, theme, style]);
+  }, [canvasRef, reducedMotion, style]);
 
   useEffect(
     () => () => {

@@ -1,41 +1,75 @@
-import type { Testimonial } from "@/types";
+import type { Credential } from "@/types";
 
-/** Placeholder client wordmarks. Replace with real logos you have permission to show. */
-export const CLIENT_LOGOS: readonly string[] = [
-  "HELIX BANK",
-  "NORTHWIND HEALTH",
-  "ORBITAL LABS",
-  "VANTA LOGISTICS",
-  "QUANTA RETAIL",
-  "ARCLIGHT ENERGY",
-  "NIMBUS SAAS",
-  "KESTREL INSURANCE",
+/** Organisations and platforms behind the team's training and work. */
+export const ORGANISATIONS: readonly string[] = [
+  "FAST NUCES",
+  "LANGCHAIN ACADEMY",
+  "EXFILTRA",
+  "FAST CYBER SECURITY SOCIETY",
+  "HACK THE BOX",
+  "SOLANA",
 ];
 
-/** Placeholder testimonials. Replace with real quotes approved by your clients. */
-export const TESTIMONIALS: readonly Testimonial[] = [
+/** Verifiable certifications, roles and leadership from the team's resumes. */
+export const CREDENTIALS: readonly Credential[] = [
   {
-    id: "t1",
-    quote: "NexusAI shipped in eight weeks what our internal team had been scoping for a year. The evaluation suite alone changed how we build.",
-    role: "VP of Engineering",
-    company: "Series C Insurtech",
+    id: "exfiltra",
+    kind: "Role",
+    title: "Junior Security Engineer",
+    org: "Exfiltra",
+    period: "2026 to present",
+    memberId: "zeeshan",
     accent: "pink",
-    metric: "-72% handling time",
+    detail: "Web app penetration tests, AI/LLM security assessments and adversarial prompt injection testing across autonomous agent workflows.",
   },
   {
-    id: "t2",
-    quote: "They kept every byte inside our cloud and still delivered answers faster than the commercial tools we tested.",
-    role: "Head of Data",
-    company: "Private Equity Fund",
+    id: "freelance",
+    kind: "Role",
+    title: "Freelance AI/ML Developer",
+    org: "Self-employed",
+    period: "2025 to present",
+    memberId: "zahid",
     accent: "cyan",
-    metric: "3.4x analyst output",
+    detail: "Applied machine learning, deep learning and generative AI to solve business problems for clients.",
   },
   {
-    id: "t3",
-    quote: "The offline app works in places where we never get signal. Our technicians actually ask for it now.",
-    role: "Director of Field Operations",
-    company: "Industrial Services Co.",
+    id: "langgraph-cert",
+    kind: "Certification",
+    title: "LangGraph Advanced AI Agents",
+    org: "LangChain Academy",
+    period: "2026",
+    memberId: "zahid",
     accent: "lime",
-    metric: "+38% first time fixes",
+    detail: "State management, human-in-the-loop workflows and long-term memory for AI agents.",
+  },
+  {
+    id: "langchain-cert",
+    kind: "Certification",
+    title: "LangChain AI Agent Development",
+    org: "Professional course",
+    period: "2026",
+    memberId: "zahid",
+    accent: "cyan",
+    detail: "AI agent development from basics to production-ready deployment.",
+  },
+  {
+    id: "cyber-society",
+    kind: "Leadership",
+    title: "President, FAST Society of Cyber Security",
+    org: "FAST NUCES",
+    period: "Student society",
+    memberId: "zeeshan",
+    accent: "pink",
+    detail: "Led workshops on offensive web exploitation, API security and emerging AI/LLM attack vectors.",
+  },
+  {
+    id: "ctf",
+    kind: "Leadership",
+    title: "CTF Lead Organizer",
+    org: "FAST NUCES",
+    period: "April 2025",
+    memberId: "zeeshan",
+    accent: "lime",
+    detail: "Built Web, Reverse Engineering and Pwn challenges and the containerised competition infrastructure.",
   },
 ];

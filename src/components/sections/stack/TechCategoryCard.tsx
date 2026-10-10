@@ -16,7 +16,7 @@ export function TechCategoryCard({ category, selectedId, onSelect }: TechCategor
   return (
     <BentoCard accent={category.accent} className="h-full p-5">
       <header className="mb-5 flex items-center justify-between">
-        <h3 className={cn("font-tech text-sm tracking-[0.12em] uppercase", tokens.text, tokens.textGlow)}>[{category.label}]</h3>
+        <h3 className={cn("font-tech text-sm tracking-[0.12em] uppercase", tokens.text)}>[{category.label}]</h3>
         <span className="font-mono text-xs text-fg-muted">{String(category.items.length).padStart(2, "0")} modules</span>
       </header>
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-2">

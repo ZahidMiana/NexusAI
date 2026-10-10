@@ -22,7 +22,7 @@ export function NavLinks({ activeId, layout, onNavigate }: NavLinksProps) {
               aria-current={active ? "location" : undefined}
               className={cn(
                 "relative font-tech tracking-[0.14em] uppercase transition-colors",
-                layout === "row" && cn("py-1 text-xs", active ? "text-cyber-cyan text-glow-cyan" : "text-fg-muted hover:text-cyber-cyan"),
+                layout === "row" && cn("py-1 text-xs", active ? "text-cyber-cyan" : "text-fg-muted hover:text-cyber-cyan"),
                 layout === "grid" &&
                   cn(
                     "flex items-center justify-between rounded-lg border px-4 py-3 text-sm",

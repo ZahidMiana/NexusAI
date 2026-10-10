@@ -69,7 +69,7 @@ function RoiOutput({ label, value, accent }: { label: string; value: string; acc
   return (
     <div className="rounded-xl border border-line bg-inset px-4 py-3">
       <p className="font-tech text-xs tracking-[0.14em] text-fg-muted uppercase">{label}</p>
-      <p className={cn("mt-1 truncate font-display text-lg font-black tabular-nums", tokens.text, tokens.textGlow)}>{value}</p>
+      <p className={cn("mt-1 truncate font-display text-lg font-black tabular-nums", tokens.text)}>{value}</p>
     </div>
   );
 }

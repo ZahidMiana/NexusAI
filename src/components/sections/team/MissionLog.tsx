@@ -13,14 +13,14 @@ import { cn } from "@/lib/cn";
 import { pick } from "@/lib/math";
 
 const EVENTS = [
-  "eval suite passed · 312/312",
-  "canary promoted → 100% traffic",
-  "LoRA adapter hot-swapped",
-  "p95 latency ↓ 12ms",
-  "agent graph checkpoint saved",
-  "GGUF build signed + shipped",
-  "vector index compacted",
+  "RAG eval suite passed",
+  "prompt injection test blocked",
+  "LangGraph checkpoint saved",
+  "retrieval recall ↑ 3%",
+  "OWASP LLM audit report shipped",
+  "vector index re-chunked",
   "guardrail policy updated",
+  "API pentest retest: fixed",
 ] as const;
 
 interface LogEntry {
@@ -32,7 +32,7 @@ interface LogEntry {
 const SEED: readonly LogEntry[] = [
   { id: 3, memberIndex: 0, message: EVENTS[0] },
   { id: 2, memberIndex: 1, message: EVENTS[1] },
-  { id: 1, memberIndex: 2, message: EVENTS[5] },
+  { id: 1, memberIndex: 0, message: EVENTS[2] },
 ];
 
 /** Squad-level live event stream and collective uptime. */
@@ -43,7 +43,7 @@ export function MissionLog() {
         <BentoLabel index="04.∑" accent="lime">
           Squad Sync
         </BentoLabel>
-        <Radar className="h-5 w-5 animate-flicker text-cyber-lime drop-glow-lime" />
+        <Radar className="h-5 w-5 animate-flicker text-cyber-lime" />
       </div>
       <MissionFeed />
     </BentoCard>
@@ -66,7 +66,7 @@ function MissionFeed() {
     <>
       <div>
         <p className="font-tech text-xs tracking-[0.14em] text-fg-muted uppercase">Mesh uptime</p>
-        <p className="mt-1 font-display text-lg font-black text-cyber-lime text-glow-lime tabular-nums">{label ?? "syncing…"}</p>
+        <p className="mt-1 font-display text-lg font-black text-cyber-lime tabular-nums">{label ?? "syncing…"}</p>
       </div>
 
       <ul className="flex-1 space-y-2 overflow-hidden" aria-live="polite">

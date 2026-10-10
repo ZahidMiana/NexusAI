@@ -7,6 +7,7 @@ import { FullStackEngineerCard } from "./FullStackEngineerCard";
 import { MissionLog } from "./MissionLog";
 import { MobileDeveloperCard } from "./MobileDeveloperCard";
 import { ProductEngineerCard } from "./ProductEngineerCard";
+import { SecurityEngineerCard } from "./SecurityEngineerCard";
 import type { MemberCardProps } from "./types";
 
 /**
@@ -15,6 +16,7 @@ import type { MemberCardProps } from "./types";
  */
 const SHOWCASES: Record<MemberSpecialty, { Card: ComponentType<MemberCardProps>; span: string }> = {
   "full-stack": { Card: FullStackEngineerCard, span: "md:col-span-2 lg:col-span-2 xl:col-span-3" },
+  security: { Card: SecurityEngineerCard, span: "md:col-span-2 lg:col-span-3 xl:col-span-4" },
   product: { Card: ProductEngineerCard, span: "md:col-span-2 lg:col-span-2 xl:col-span-2" },
   mobile: { Card: MobileDeveloperCard, span: "md:col-span-2 lg:col-span-1 xl:col-span-2" },
 };
@@ -30,7 +32,7 @@ export function TeamSection() {
         index="04"
         title="The Elite AI Grid"
         accent="pink"
-        subtitle="Three operators, three disciplines, one deployment pipeline. Every block below is a live, interactive instrument."
+        subtitle="One builds the AI, one breaks it before attackers can. Every block below is a live, interactive instrument."
       />
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         <Reveal className={SHOWCASES[lead.specialty].span}>

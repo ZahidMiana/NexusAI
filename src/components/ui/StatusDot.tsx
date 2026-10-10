@@ -13,7 +13,7 @@ export function StatusDot({ accent = "lime", pulse = true, className }: StatusDo
   return (
     <span className={cn("relative inline-flex h-2 w-2", className)}>
       {pulse && <span className={cn("absolute inline-flex h-full w-full animate-ping rounded-full opacity-70", tokens.bg)} />}
-      <span className={cn("relative inline-flex h-2 w-2 rounded-full", tokens.bg, tokens.dropGlow)} />
+      <span className={cn("relative inline-flex h-2 w-2 rounded-full", tokens.bg)} />
     </span>
   );
 }

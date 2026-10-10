@@ -20,7 +20,7 @@ export function NeuralTopology() {
       <div className="pointer-events-none relative z-10 flex h-full min-h-[440px] flex-col justify-between p-6">
         <div className="flex items-start justify-between gap-4">
           <BentoLabel index="01">Neural Topology</BentoLabel>
-          <Network className={cn("h-5 w-5 transition-colors", active ? "text-cyber-pink drop-glow-pink" : "text-cyber-cyan drop-glow-cyan")} />
+          <Network className={cn("h-5 w-5 transition-colors", active ? "text-cyber-pink" : "text-cyber-cyan")} />
         </div>
 
         <div className="flex flex-wrap items-end justify-between gap-4">
@@ -37,7 +37,7 @@ function SynapticLoad({ active }: { active: boolean }) {
   return (
     <div className="rounded-lg border border-line bg-inset px-4 py-3 backdrop-blur-sm">
       <p className="font-tech text-xs tracking-[0.14em] text-fg-muted uppercase">Synaptic load</p>
-      <p className={cn("font-display text-2xl font-black tabular-nums", active ? "text-cyber-pink text-glow-pink" : "text-cyber-cyan text-glow-cyan")}>
+      <p className={cn("font-display text-2xl font-black tabular-nums", active ? "text-cyber-pink" : "text-cyber-cyan")}>
         {load.toFixed(1)}%
       </p>
     </div>

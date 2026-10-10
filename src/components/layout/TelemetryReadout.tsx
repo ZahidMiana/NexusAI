@@ -31,7 +31,7 @@ export function TelemetryReadout({ layout = "row", condensed = false, className 
           <div key={item.label} className={cn("flex items-center gap-2", condensed && index > 0 && "xl:hidden 2xl:flex")}>
             <StatusDot accent={item.accent} />
             <span className="text-fg-muted">{item.label}:</span>
-            <span className={cn(tokens.text, tokens.textGlow)}>{item.value}</span>
+            <span className={cn(tokens.text)}>{item.value}</span>
             {item.label === "CORE_TEMP" && <span className="text-fg-muted tabular-nums">{coreTemp.toFixed(1)}°C</span>}
           </div>
         );

@@ -1,14 +1,14 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import { Check, ChevronDown, Cloud, Square, Zap, type LucideIcon } from "lucide-react";
+import { Check, ChevronDown, Cloud, Square, type LucideIcon } from "lucide-react";
 import { useEffect, useId, useRef, useState, type KeyboardEvent } from "react";
 import { usePreferences } from "@/hooks/usePreferences";
 import { cn } from "@/lib/cn";
 import { preferenceStore } from "@/lib/preferences/store";
-import { DESIGN_STYLES, DESIGN_STYLE_IDS, type DesignStyleId } from "@/lib/preferences/themes";
+import { DESIGN_STYLES, DESIGN_STYLE_IDS, type DesignStyleId } from "@/lib/preferences/styles";
 
-export const STYLE_ICONS: Record<DesignStyleId, LucideIcon> = { clay: Cloud, cyber: Zap, brutal: Square };
+export const STYLE_ICONS: Record<DesignStyleId, LucideIcon> = { clay: Cloud, brutal: Square };
 
 /**
  * Navbar button showing the active design style; opens a small menu of all

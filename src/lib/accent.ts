@@ -11,7 +11,6 @@ export interface AccentTokens {
   /** CSS variable holding the RGB triplet; use as `rgb(${rgb} / alpha)`. */
   rgb: string;
   text: string;
-  textGlow: string;
   bg: string;
   bgSoft: string;
   border: string;
@@ -19,7 +18,6 @@ export interface AccentTokens {
   hoverBorder: string;
   glow: string;
   hoverGlow: string;
-  dropGlow: string;
   ring: string;
   groupHoverBorder: string;
   groupHoverText: string;
@@ -31,7 +29,6 @@ export const ACCENT_TOKENS: Readonly<Record<Accent, AccentTokens>> = {
     hex: "rgb(var(--accent-cyan))",
     rgb: "var(--accent-cyan)",
     text: "text-cyber-cyan",
-    textGlow: "text-glow-cyan",
     bg: "bg-cyber-cyan",
     bgSoft: "bg-cyber-cyan/10",
     border: "border-cyber-cyan",
@@ -39,7 +36,6 @@ export const ACCENT_TOKENS: Readonly<Record<Accent, AccentTokens>> = {
     hoverBorder: "hover:border-cyber-cyan/80",
     glow: "glow-cyan",
     hoverGlow: "hover:glow-cyan",
-    dropGlow: "drop-glow-cyan",
     ring: "focus-visible:ring-cyber-cyan/60",
     groupHoverBorder: "group-hover/bento:border-cyber-cyan",
     groupHoverText: "group-hover/bento:text-cyber-cyan",
@@ -49,7 +45,6 @@ export const ACCENT_TOKENS: Readonly<Record<Accent, AccentTokens>> = {
     hex: "rgb(var(--accent-pink))",
     rgb: "var(--accent-pink)",
     text: "text-cyber-pink",
-    textGlow: "text-glow-pink",
     bg: "bg-cyber-pink",
     bgSoft: "bg-cyber-pink/10",
     border: "border-cyber-pink",
@@ -57,7 +52,6 @@ export const ACCENT_TOKENS: Readonly<Record<Accent, AccentTokens>> = {
     hoverBorder: "hover:border-cyber-pink/80",
     glow: "glow-pink",
     hoverGlow: "hover:glow-pink",
-    dropGlow: "drop-glow-pink",
     ring: "focus-visible:ring-cyber-pink/60",
     groupHoverBorder: "group-hover/bento:border-cyber-pink",
     groupHoverText: "group-hover/bento:text-cyber-pink",
@@ -67,7 +61,6 @@ export const ACCENT_TOKENS: Readonly<Record<Accent, AccentTokens>> = {
     hex: "rgb(var(--accent-lime))",
     rgb: "var(--accent-lime)",
     text: "text-cyber-lime",
-    textGlow: "text-glow-lime",
     bg: "bg-cyber-lime",
     bgSoft: "bg-cyber-lime/10",
     border: "border-cyber-lime",
@@ -75,7 +68,6 @@ export const ACCENT_TOKENS: Readonly<Record<Accent, AccentTokens>> = {
     hoverBorder: "hover:border-cyber-lime/80",
     glow: "glow-lime",
     hoverGlow: "hover:glow-lime",
-    dropGlow: "drop-glow-lime",
     ring: "focus-visible:ring-cyber-lime/60",
     groupHoverBorder: "group-hover/bento:border-cyber-lime",
     groupHoverText: "group-hover/bento:text-cyber-lime",

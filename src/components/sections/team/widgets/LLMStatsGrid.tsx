@@ -1,41 +1,41 @@
 "use client";
 
-import { Activity, Cpu, Gauge, Layers3 } from "lucide-react";
+import { Activity, Gauge, Layers3, Target } from "lucide-react";
 import type { ReactNode } from "react";
 import { MetricBar } from "@/components/ui/MetricBar";
 import { useLiveCounter, useLiveMetric, useLiveSeries } from "@/hooks/useLiveMetric";
 import { accentTokens } from "@/lib/accent";
 import { cn } from "@/lib/cn";
-import { formatCompact, formatInteger } from "@/lib/format";
+import { formatInteger } from "@/lib/format";
 import type { Accent } from "@/types";
 import { Sparkline } from "./Sparkline";
 
-const GPU_SEEDS = [
-  { id: "H100-0", initial: 87 },
-  { id: "H100-1", initial: 74 },
-  { id: "H100-2", initial: 91 },
-  { id: "H100-3", initial: 66 },
+const PIPELINE_STAGES = [
+  { id: "EMBED", initial: 58 },
+  { id: "RETRIEVE", initial: 71 },
+  { id: "RERANK", initial: 46 },
+  { id: "GENERATE", initial: 83 },
 ] as const;
 
-/** Live LLM deployment telemetry: GPU load, token throughput and latency. */
+/** Simulated live telemetry for a RAG + agent pipeline. */
 export function LLMStatsGrid() {
-  const throughput = useLiveSeries({ initial: 11800, amplitude: 650, min: 8500, max: 14500, intervalMs: 700, length: 40 });
-  const tokensServed = useLiveCounter({ initial: 38_412_907_331, minStep: 9_000, maxStep: 14_000, intervalMs: 700 });
-  const latency = useLiveMetric({ initial: 84, amplitude: 6, min: 61, max: 118, intervalMs: 1100 });
-  const activeRequests = useLiveMetric({ initial: 342, amplitude: 24, min: 220, max: 480, intervalMs: 900 });
-  const currentThroughput = throughput[throughput.length - 1];
+  const queries = useLiveSeries({ initial: 118, amplitude: 9, min: 80, max: 160, intervalMs: 700, length: 40 });
+  const chunks = useLiveCounter({ initial: 128_406, minStep: 3, maxStep: 14, intervalMs: 900 });
+  const latency = useLiveMetric({ initial: 840, amplitude: 45, min: 620, max: 1150, intervalMs: 1100 });
+  const recall = useLiveMetric({ initial: 0.91, amplitude: 0.01, min: 0.86, max: 0.95, intervalMs: 1300 });
+  const currentQueries = queries[queries.length - 1];
 
   return (
     <div className="grid gap-4 sm:grid-cols-2">
       <div className="space-y-3 rounded-xl border border-line bg-inset p-4">
         <div className="flex items-center justify-between font-tech text-xs tracking-[0.14em] text-fg-muted uppercase">
           <span className="flex items-center gap-1.5">
-            <Cpu className="h-3.5 w-3.5 text-cyber-cyan" /> GPU Fleet
+            <Layers3 className="h-3.5 w-3.5 text-cyber-cyan" /> Pipeline load
           </span>
-          <span className="text-cyber-lime">8× H100 · TP=4</span>
+          <span className="text-cyber-lime">Hybrid RAG</span>
         </div>
-        {GPU_SEEDS.map((gpu) => (
-          <GpuMeter key={gpu.id} id={gpu.id} initial={gpu.initial} />
+        {PIPELINE_STAGES.map((stage) => (
+          <StageMeter key={stage.id} id={stage.id} initial={stage.initial} />
         ))}
       </div>
 
@@ -43,31 +43,28 @@ export function LLMStatsGrid() {
         <div className="rounded-xl border border-line bg-inset p-4">
           <div className="flex items-center justify-between font-tech text-xs tracking-[0.14em] text-fg-muted uppercase">
             <span className="flex items-center gap-1.5">
-              <Activity className="h-3.5 w-3.5 text-cyber-pink" /> Token throughput
+              <Activity className="h-3.5 w-3.5 text-cyber-pink" /> Queries / min
             </span>
             <span className="text-cyber-lime">LIVE</span>
           </div>
-          <p className="mt-2 font-display text-2xl font-black text-fg tabular-nums">
-            {formatInteger(currentThroughput)}
-            <span className="ml-1 font-tech text-xs font-normal text-fg-muted">tok/s</span>
-          </p>
-          <Sparkline values={throughput} min={8000} max={15000} accent="pink" className="mt-2 h-12 w-full" />
+          <p className="mt-2 font-display text-2xl font-black text-fg tabular-nums">{formatInteger(currentQueries)}</p>
+          <Sparkline values={queries} min={70} max={170} accent="pink" className="mt-2 h-12 w-full" />
         </div>
 
         <div className="grid grid-cols-3 gap-3">
-          <StatTile icon={<Layers3 className="h-3.5 w-3.5" />} label="Served" value={formatCompact(tokensServed)} accent="cyan" />
-          <StatTile icon={<Gauge className="h-3.5 w-3.5" />} label="P95" value={`${latency.toFixed(0)}ms`} accent="lime" />
-          <StatTile icon={<Activity className="h-3.5 w-3.5" />} label="Req" value={activeRequests.toFixed(0)} accent="pink" />
+          <StatTile icon={<Layers3 className="h-3.5 w-3.5" />} label="Chunks" value={`${Math.round(chunks / 1000)}K`} accent="cyan" />
+          <StatTile icon={<Gauge className="h-3.5 w-3.5" />} label="P95 ms" value={latency.toFixed(0)} accent="lime" />
+          <StatTile icon={<Target className="h-3.5 w-3.5" />} label="Recall" value={recall.toFixed(2)} accent="pink" />
         </div>
       </div>
     </div>
   );
 }
 
-function GpuMeter({ id, initial }: { id: string; initial: number }) {
-  const usage = useLiveMetric({ initial, amplitude: 5, min: 48, max: 99, intervalMs: 900 });
-  const accent: Accent = usage > 92 ? "pink" : usage > 80 ? "cyan" : "lime";
-  return <MetricBar label={id} value={usage} accent={accent} />;
+function StageMeter({ id, initial }: { id: string; initial: number }) {
+  const load = useLiveMetric({ initial, amplitude: 6, min: 25, max: 97, intervalMs: 900 });
+  const accent: Accent = load > 88 ? "pink" : load > 65 ? "cyan" : "lime";
+  return <MetricBar label={id} value={load} accent={accent} />;
 }
 
 function StatTile({ icon, label, value, accent }: { icon: ReactNode; label: string; value: string; accent: Accent }) {

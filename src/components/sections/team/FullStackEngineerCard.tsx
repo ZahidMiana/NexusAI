@@ -13,7 +13,7 @@ import { LLMStatsGrid } from "./widgets/LLMStatsGrid";
 type View = "telemetry" | "architecture";
 
 const VIEWS: readonly SegmentOption<View>[] = [
-  { value: "telemetry", label: "LLM Stats" },
+  { value: "telemetry", label: "RAG Stats" },
   { value: "architecture", label: "Arch Graph" },
 ];
 
@@ -24,15 +24,15 @@ export function FullStackEngineerCard({ member, index }: MemberCardProps) {
     <BentoCard accent={member.accent} scaleOnHover={false} className="flex h-full flex-col gap-6 p-6">
       <div className="flex items-center justify-between">
         <BentoLabel index="04.A" accent={member.accent}>
-          LLM Deployment Core
+          RAG & Agent Core
         </BentoLabel>
-        <Server className="h-5 w-5 text-cyber-cyan drop-glow-cyan" />
+        <Server className="h-5 w-5 text-cyber-cyan" />
       </div>
 
       <div className="grid gap-6 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.6fr)]">
         <MemberHeader member={member} index={index} />
         <div className="min-w-0 space-y-4">
-          <SegmentedControl options={VIEWS} value={view} onChange={setView} accent={member.accent} ariaLabel="Deployment view" />
+          <SegmentedControl options={VIEWS} value={view} onChange={setView} accent={member.accent} ariaLabel="RAG and agent view" />
           <AnimatePresence mode="wait" initial={false}>
             <motion.div
               key={view}

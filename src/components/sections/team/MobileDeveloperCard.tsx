@@ -24,7 +24,7 @@ export function MobileDeveloperCard({ member, index }: MemberCardProps) {
         <BentoLabel index="04.C" accent={member.accent}>
           Edge Intelligence Rig
         </BentoLabel>
-        <Smartphone className="h-5 w-5 text-cyber-lime drop-glow-lime" />
+        <Smartphone className="h-5 w-5 text-cyber-lime" />
       </div>
 
       <div className="flex flex-1 flex-col gap-6 xl:flex-row">

@@ -1,11 +1,14 @@
-import { Radio } from "lucide-react";
+import { Award, BriefcaseBusiness, Users } from "lucide-react";
 import { BentoCard } from "@/components/ui/BentoCard";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { CLIENT_LOGOS, TESTIMONIALS } from "@/data/proof";
+import { CREDENTIALS, ORGANISATIONS } from "@/data/proof";
+import { getMemberById } from "@/data/team";
 import { accentTokens } from "@/lib/accent";
 import { cn } from "@/lib/cn";
-import type { Testimonial } from "@/types";
+import type { Credential, CredentialKind } from "@/types";
+
+const KIND_ICONS: Record<CredentialKind, typeof Award> = { Certification: Award, Role: BriefcaseBusiness, Leadership: Users };
 
 export function ProofSection() {
   return (
@@ -13,15 +16,15 @@ export function ProofSection() {
       <SectionHeading
         headingId="proof-heading"
         index="03"
-        title="Incoming Transmissions"
+        title="Verified Credentials"
         accent="cyan"
-        subtitle="What the teams we work with say once the systems are live."
+        subtitle="The roles, certifications and leadership behind the work."
       />
-      <LogoMarquee />
-      <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-3">
-        {TESTIMONIALS.map((testimonial, index) => (
-          <Reveal key={testimonial.id} delay={index * 0.08}>
-            <TestimonialCard testimonial={testimonial} />
+      <OrganisationMarquee />
+      <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {CREDENTIALS.map((credential, index) => (
+          <Reveal key={credential.id} delay={index * 0.05}>
+            <CredentialCard credential={credential} />
           </Reveal>
         ))}
       </div>
@@ -29,11 +32,11 @@ export function ProofSection() {
   );
 }
 
-function LogoMarquee() {
-  const loop = [...CLIENT_LOGOS, ...CLIENT_LOGOS];
+function OrganisationMarquee() {
+  const loop = [...ORGANISATIONS, ...ORGANISATIONS];
   return (
     <div className="relative overflow-hidden rounded-2xl border border-line bg-panel py-5 [mask-image:linear-gradient(90deg,transparent,black_12%,black_88%,transparent)]">
-      <p className="sr-only">Teams we have worked with: {CLIENT_LOGOS.join(", ")}</p>
+      <p className="sr-only">Organisations and platforms: {ORGANISATIONS.join(", ")}</p>
       <ul aria-hidden className="marquee-track flex w-max animate-marquee gap-12 pr-12">
         {loop.map((name, index) => (
           <li key={`${name}-${index}`} className="font-display text-lg font-black tracking-[0.12em] whitespace-nowrap text-fg-muted transition-colors hover:text-cyber-cyan">
@@ -45,21 +48,29 @@ function LogoMarquee() {
   );
 }
 
-function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
-  const tokens = accentTokens(testimonial.accent);
+function CredentialCard({ credential }: { credential: Credential }) {
+  const tokens = accentTokens(credential.accent);
+  const member = getMemberById(credential.memberId);
+  const Icon = KIND_ICONS[credential.kind];
+
   return (
-    <BentoCard accent={testimonial.accent} className="flex h-full flex-col gap-5 p-6">
+    <BentoCard accent={credential.accent} className="flex h-full flex-col gap-4 p-6">
       <div className="flex items-center justify-between font-tech text-xs tracking-[0.12em] uppercase">
         <span className={cn("flex items-center gap-1.5", tokens.text)}>
-          <Radio className="h-3.5 w-3.5" /> Transmission
+          <Icon className="h-3.5 w-3.5" aria-hidden /> {credential.kind}
         </span>
-        <span className="rounded border border-line-strong px-2 py-0.5 text-fg-soft">{testimonial.metric}</span>
+        <span className="rounded border border-line-strong px-2 py-0.5 text-fg-soft">{credential.period}</span>
       </div>
-      <blockquote className="flex-1 font-mono text-base leading-relaxed text-fg">“{testimonial.quote}”</blockquote>
-      <footer className="border-t border-line pt-4">
-        <p className="font-tech text-sm tracking-[0.1em] text-fg-soft uppercase">{testimonial.role}</p>
-        <p className="font-mono text-xs text-fg-muted">{testimonial.company}</p>
-      </footer>
+      <div>
+        <h3 className="font-display text-lg font-black tracking-wide text-fg">{credential.title}</h3>
+        <p className="font-mono text-sm text-fg-muted">{credential.org}</p>
+      </div>
+      <p className="flex-1 font-mono text-sm leading-relaxed text-fg-soft">{credential.detail}</p>
+      {member && (
+        <p className="border-t border-line pt-3 font-tech text-xs tracking-[0.12em] text-fg-muted uppercase">
+          {member.name} <span className={tokens.text}>{member.handle}</span>
+        </p>
+      )}
     </BentoCard>
   );
 }

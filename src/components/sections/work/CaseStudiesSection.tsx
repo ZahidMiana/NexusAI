@@ -9,7 +9,14 @@ import { CaseStudyCard } from "./CaseStudyCard";
 import { CaseStudyDialog } from "./CaseStudyDialog";
 
 /** Bento placement per position: the first study is the large featured tile. */
-const SPANS = ["md:col-span-2 xl:col-span-2 xl:row-span-2", "md:col-span-2 xl:col-span-2", "", ""] as const;
+const SPANS = [
+  "md:col-span-2 xl:col-span-2 xl:row-span-2",
+  "md:col-span-2 xl:col-span-2",
+  "",
+  "",
+  "md:col-span-2 xl:col-span-2",
+  "md:col-span-2 xl:col-span-2",
+] as const;
 
 export function CaseStudiesSection() {
   const [openStudy, setOpenStudy] = useState<CaseStudy | null>(null);
@@ -21,7 +28,7 @@ export function CaseStudiesSection() {
         index="02"
         title="Mission Logs"
         accent="cyan"
-        subtitle="Selected production work. Real problems, shipped systems and measured results. Open any log for the full story."
+        subtitle="Real projects from the team. The problem, what we built and what it achieved. Open any log for the full story."
       />
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-4">
         {CASE_STUDIES.map((study, index) => (

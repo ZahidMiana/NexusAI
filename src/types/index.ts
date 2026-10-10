@@ -1,12 +1,12 @@
 import type { LucideIcon } from "lucide-react";
-import type { DesignStyleId, EffectsMode, ThemeId } from "@/lib/preferences/themes";
+import type { DesignStyleId, EffectsMode } from "@/lib/preferences/styles";
 
 /** Neon accent channels available throughout the design system. */
 export type Accent = "cyan" | "pink" | "lime";
 
 /* ─────────────────────────── Team ─────────────────────────── */
 
-export type MemberSpecialty = "full-stack" | "product" | "mobile";
+export type MemberSpecialty = "full-stack" | "security" | "product" | "mobile";
 
 export interface TeamMember {
   id: string;
@@ -22,7 +22,7 @@ export interface TeamMember {
   hireAs: ProjectTypeId;
   /** Optional portrait (path under /public). Rendered with a neon duotone filter. */
   photo?: string;
-  socials?: { github?: string; linkedin?: string };
+  socials?: { github?: string; linkedin?: string; website?: string };
 }
 
 /* ─────────────────────────── Tech stack ─────────────────────────── */
@@ -33,7 +33,8 @@ export interface TechItem {
   icon: LucideIcon;
   accent: Accent;
   proficiency: number;
-  yearsInProduction: number;
+  /** Real projects where the team used this technology. */
+  usedIn: readonly string[];
   summary: string;
   highlights: readonly string[];
 }
@@ -65,7 +66,6 @@ export type TerminalLineDraft = Pick<TerminalLine, "text"> & Partial<Pick<Termin
 export type TerminalEffect =
   | { type: "open-contact"; prefill?: ContactPrefill }
   | { type: "set-style"; style: DesignStyleId }
-  | { type: "set-theme"; theme: ThemeId }
   | { type: "set-effects"; effects: EffectsMode };
 
 export interface CommandResult {
@@ -142,7 +142,7 @@ export interface PointerState {
 
 /* ─────────────────────────── Contact / lead capture ─────────────────────────── */
 
-export type ProjectTypeId = "llm-platform" | "agentic-product" | "on-device" | "audit" | "other";
+export type ProjectTypeId = "llm-platform" | "agentic-product" | "security" | "on-device" | "audit" | "other";
 
 export type EngagementId = "audit" | "sprint" | "squad";
 
@@ -169,7 +169,9 @@ export interface CaseStudy {
   solution: readonly string[];
   results: readonly CaseMetric[];
   stack: readonly string[];
-  duration: string;
+  /** Team member id (see data/team.ts) who built it. */
+  owner: string;
+  duration?: string;
   quote?: string;
   /** Pre-selected in the contact form from "Start a similar project". */
   projectType: ProjectTypeId;
@@ -200,13 +202,18 @@ export interface ServicePlan {
   projectType: ProjectTypeId;
 }
 
-export interface Testimonial {
+export type CredentialKind = "Certification" | "Role" | "Leadership";
+
+export interface Credential {
   id: string;
-  quote: string;
-  role: string;
-  company: string;
+  kind: CredentialKind;
+  title: string;
+  org: string;
+  period: string;
+  /** Team member id (see data/team.ts). */
+  memberId: string;
   accent: Accent;
-  metric: string;
+  detail: string;
 }
 
 export interface FaqItem {

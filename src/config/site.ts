@@ -3,9 +3,9 @@ export const siteConfig = {
   brandMark: "NEXUS_AI //",
   tagline: "We Architect Intelligent Ecosystems.",
   description:
-    "NexusAI is an elite squad of AI engineers shipping production LLM platforms, agentic products and on-device intelligence.",
+    "NexusAI is a team of AI engineers and security specialists building production LLM apps, RAG pipelines and AI agents, and keeping them secure.",
   url: "https://nexus-ai.dev",
-  foundedAt: "2021-03-14T00:00:00Z",
+  foundedAt: "2025-01-01T00:00:00Z",
   contact: {
     email: "uplink@nexus-ai.dev",
     secureEmail: "secure@nexus-ai.dev",

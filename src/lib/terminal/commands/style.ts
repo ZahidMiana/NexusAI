@@ -1,4 +1,4 @@
-import { DESIGN_STYLES, DESIGN_STYLE_IDS, isDesignStyleId } from "@/lib/preferences/themes";
+import { DESIGN_STYLES, DESIGN_STYLE_IDS, isDesignStyleId } from "@/lib/preferences/styles";
 import type { TerminalCommand } from "@/types";
 
 export const styleCommand: TerminalCommand = {

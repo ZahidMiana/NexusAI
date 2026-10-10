@@ -10,13 +10,13 @@ export const FAQ_ITEMS: readonly FaqItem[] = [
     id: "models",
     question: "Which AI models do you work with?",
     answer:
-      "Whatever fits the job. We use leading commercial APIs, open weight models like Llama and Mistral self hosted in your cloud, and small quantized models that run on phones.",
+      "Whatever fits the job: leading commercial APIs like Gemini and GPT, or open weight models self hosted in your cloud, wired together with LangChain and LangGraph.",
   },
   {
     id: "data",
     question: "Is our data safe with you?",
     answer:
-      "Yes. We sign an NDA before seeing anything, work inside your cloud accounts when needed, and can build systems where no data ever leaves your infrastructure.",
+      "Yes. We sign an NDA before seeing anything, and security is built in: every system we ship is tested against the OWASP Top 10 for LLMs by our own security engineer.",
   },
   {
     id: "ownership",

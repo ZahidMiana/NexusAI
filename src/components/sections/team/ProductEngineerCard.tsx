@@ -35,7 +35,7 @@ export function ProductEngineerCard({ member, index }: MemberCardProps) {
         <BentoLabel index="04.B" accent={member.accent}>
           Agentic Product Lab
         </BentoLabel>
-        <Bot className="h-5 w-5 text-cyber-pink drop-glow-pink" />
+        <Bot className="h-5 w-5 text-cyber-pink" />
       </div>
 
       <MemberHeader member={member} index={index} />

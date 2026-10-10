@@ -8,7 +8,7 @@ export const aboutCommand: TerminalCommand = {
     lines: [
       { text: `${siteConfig.brandMark} MISSION BRIEF`, tone: "pink" },
       { text: siteConfig.description },
-      { text: "We ship: LLM platforms · agentic products · on-device AI · evaluation infra.", tone: "cyan" },
+      { text: "We ship: LLM apps · RAG pipelines · AI agents · AI security audits.", tone: "cyan" },
       { text: "Engagement models: embedded squad · fixed-scope sprint · architecture audit.", tone: "muted" },
     ],
   }),

@@ -165,7 +165,7 @@ function SuccessPanel({ ticket, onReset }: { ticket: string; onReset: () => void
 
   return (
     <div role="status" className="flex min-h-[28rem] flex-col items-start justify-center gap-5 rounded-xl border border-cyber-lime/40 bg-inset p-6 font-mono sm:p-8">
-      <CheckCircle2 className="h-10 w-10 text-cyber-lime drop-glow-lime" />
+      <CheckCircle2 className="h-10 w-10 text-cyber-lime" />
       <h3 ref={headingRef} tabIndex={-1} className="font-display text-2xl font-black tracking-wide text-fg uppercase outline-none">
         Transmission received
       </h3>

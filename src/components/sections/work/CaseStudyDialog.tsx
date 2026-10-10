@@ -5,6 +5,7 @@ import { CountUp } from "@/components/effects/CountUp";
 import { Dialog } from "@/components/ui/Dialog";
 import { NeonButton } from "@/components/ui/NeonButton";
 import { useContactLauncher } from "@/context/ContactContext";
+import { getMemberById } from "@/data/team";
 import { accentTokens } from "@/lib/accent";
 import { cn } from "@/lib/cn";
 import type { CaseStudy } from "@/types";
@@ -46,7 +47,8 @@ function CaseStudyBody({ study, titleId, onStartSimilar }: { study: CaseStudy; t
         </h2>
         <p className="font-mono text-base leading-relaxed text-fg-soft">{study.summary}</p>
         <p className="flex items-center gap-2 font-tech text-xs tracking-[0.12em] text-fg-muted uppercase">
-          <Clock className="h-3.5 w-3.5" /> Delivered in {study.duration}
+          <Clock className="h-3.5 w-3.5" /> Built by {getMemberById(study.owner)?.name ?? "NexusAI"}
+          {study.duration && ` · ${study.duration}`}
         </p>
       </header>
 
@@ -54,7 +56,7 @@ function CaseStudyBody({ study, titleId, onStartSimilar }: { study: CaseStudy; t
         {study.results.map((metric) => (
           <div key={metric.label} className={cn("flex flex-col-reverse rounded-xl border bg-inset p-4", tokens.borderSoft)}>
               <dt className="mt-1 font-tech text-xs tracking-[0.1em] text-fg-muted uppercase">{metric.label}</dt>
-              <dd className={cn("font-display text-3xl font-black", tokens.text, tokens.textGlow)}><CountUp value={metric.value} durationMs={900} />
+              <dd className={cn("font-display text-3xl font-black", tokens.text)}><CountUp value={metric.value} durationMs={900} />
               </dd>
           </div>
         ))}

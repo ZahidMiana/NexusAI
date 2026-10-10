@@ -39,7 +39,7 @@ export const SERVICE_PLANS: readonly ServicePlan[] = [
   {
     id: "squad",
     name: "Embedded Squad",
-    tagline: "Our three operators working as part of your team.",
+    tagline: "Our operators working as part of your team.",
     price: "$38k",
     priceNote: "per month",
     timeline: "3 month minimum",
@@ -47,7 +47,7 @@ export const SERVICE_PLANS: readonly ServicePlan[] = [
     featured: false,
     projectType: "llm-platform",
     features: [
-      "Full stack, product and mobile AI engineers",
+      "Full stack AI and AI security engineers",
       "Joins your standups, repos and roadmap",
       "Ongoing feature delivery and platform work",
       "Knowledge transfer to your engineers",

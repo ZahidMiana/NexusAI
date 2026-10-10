@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowUpRight, Copy, Leaf, Palette, Rocket, SquareTerminal, Sparkles, type LucideIcon } from "lucide-react";
+import { ArrowUpRight, Copy, Leaf, Rocket, SquareTerminal, Sparkles, type LucideIcon } from "lucide-react";
 import { STYLE_ICONS } from "@/components/layout/StyleMenu";
 import { useMemo } from "react";
 import { NAV_LINKS } from "@/config/navigation";
@@ -9,9 +9,9 @@ import { useContactLauncher } from "@/context/ContactContext";
 import { useTerminalLauncher } from "@/context/TerminalContext";
 import { usePreferences } from "@/hooks/usePreferences";
 import { preferenceStore } from "@/lib/preferences/store";
-import { DESIGN_STYLES, DESIGN_STYLE_IDS, THEMES, THEME_IDS } from "@/lib/preferences/themes";
+import { DESIGN_STYLES, DESIGN_STYLE_IDS } from "@/lib/preferences/styles";
 
-export type PaletteGroup = "Actions" | "Navigate" | "Style" | "Theme" | "Effects";
+export type PaletteGroup = "Actions" | "Navigate" | "Style" | "Effects";
 
 export interface PaletteItem {
   id: string;
@@ -24,7 +24,7 @@ export interface PaletteItem {
   run: () => void;
 }
 
-export const GROUP_ORDER: readonly PaletteGroup[] = ["Actions", "Navigate", "Style", "Theme", "Effects"];
+export const GROUP_ORDER: readonly PaletteGroup[] = ["Actions", "Navigate", "Style", "Effects"];
 
 function scrollToSection(id: string): void {
   document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -34,7 +34,7 @@ function scrollToSection(id: string): void {
 export function usePaletteItems(): PaletteItem[] {
   const { openContact } = useContactLauncher();
   const { openTerminal } = useTerminalLauncher();
-  const { style, theme, effects } = usePreferences();
+  const { style, effects } = usePreferences();
 
   return useMemo(() => {
     const actions: PaletteItem[] = [
@@ -69,24 +69,10 @@ export function usePaletteItems(): PaletteItem[] {
       group: "Style",
       label: `${DESIGN_STYLES[id].label} style`,
       hint: DESIGN_STYLES[id].description,
-      keywords: `style design skin look ${id} ${DESIGN_STYLES[id].scheme}`,
+      keywords: `style design skin look theme ${id}`,
       icon: STYLE_ICONS[id],
       selected: style === id,
       run: () => preferenceStore.setStyle(id),
-    }));
-
-    const themes = THEME_IDS.map<PaletteItem>((id) => ({
-      id: `theme-${id}`,
-      group: "Theme",
-      label: `${THEMES[id].label} theme`,
-      hint: `${THEMES[id].description} · Cyber style`,
-      keywords: `theme colour color palette ${id}`,
-      icon: Palette,
-      selected: style === "cyber" && theme === id,
-      run: () => {
-        preferenceStore.setStyle("cyber");
-        preferenceStore.setTheme(id);
-      },
     }));
 
     const effectModes: PaletteItem[] = [
@@ -94,8 +80,8 @@ export function usePaletteItems(): PaletteItem[] {
       { id: "fx-calm", group: "Effects", label: "Calm effects", hint: "No ambient motion", keywords: "effects reduce motion quiet fx accessibility", icon: Leaf, selected: effects === "calm", run: () => preferenceStore.setEffects("calm") },
     ];
 
-    return [...actions, ...navigate, ...styles, ...themes, ...effectModes];
-  }, [openContact, openTerminal, style, theme, effects]);
+    return [...actions, ...navigate, ...styles, ...effectModes];
+  }, [openContact, openTerminal, style, effects]);
 }
 
 export function matchesQuery(item: PaletteItem, query: string): boolean {

@@ -1,6 +1,7 @@
 import { ArrowUpRight } from "lucide-react";
 import { CountUp } from "@/components/effects/CountUp";
 import { BentoCard } from "@/components/ui/BentoCard";
+import { getMemberById } from "@/data/team";
 import { accentTokens } from "@/lib/accent";
 import { cn } from "@/lib/cn";
 import type { CaseStudy } from "@/types";
@@ -33,7 +34,9 @@ export function CaseStudyCard({ study, index, featured, onOpen }: CaseStudyCardP
 
         <div>
           <h3 className={cn("font-display font-black tracking-wide text-fg uppercase", featured ? "text-3xl" : "text-xl")}>{study.title}</h3>
-          <p className="mt-1 font-mono text-xs text-fg-muted">{study.client}</p>
+          <p className="mt-1 font-mono text-xs text-fg-muted">
+            {study.client} · built by {getMemberById(study.owner)?.name ?? "NexusAI"}
+          </p>
         </div>
 
         <p className={cn("font-mono leading-relaxed text-fg-soft", featured ? "text-base" : "text-sm")}>{study.summary}</p>
@@ -44,13 +47,24 @@ export function CaseStudyCard({ study, index, featured, onOpen }: CaseStudyCardP
               <p className="font-tech text-xs tracking-[0.12em] text-cyber-pink uppercase">The problem</p>
               <p className="mt-2 font-mono text-sm leading-relaxed text-fg-soft">{study.problem}</p>
             </div>
+            <div>
+              <p className="font-tech text-xs tracking-[0.12em] text-cyber-lime uppercase">What we built</p>
+              <ul className="mt-2 space-y-1.5">
+                {study.solution.slice(0, 3).map((item) => (
+                  <li key={item} className="flex gap-2 font-mono text-sm leading-relaxed text-fg-soft">
+                    <span aria-hidden className={cn("mt-2 h-1.5 w-1.5 shrink-0 rounded-full", tokens.bg)} />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
             {study.quote && (
               <blockquote className={cn("border-l-2 pl-4 font-mono text-base leading-relaxed text-fg italic", tokens.border)}>
                 “{study.quote}”
               </blockquote>
             )}
             <div>
-              <p className="font-tech text-xs tracking-[0.12em] text-fg-muted uppercase">Built with · {study.duration}</p>
+              <p className="font-tech text-xs tracking-[0.12em] text-fg-muted uppercase">Built with</p>
               <ul className="mt-2 flex flex-wrap gap-2">
                 {study.stack.map((tech) => (
                   <li key={tech} className="rounded border border-line-strong bg-inset px-2 py-1 font-tech text-xs tracking-[0.1em] text-fg-soft uppercase">
@@ -66,7 +80,7 @@ export function CaseStudyCard({ study, index, featured, onOpen }: CaseStudyCardP
           {metrics.map((metric) => (
             <div key={metric.label} className="flex flex-col-reverse rounded-lg border border-line bg-inset p-3">
               <dt className="mt-1 font-tech text-xs tracking-[0.1em] text-fg-muted uppercase">{metric.label}</dt>
-              <dd className={cn("font-display font-black", featured ? "text-2xl" : "text-lg", tokens.text, tokens.textGlow)}><CountUp value={metric.value} />
+              <dd className={cn("font-display font-black", featured ? "text-2xl" : "text-lg", tokens.text)}><CountUp value={metric.value} />
               </dd>
             </div>
           ))}

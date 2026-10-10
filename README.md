@@ -7,25 +7,23 @@ Built with Next.js, React, Tailwind CSS and Framer Motion.
 
 ## Features
 
-* **Hero section** with a clear pitch, a book a call button, an animated neural network and a synthwave horizon
-* **Case studies** in a bento grid, each opening a full story with results
-* **Team showcase** with a live widget for each engineer
-  * LLM stats with GPU usage and token counters
-  * Agent workflow simulator and ROI calculator
-  * Phone demo that runs an on device AI model and object detection
+* **Hero section** with a clear pitch, a book a call button and an animated neural network
+* **Case studies**: six real projects from the team, each opening a full story
+* **Team showcase** with a live demo for each member
+  * Zahid Iqbal, Full Stack AI Engineer: RAG pipeline stats and agent architecture graph
+  * Zeeshan Khalid, AI Security Engineer: prompt injection lab, OWASP LLM Top 10 audit and threat feed
 * **Process timeline** that fills in as you scroll
 * **Services** with three engagement plans and starting prices
-* **Client proof** with a scrolling logo strip and testimonials
+* **Verified credentials**: real roles, certifications and leadership
 * **Live terminal** where you can type commands like `/help`, `/team` and `/book`
 * **Tech stack** grid where every badge opens a short expertise summary
 * **FAQ** with answers to common client questions
 * **Contact form** that emails you every new lead, with spam protection
 * **Footer** with encrypted email that unlocks on hover and live world clocks
-* **Three design styles**: Clay (light claymorphism, default), Cyber (dark neon) and Brutal (light neo brutalism), switched from the style button in the navbar
-* **Command palette** (Ctrl + K) to jump to any section, book a call or switch style and theme
-* **Three color themes** for the Cyber style: Cyber, Synthwave and Matrix
+* **Two design styles**: Clay (soft claymorphism, default) and Brutal (bold neo brutalism), switched from the style button in the navbar
+* **Command palette** (Ctrl + K) to jump to any section, book a call or switch style
 * **Effects switch**: Full or Calm, where Calm turns off all ambient motion
-* **Small moments**: a short boot intro on first visit, headings that decode and numbers that count up
+* **Small moments**: headings that decode and numbers that count up
 * **Mobile friendly** with touch support and readable text sizes
 * **Accessible** with good contrast and support for reduced motion
 
@@ -92,7 +90,6 @@ The form checks every field in the browser and again on the server. It also has 
 | `/contact` | Show contact details |
 | `/book` | Open the contact form (try `/book on-device`) |
 | `/style` | Switch design style, for example `/style clay` |
-| `/theme` | Switch Cyber color theme, for example `/theme synthwave` |
 | `/fx` | Switch effects, `/fx calm` or `/fx full` |
 | `/about` | Show the agency mission |
 | `/whoami` | Show session info |
@@ -119,43 +116,46 @@ Shortcuts: arrow keys for history, Tab to autocomplete. Press Ctrl + K anywhere 
 
 | What to change | File |
 | :--- | :--- |
-| Team names, bios, photos and links | `src/data/team.ts` |
+| Team members, photos and links | `src/data/team.ts` |
 | Case studies | `src/data/caseStudies.ts` |
 | Services and prices | `src/data/services.ts` |
-| Client logos and testimonials | `src/data/proof.ts` |
+| Credentials and organisations | `src/data/proof.ts` |
 | FAQ | `src/data/faq.ts` |
 | Tech stack items | `src/data/techStack.ts` |
 | Emails and site name | `src/config/site.ts` |
 | Design style tokens | `src/app/design-styles.css` |
-| Style and theme lists | `src/lib/preferences/themes.ts` |
+| Style list and default | `src/lib/preferences/styles.ts` |
 | Animations and effects | `src/app/globals.css` |
 | Terminal commands | `src/lib/terminal/commands` |
 
-The case studies, client logos and testimonials are sample content. Replace them with your real work before launch.
+## Adding a Team Member
+
+1. Add an entry to `src/data/team.ts` with name, role, bio, focus areas and links
+2. Pick a `specialty`. It decides which showcase card the member gets: `full-stack`, `security`, `product` or `mobile`
+3. Put a photo in `public/team/` and set `photo: "/team/name.jpg"`
+
+The product and mobile cards are ready for future members and appear as soon as someone uses that specialty. Credentials go in `src/data/proof.ts` and projects in `src/data/caseStudies.ts`.
 
 To add a new terminal command, create a file in `src/lib/terminal/commands` and register it in `src/lib/terminal/index.ts`.
 
 ## Design Styles
 
-The whole site can switch between three looks. The style button in the navbar shows the current style, and clicking it opens a menu with all three:
+The whole site can switch between two looks. The style button in the navbar shows the current style, and clicking it opens a menu with both:
 
 | Style | Look |
 | :--- | :--- |
 | Clay | Light pastel, soft puffy cards, rounded font (default) |
-| Cyber | Dark neon, glow and glitch effects |
 | Brutal | Light cream, thick black borders, hard shadows, bold font |
 
-To change the default style, edit `DEFAULT_STYLE` in `src/lib/preferences/themes.ts`.
+To change the default style, edit `DEFAULT_STYLE` in `src/lib/preferences/styles.ts`. To add a new style, add it to that file and add a token block for it in `src/app/design-styles.css`.
 
-Components never use fixed colors. They use design tokens such as `text-fg`, `bg-panel` and `border-line`, and each style sets its own values for colors, corner radius, shadows and fonts in `src/app/design-styles.css`. The terminal and phone demo stay dark in every style, like real devices. Every text element passes WCAG AA contrast in all three styles.
+Components never use fixed colors. They use design tokens such as `text-fg`, `bg-panel` and `border-line`, and each style sets its own values for colors, corner radius, shadows and fonts in `src/app/design-styles.css`. The terminal and phone demo stay dark in every style, like real devices. Every text element passes WCAG AA contrast in both styles.
 
 The chosen style is remembered for the next visit and applied before the page paints, so there is no flash.
 
-## Themes and Effects
+## Effects
 
-All neon colors in the Cyber style come from three CSS variables, so a theme only changes three values. To add a theme, add one entry to `src/lib/preferences/themes.ts` and it shows up in the command palette, the `/theme` command and the CSS automatically.
-
-The site respects the reduced motion setting of your device. Calm mode goes further and also stops textures, glitches, the cursor ring and live counters, while keeping every feature usable.
+The site respects the reduced motion setting of your device. The Calm effects mode (in the command palette, or `/fx calm` in the terminal) goes further and stops all ambient animation and live counters, while keeping every feature usable.
 
 ## Code Principles
 

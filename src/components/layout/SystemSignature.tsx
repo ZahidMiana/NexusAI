@@ -15,7 +15,7 @@ export function SystemSignature() {
   return (
     <div className="space-y-3 font-mono text-xs">
       <div className="flex items-center gap-2 font-tech tracking-[0.12em] text-cyber-lime uppercase">
-        <ShieldCheck className="h-4 w-4 drop-glow-lime" />
+        <ShieldCheck className="h-4 w-4" />
         Signature verified
       </div>
       <dl className="grid grid-cols-[auto_1fr] gap-x-3 gap-y-1.5 text-fg-muted">

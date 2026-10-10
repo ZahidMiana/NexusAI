@@ -30,7 +30,7 @@ export function FaqSection() {
         <Reveal delay={0.1}>
           <BentoCard accent="cyan" className="flex h-full flex-col gap-5 p-6">
             <BentoLabel index="09.B">Still unsure?</BentoLabel>
-            <MessageSquare className="h-8 w-8 text-cyber-cyan drop-glow-cyan" />
+            <MessageSquare className="h-8 w-8 text-cyber-cyan" />
             <p className="font-display text-xl font-black tracking-wide text-fg uppercase">Ask us anything</p>
             <p className="font-mono text-sm leading-relaxed text-fg-soft">
               Send a short note about your project. A real engineer replies within one business day.
