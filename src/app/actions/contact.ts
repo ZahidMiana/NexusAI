@@ -2,9 +2,10 @@
 
 import { headers } from "next/headers";
 import { siteConfig } from "@/config/site";
+import { ATTACHMENT_FIELD, safeFilename, validateAttachment, type LeadAttachment } from "@/lib/contact/attachment";
 import { HONEYPOT_FIELD, type ContactFormState } from "@/lib/contact/formState";
 import { createContactNotifier } from "@/lib/contact/notifier";
-import { SlidingWindowRateLimiter } from "@/lib/contact/rateLimit";
+import { SlidingWindowRateLimiter } from "@/lib/rateLimit";
 import { validateContact, valuesFromFormData } from "@/lib/contact/validation";
 
 const limiter = new SlidingWindowRateLimiter(5, 10 * 60 * 1000);
@@ -32,9 +33,20 @@ export async function submitContact(_previous: ContactFormState, formData: FormD
     return { status: "error", message: "Too many messages from this connection. Please try again in a few minutes." };
   }
 
-  const result = validateContact(valuesFromFormData(formData));
-  if (!result.success) {
-    return { status: "error", message: "Please fix the highlighted fields.", errors: result.errors };
+  const upload = formData.get(ATTACHMENT_FIELD);
+  const file = upload instanceof File && upload.size > 0 ? upload : null;
+  const attachmentError = file ? validateAttachment(file) : undefined;
+
+  const result = validateContact(valuesFromFormData(formData), { hasAttachment: Boolean(file) && !attachmentError });
+  if (!result.success || attachmentError) {
+    const errors = { ...(result.success ? {} : result.errors), ...(attachmentError ? { attachment: attachmentError } : {}) };
+    return { status: "error", message: "Please fix the highlighted fields.", errors };
+  }
+
+  let attachment: LeadAttachment | undefined;
+  if (file) {
+    const content = Buffer.from(await file.arrayBuffer()).toString("base64");
+    attachment = { filename: safeFilename(file.name), size: file.size, content };
   }
 
   const notifier = createContactNotifier();
@@ -45,7 +57,7 @@ export async function submitContact(_previous: ContactFormState, formData: FormD
 
   const ticket = createTicket();
   try {
-    await notifier.deliver({ ...result.data, ticket, receivedAt: new Date() });
+    await notifier.deliver({ ...result.data, attachment, ticket, receivedAt: new Date() });
   } catch (error) {
     console.error(`[contact] Delivery via ${notifier.channel} failed`, error);
     return { status: "error", message: `We could not send your message. Please email us at ${siteConfig.contact.email}.` };

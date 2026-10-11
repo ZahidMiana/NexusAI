@@ -1,7 +1,6 @@
 "use client";
 
 import { Check, Sparkles } from "lucide-react";
-import { CountUp } from "@/components/effects/CountUp";
 import { BentoCard } from "@/components/ui/BentoCard";
 import { NeonButton } from "@/components/ui/NeonButton";
 import { Reveal } from "@/components/ui/Reveal";
@@ -22,7 +21,7 @@ export function ServicesSection() {
         headingId="services-heading"
         index="05"
         eyebrow="Services & process"
-        title="Services & Pricing"
+        title="Services"
         accent="pink"
         subtitle="Pick the shape that fits your stage. Every engagement includes an NDA, full code ownership and weekly demos."
       />
@@ -88,12 +87,7 @@ function ServiceCard({ plan }: { plan: ServicePlan }) {
         )}
       </div>
 
-      <div>
-        <p className="font-tech text-xs tracking-[0.12em] text-fg-muted uppercase">{plan.priceNote}</p>
-        <p className={cn("font-display text-4xl font-black", tokens.text)}><CountUp value={plan.price} />
-        </p>
-        <p className="mt-1 font-mono text-sm text-fg-soft">Timeline: {plan.timeline}</p>
-      </div>
+      <p className={cn("font-tech text-xs tracking-[0.12em] uppercase", tokens.text)}>Timeline: {plan.timeline}</p>
 
       <ul className="flex-1 space-y-2.5">
         {plan.features.map((feature) => (
@@ -108,7 +102,7 @@ function ServiceCard({ plan }: { plan: ServicePlan }) {
         accent={plan.accent}
         variant={plan.featured ? "solid" : "outline"}
         className="w-full"
-        onClick={() => openContact({ engagement: plan.id, projectType: plan.projectType })}
+        onClick={() => openContact({ projectType: plan.projectType })}
       >
         Choose {plan.name}
       </NeonButton>

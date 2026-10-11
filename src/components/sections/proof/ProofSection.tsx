@@ -1,4 +1,4 @@
-import { Award, BriefcaseBusiness, Users } from "lucide-react";
+import { Award, BriefcaseBusiness, Trophy, Users } from "lucide-react";
 import { BentoCard } from "@/components/ui/BentoCard";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -10,7 +10,7 @@ import { accentTokens } from "@/lib/accent";
 import { cn } from "@/lib/cn";
 import type { Credential, CredentialKind } from "@/types";
 
-const KIND_ICONS: Record<CredentialKind, typeof Award> = { Certification: Award, Role: BriefcaseBusiness, Leadership: Users };
+const KIND_ICONS: Record<CredentialKind, typeof Award> = { Certification: Award, Role: BriefcaseBusiness, Leadership: Users, Award: Trophy };
 
 export function ProofSection() {
   return (
@@ -21,7 +21,7 @@ export function ProofSection() {
         eyebrow="Credentials"
         title="Experience & Credentials"
         accent="cyan"
-        subtitle="The roles, certifications and leadership behind the work."
+        subtitle="The roles, certifications, leadership and awards behind the work."
       />
       <OrganisationMarquee />
       <div className="mt-6">

@@ -20,9 +20,11 @@ export interface TeamMember {
   focus: readonly string[];
   /** Project type pre-selected when a visitor clicks "Hire for this". */
   hireAs: ProjectTypeId;
-  /** Optional portrait (path under /public). Rendered with a neon duotone filter. */
+  /** Optional portrait (path under /public), shown in a hexagon frame. */
   photo?: string;
   socials?: { github?: string; linkedin?: string; website?: string };
+  /** WhatsApp number in international format, digits only (e.g. "923001234567"). */
+  whatsapp?: string;
   /** Optional link to a CV / resume PDF (e.g. "/team/zahid-cv.pdf" in /public). */
   resumeUrl?: string;
 }
@@ -45,7 +47,10 @@ export interface TechCategory {
   id: string;
   label: string;
   accent: Accent;
+  /** Tools with a full explanation, tappable in the stack section. */
   items: readonly TechItem[];
+  /** Every other tool the team uses in this area, shown as plain tags. */
+  alsoUsed: readonly string[];
 }
 
 /* ─────────────────────────── Terminal ─────────────────────────── */
@@ -143,13 +148,21 @@ export interface PointerState {
 
 /* ─────────────────────────── Contact / lead capture ─────────────────────────── */
 
-export type ProjectTypeId = "llm-platform" | "agentic-product" | "security" | "on-device" | "audit" | "other";
+export type ProjectTypeId =
+  | "llm-platform"
+  | "agentic-product"
+  | "full-stack"
+  | "frontend"
+  | "backend"
+  | "security"
+  | "on-device"
+  | "audit"
+  | "other";
 
 export type EngagementId = "audit" | "sprint" | "squad";
 
 export interface ContactPrefill {
   projectType?: ProjectTypeId;
-  engagement?: EngagementId;
 }
 
 /* ─────────────────────────── Case studies ─────────────────────────── */
@@ -203,8 +216,6 @@ export interface ServicePlan {
   id: EngagementId;
   name: string;
   tagline: string;
-  price: string;
-  priceNote: string;
   timeline: string;
   accent: Accent;
   featured: boolean;
@@ -212,7 +223,7 @@ export interface ServicePlan {
   projectType: ProjectTypeId;
 }
 
-export type CredentialKind = "Certification" | "Role" | "Leadership";
+export type CredentialKind = "Certification" | "Role" | "Leadership" | "Award";
 
 export interface Credential {
   id: string;

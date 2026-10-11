@@ -4,10 +4,11 @@ import { AlertTriangle, CheckCircle2, Loader2, Send } from "lucide-react";
 import { useActionState, useEffect, useRef, useState, type ChangeEvent, type FormEvent } from "react";
 import { submitContact } from "@/app/actions/contact";
 import { NeonButton } from "@/components/ui/NeonButton";
-import { SelectField, TextAreaField, TextField } from "@/components/ui/FormField";
+import { FileField, SelectField, TextAreaField, TextField } from "@/components/ui/FormField";
 import { siteConfig } from "@/config/site";
 import { useContactRequest } from "@/context/ContactContext";
-import { BUDGET_RANGES, ENGAGEMENTS, PROJECT_TYPES } from "@/data/contact";
+import { PROJECT_TYPES } from "@/data/contact";
+import { ATTACHMENT_ACCEPT, ATTACHMENT_FIELD, ATTACHMENT_MAX_BYTES, formatBytes, validateAttachment, type AttachmentInfo } from "@/lib/contact/attachment";
 import { HONEYPOT_FIELD, INITIAL_CONTACT_STATE, type ContactFormState } from "@/lib/contact/formState";
 import {
   CONTACT_FIELDS,
@@ -33,17 +34,24 @@ export function ContactForm() {
   const [dismissedTicket, setDismissedTicket] = useState<string | null>(null);
   const request = useContactRequest();
   const [appliedRequestId, setAppliedRequestId] = useState(0);
+  const [attachment, setAttachment] = useState<AttachmentInfo | null>(null);
   const nameRef = useRef<HTMLInputElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
+  const fileRef = useRef<HTMLInputElement>(null);
 
   // Sync server results into local state (derived-state pattern, no effect needed).
   if (state !== seenState) {
     setSeenState(state);
-    if (state.status === "error") setErrors(state.errors ?? {});
+    if (state.status === "error") {
+      setErrors(state.errors ?? {});
+      // React resets the native file input after every submit, so mirror that here.
+      setAttachment(null);
+    }
     if (state.status === "success") {
       setValues(EMPTY_CONTACT_VALUES);
       setErrors({});
       setAttempted(false);
+      setAttachment(null);
     }
   }
 
@@ -53,7 +61,6 @@ export function ContactForm() {
     setValues((current) => ({
       ...current,
       projectType: request.prefill.projectType ?? current.projectType,
-      engagement: request.prefill.engagement ?? current.engagement,
     }));
     if (state.status === "success") setDismissedTicket(state.ticket);
   }
@@ -69,8 +76,8 @@ export function ContactForm() {
     const next = { ...values, [field]: event.target.value };
     setValues(next);
     if (attempted) {
-      const result = validateContact(next);
-      setErrors(result.success ? {} : result.errors);
+      const result = validateContact(next, { hasAttachment: Boolean(attachment) });
+      setErrors((current) => ({ ...(result.success ? {} : result.errors), ...(current.attachment ? { attachment: current.attachment } : {}) }));
     } else if (errors[field]) {
       setErrors((current) => {
         const next = { ...current };
@@ -80,8 +87,27 @@ export function ContactForm() {
     }
   };
 
+  const changeAttachment = (file: File | null) => {
+    const problem = file ? validateAttachment(file) : undefined;
+    // Invalid or removed files are cleared from the input so they are never submitted.
+    if (!file || problem) {
+      if (fileRef.current) fileRef.current.value = "";
+      setAttachment(null);
+    } else {
+      setAttachment({ name: file.name, size: file.size });
+    }
+    setErrors((current) => {
+      const next = { ...current };
+      if (problem) next.attachment = problem;
+      else delete next.attachment;
+      // A valid file makes the written brief optional.
+      if (file && !problem && next.message && values.message.trim().length <= LIMITS.messageMax) delete next.message;
+      return next;
+    });
+  };
+
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    const result = validateContact(values);
+    const result = validateContact(values, { hasAttachment: Boolean(attachment) });
     if (result.success) return;
     event.preventDefault();
     setAttempted(true);
@@ -113,10 +139,9 @@ export function ContactForm() {
 
       <TextField id="contact-company" name="company" label="Company" optional autoComplete="organization" placeholder="Company name" value={values.company} onChange={update("company")} error={errors.company} maxLength={LIMITS.companyMax} />
 
-      <div className="grid gap-5 sm:grid-cols-3">
+      <div className="grid gap-5 sm:grid-cols-2">
         <SelectField id="contact-project" name="projectType" label="Project type" placeholder="Select…" options={PROJECT_TYPES} value={values.projectType} onChange={update("projectType")} error={errors.projectType} />
-        <SelectField id="contact-engagement" name="engagement" label="Engagement" optional placeholder="Not sure" options={ENGAGEMENTS} value={values.engagement} onChange={update("engagement")} error={errors.engagement} />
-        <SelectField id="contact-budget" name="budget" label="Budget" placeholder="Select…" options={BUDGET_RANGES} value={values.budget} onChange={update("budget")} error={errors.budget} />
+        <TextField id="contact-budget" name="budget" label="Budget range" placeholder="e.g. $5k to $10k" value={values.budget} onChange={update("budget")} error={errors.budget} maxLength={LIMITS.budgetMax} />
       </div>
 
       <TextAreaField
@@ -124,12 +149,25 @@ export function ContactForm() {
         name="message"
         label="Project brief"
         hint={`${values.message.trim().length}/${LIMITS.messageMax}`}
-        placeholder="What are you building, what is blocking you, and when do you need it live?"
+        placeholder="What are you building, what is blocking you, and when do you need it live? You can also attach a brief below."
         rows={5}
         value={values.message}
         onChange={update("message")}
         error={errors.message}
         maxLength={LIMITS.messageMax}
+      />
+
+      <FileField
+        ref={fileRef}
+        id="contact-attachment"
+        name={ATTACHMENT_FIELD}
+        label="Attach a brief"
+        optional
+        accept={ATTACHMENT_ACCEPT}
+        help={`PDF, Word, PowerPoint, Excel, text or image. Max ${formatBytes(ATTACHMENT_MAX_BYTES)}.`}
+        file={attachment ? { name: attachment.name, size: formatBytes(attachment.size) } : null}
+        error={errors.attachment}
+        onChange={changeAttachment}
       />
 
       {/* Honeypot: hidden from people and assistive tech, irresistible to bots. */}

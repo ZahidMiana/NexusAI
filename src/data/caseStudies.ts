@@ -1,4 +1,4 @@
-import { Coins, FileText, ScanEye, Server, ShieldAlert, Users } from "lucide-react";
+import { Coins, FileText, MapPinned, ScanEye, ScanText, Server, ShieldAlert, Users } from "lucide-react";
 import type { CaseStudy } from "@/types";
 
 /**
@@ -169,5 +169,64 @@ export const CASE_STUDIES: readonly CaseStudy[] = [
       { label: "Infra", value: "Docker" },
     ],
     stack: ["Docker", "IDS", "Linux", "Web Security"],
+  },
+  {
+    id: "vision-to-markdown",
+    cover: "/work/vision-to-markdown.jpg",
+    coverAlt: "A system of linear equations printed on white paper",
+    coverCredit: { name: "Antoine Dautry", url: "https://unsplash.com/photos/05A-kdOH6Hw" },
+    links: {
+      github: "https://github.com/Zubair-Ali-Sandhu/vision-to-markdown",
+      demo: "https://huggingface.co/spaces/prospect01/document-to-markdown",
+    },
+    icon: ScanText,
+    title: "Vision to Markdown",
+    client: "Document OCR",
+    industry: "Vision AI",
+    owner: "zubair",
+    projectType: "llm-platform",
+    accent: "lime",
+    summary: "A fine-tuned Qwen2-VL-2B model that turns scanned pages, including LaTeX math, into clean Markdown. Live as a Gradio demo.",
+    problem:
+      "Generic OCR flattens equations and layout, and off-the-shelf vision-language models drift on academic pages. The goal was accurate Markdown and LaTeX from page images on a small, cheap model.",
+    solution: [
+      "QLoRA fine-tuning of Qwen2-VL-2B (4-bit NF4, rank-16 LoRA) with PyTorch and TRL",
+      "Training on a Nougat and LaTeX OCR corpus of academic pages",
+      "Evaluation with ROUGE-L against the zero-shot baseline",
+      "Deployed as a public Gradio Space on Hugging Face",
+    ],
+    results: [
+      { label: "ROUGE-L zero-shot", value: "0.41" },
+      { label: "ROUGE-L fine-tuned", value: "0.68" },
+    ],
+    stack: ["Qwen2-VL", "QLoRA", "PyTorch", "Gradio"],
+  },
+  {
+    id: "crimex",
+    cover: "/work/crimex.jpg",
+    coverAlt: "A hand holding a smartphone up to photograph city lights at night",
+    coverCredit: { name: "Song Han", url: "https://unsplash.com/photos/0cg3bt4XeH4" },
+    links: { github: "https://github.com/Zubair-Ali-Sandhu/CRIMEX" },
+    icon: MapPinned,
+    title: "CRIMEX",
+    client: "Crime Reporting App",
+    industry: "Public Safety / Mobile",
+    owner: "zubair",
+    projectType: "on-device",
+    accent: "cyan",
+    summary: "An Android app for reporting crimes digitally, with secure sign-in, crime hotspot maps and full case tracking.",
+    problem:
+      "Reporting a crime usually means a visit to a station and no way to follow the case. Reports needed to be filed from a phone, secured, and routed to the right people.",
+    solution: [
+      "Native Android client in Kotlin with a clean OOP design",
+      "FastAPI service layer over a Supabase PostgreSQL database",
+      "Multi-factor Firebase Authentication and role-based access control",
+      "Geospatial crime hotspot tracking with the Google Maps API",
+    ],
+    results: [
+      { label: "Auth", value: "MFA" },
+      { label: "Access", value: "RBAC" },
+    ],
+    stack: ["Kotlin", "FastAPI", "PostgreSQL", "Google Maps"],
   },
 ];

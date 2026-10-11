@@ -1,39 +1,22 @@
-import type { Accent, TerminalCommand } from "@/types";
-
-interface StackEntry {
-  name: string;
-  version: string;
-  role: string;
-  load: number;
-  tone: Accent;
-}
-
-const STACK: readonly StackEntry[] = [
-  { name: "PYTHON", version: "v3.12", role: "core runtime // async services", load: 10, tone: "cyan" },
-  { name: "PYTORCH", version: "v2.5", role: "training · fine-tuning · distillation", load: 10, tone: "pink" },
-  { name: "LANGCHAIN", version: "v0.3", role: "agent graphs · retrieval chains", load: 9, tone: "lime" },
-  { name: "NEXT.JS", version: "v16", role: "streaming RSC interfaces", load: 9, tone: "cyan" },
-  { name: "HUGGING_FACE", version: "API", role: "transformers · PEFT · TGI protocols", load: 9, tone: "pink" },
-];
-
-function meter(load: number): string {
-  return `[${"■".repeat(load)}${"□".repeat(10 - load)}]`;
-}
+import { TECH_CATEGORIES } from "@/data/techStack";
+import type { TerminalCommand, TerminalLineDraft } from "@/types";
 
 export const stackCommand: TerminalCommand = {
   name: "/stack",
   aliases: ["/tech"],
-  description: "Dump the production technology stack",
-  execute: () => ({
-    lines: [
-      { text: "> Mounting /usr/nexus/stack ...", tone: "muted" },
-      { text: "┌─ CORE_PROTOCOLS ──────────────────────────────┐", tone: "cyan" },
-      ...STACK.map((entry) => ({
-        text: `  ${meter(entry.load)} ${entry.name.padEnd(15, ".")} ${entry.version.padEnd(6)} // ${entry.role}`,
-        tone: entry.tone,
-      })),
-      { text: "└───────────────────────────────────────────────┘", tone: "cyan" },
-      { text: "STACK_INTEGRITY: 100% · ALL PROTOCOLS HANDSHAKE OK", tone: "lime" },
-    ],
-  }),
+  description: "List the team's full technology stack",
+  execute: () => {
+    const groups: TerminalLineDraft[] = TECH_CATEGORIES.flatMap((category) => [
+      { text: `▸ ${category.label.toUpperCase()}`, tone: category.accent },
+      { text: `  ${[...category.items.map((item) => item.name), ...category.alsoUsed].join(" · ")}`, tone: "muted" },
+    ]);
+
+    return {
+      lines: [
+        { text: "> Mounting /usr/nexus/stack ...", tone: "muted" },
+        ...groups,
+        { text: "Run /explain <tool> for details, e.g. /explain langgraph", tone: "lime" },
+      ],
+    };
+  },
 };

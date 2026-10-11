@@ -13,18 +13,18 @@ interface ModeProfile {
 
 const PROFILES: Record<DeviceMode, ModeProfile> = {
   home: { label: "IDLE", npu: 4, cpu: 9, thermal: 31 },
-  llm: { label: "LLM_DECODE", npu: 82, cpu: 34, thermal: 39 },
+  ocr: { label: "VLM_DECODE", npu: 82, cpu: 34, thermal: 39 },
   cv: { label: "CV_PIPELINE", npu: 64, cpu: 47, thermal: 37 },
 };
 
 export interface DeviceTelemetryProps {
   mode: DeviceMode;
-  llmActive: boolean;
+  ocrActive: boolean;
 }
 
 /** External readout mirroring the simulated device's compute state. */
-export function DeviceTelemetry({ mode, llmActive }: DeviceTelemetryProps) {
-  const effectiveMode: DeviceMode = mode === "llm" && !llmActive ? "home" : mode;
+export function DeviceTelemetry({ mode, ocrActive }: DeviceTelemetryProps) {
+  const effectiveMode: DeviceMode = mode === "ocr" && !ocrActive ? "home" : mode;
   const profile = PROFILES[effectiveMode];
 
   return (

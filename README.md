@@ -8,15 +8,18 @@ Built with Next.js, React, Tailwind CSS and Framer Motion.
 ## Features
 
 * **Hero section** with a clear pitch, a book a call button and an interactive animated neural network
-* **Case studies**: six real projects from the team, each with a cover and a full story
+* **Case studies**: eight real projects from the team, each with a cover and a full story
 * **Team showcase** with a live demo for each member
   * Zahid Iqbal, Full Stack AI Engineer: RAG pipeline stats and agent architecture graph
   * Zeeshan Khalid, AI Security Engineer: prompt injection lab, OWASP LLM Top 10 audit and threat feed
-* **Services and process**: three plans with starting prices and a four step delivery process
-* **Verified credentials**: real roles, certifications and leadership
-* **Tech stack and terminal playground**: tap any tool to see how we used it, or type commands like `/help`, `/team` and `/book`
+  * Zubair Ali Sandhu, Mobile and Vision AI Engineer: phone demo with Vision to Markdown OCR and ML Kit detection
+* **Services and process**: three ways to work with us and a four step delivery process
+* **Verified credentials**: real roles, certifications, leadership and awards
+* **Tech stack and terminal playground**: the full stack from all three resumes, grouped by area; tap a highlighted tool to see how we used it, or type commands like `/help`, `/team` and `/book`
 * **FAQ** with answers to common client questions
-* **Contact form** that emails you every new lead, with spam protection
+* **Contact form** that emails you every new lead (with an optional brief file up to 4 MB as an attachment), with spam protection
+* **WhatsApp button** floating on every page; visitors pick a team member and chat with a ready greeting
+* **AI assistant** (bottom right, under WhatsApp) powered by free NVIDIA Nemotron models on OpenRouter; it answers only from the site's own data, never quotes prices, and replies in English or Roman Urdu
 * **Footer** with encrypted email that unlocks on hover and live world clocks
 * **Neo brutalist design**: cream paper, thick black borders, hard shadows and bold type, with a rounded pill navbar
 * **Command palette** (Ctrl + K) to jump to any section, book a call or switch effects
@@ -67,6 +70,16 @@ CONTACT_FROM_EMAIL="NexusAI <hello@yourdomain.com>"
 Without these settings the form still works in development and prints each lead in your terminal. In production it shows a message asking visitors to email you directly, so no lead is lost silently.
 
 The form checks every field in the browser and again on the server. It also has a hidden spam trap and allows 5 messages per visitor every 10 minutes.
+
+## AI assistant
+
+The chat assistant uses free NVIDIA Nemotron models through [OpenRouter](https://openrouter.ai). Add your key to `.env.local`:
+
+```bash
+OPENROUTER_API_KEY=sk-or-your_key
+```
+
+It learns everything from the data files in `src/data`, so editing a case study or team member updates the assistant too. The rules it follows live in `src/lib/chat/knowledge.ts`. Each visitor can send 12 messages every 10 minutes. A free OpenRouter account allows about 50 assistant replies per day; adding $10 of credit raises that a lot. When the limit is reached, the assistant asks visitors to use WhatsApp or the contact form instead.
 
 ## Scripts
 

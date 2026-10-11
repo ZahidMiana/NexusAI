@@ -2,7 +2,7 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import { HomeScreen } from "./HomeScreen";
-import { LlamaScreen } from "./LlamaScreen";
+import { OcrScreen } from "./OcrScreen";
 import { PhoneFrame } from "./PhoneFrame";
 import type { DeviceMode } from "./types";
 import { VisionScreen } from "./VisionScreen";
@@ -10,11 +10,11 @@ import { VisionScreen } from "./VisionScreen";
 export interface MobileSimulatorProps {
   mode: DeviceMode;
   onModeChange: (mode: DeviceMode) => void;
-  onLlmActivityChange: (active: boolean) => void;
+  onOcrActivityChange: (active: boolean) => void;
 }
 
-/** Phone mock that switches between on-device AI demo screens. */
-export function MobileSimulator({ mode, onModeChange, onLlmActivityChange }: MobileSimulatorProps) {
+/** Phone mock that switches between vision AI demo screens. */
+export function MobileSimulator({ mode, onModeChange, onOcrActivityChange }: MobileSimulatorProps) {
   const goHome = () => onModeChange("home");
 
   return (
@@ -29,7 +29,7 @@ export function MobileSimulator({ mode, onModeChange, onLlmActivityChange }: Mob
           transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
         >
           {mode === "home" && <HomeScreen onLaunch={onModeChange} />}
-          {mode === "llm" && <LlamaScreen onBack={goHome} onActivityChange={onLlmActivityChange} />}
+          {mode === "ocr" && <OcrScreen onBack={goHome} onActivityChange={onOcrActivityChange} />}
           {mode === "cv" && <VisionScreen onBack={goHome} />}
         </motion.div>
       </AnimatePresence>

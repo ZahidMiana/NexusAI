@@ -18,7 +18,7 @@ const SHOWCASES: Record<MemberSpecialty, { Card: ComponentType<MemberCardProps>;
   "full-stack": { Card: FullStackEngineerCard, span: "md:col-span-2 lg:col-span-2 xl:col-span-3" },
   security: { Card: SecurityEngineerCard, span: "md:col-span-2 lg:col-span-3 xl:col-span-4" },
   product: { Card: ProductEngineerCard, span: "md:col-span-2 lg:col-span-2 xl:col-span-2" },
-  mobile: { Card: MobileDeveloperCard, span: "md:col-span-2 lg:col-span-1 xl:col-span-2" },
+  mobile: { Card: MobileDeveloperCard, span: "md:col-span-2 lg:col-span-3 xl:col-span-4" },
 };
 
 export function TeamSection() {
@@ -33,7 +33,7 @@ export function TeamSection() {
         eyebrow="Team"
         title="Meet the Team"
         accent="pink"
-        subtitle="One builds the AI, one breaks it before attackers can. Each card includes a live demo of their work."
+        subtitle="One builds the AI, one breaks it before attackers can, and one puts vision AI in your users' hands. Each card includes a live demo of their work."
       />
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         <Reveal className={SHOWCASES[lead.specialty].span}>

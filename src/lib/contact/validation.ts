@@ -1,25 +1,25 @@
-import { BUDGET_RANGES, ENGAGEMENTS, PROJECT_TYPES } from "@/data/contact";
-import type { EngagementId, ProjectTypeId } from "@/types";
+import { PROJECT_TYPES } from "@/data/contact";
+import type { ProjectTypeId } from "@/types";
 
 /**
  * Single source of truth for contact form rules. Runs in the browser for
  * instant feedback and again on the server, which never trusts the client.
  */
 
-export const CONTACT_FIELDS = ["name", "email", "company", "projectType", "engagement", "budget", "message"] as const;
+export const CONTACT_FIELDS = ["name", "email", "company", "projectType", "budget", "message"] as const;
 
 export type ContactField = (typeof CONTACT_FIELDS)[number];
 
 export type ContactValues = Record<ContactField, string>;
 
-export type FieldErrors = Partial<Record<ContactField, string>>;
+export type FieldErrors = Partial<Record<ContactField | "attachment", string>>;
 
 export interface ContactSubmission {
   name: string;
   email: string;
   company: string;
   projectType: ProjectTypeId;
-  engagement: EngagementId | "";
+  /** Free text range typed by the visitor, e.g. "$5k to $10k". */
   budget: string;
   message: string;
 }
@@ -31,7 +31,6 @@ export const EMPTY_CONTACT_VALUES: ContactValues = {
   email: "",
   company: "",
   projectType: "",
-  engagement: "",
   budget: "",
   message: "",
 };
@@ -41,6 +40,8 @@ export const LIMITS = {
   nameMax: 80,
   emailMax: 254,
   companyMax: 120,
+  budgetMin: 2,
+  budgetMax: 60,
   messageMin: 20,
   messageMax: 3000,
 } as const;
@@ -50,10 +51,16 @@ const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 const isOneOf = <T extends string>(options: readonly { value: T }[], value: string): value is T =>
   options.some((option) => option.value === value);
 
-export function validateContact(values: ContactValues): ValidationResult {
+export interface ValidateOptions {
+  /** A brief file is attached, so the written brief becomes optional. */
+  hasAttachment?: boolean;
+}
+
+export function validateContact(values: ContactValues, { hasAttachment = false }: ValidateOptions = {}): ValidationResult {
   const name = values.name.trim();
   const email = values.email.trim().toLowerCase();
   const company = values.company.trim();
+  const budget = values.budget.trim();
   const message = values.message.trim();
   const errors: FieldErrors = {};
 
@@ -67,12 +74,13 @@ export function validateContact(values: ContactValues): ValidationResult {
 
   if (!isOneOf(PROJECT_TYPES, values.projectType)) errors.projectType = "Please choose a project type.";
 
-  if (values.engagement && !isOneOf(ENGAGEMENTS, values.engagement)) errors.engagement = "Please choose a valid engagement.";
+  if (budget.length < LIMITS.budgetMin) errors.budget = "Please enter your budget range.";
+  else if (budget.length > LIMITS.budgetMax) errors.budget = `Budget must be under ${LIMITS.budgetMax} characters.`;
 
-  if (!isOneOf(BUDGET_RANGES, values.budget)) errors.budget = "Please choose a budget range.";
-
-  if (message.length < LIMITS.messageMin) errors.message = `Tell us a little more (at least ${LIMITS.messageMin} characters).`;
-  else if (message.length > LIMITS.messageMax) errors.message = `Message must be under ${LIMITS.messageMax} characters.`;
+  if (message.length > LIMITS.messageMax) errors.message = `Message must be under ${LIMITS.messageMax} characters.`;
+  else if (!hasAttachment && message.length < LIMITS.messageMin) {
+    errors.message = `Write a short brief (at least ${LIMITS.messageMin} characters) or attach a file.`;
+  }
 
   if (Object.keys(errors).length > 0) return { success: false, errors };
 
@@ -83,8 +91,7 @@ export function validateContact(values: ContactValues): ValidationResult {
       email,
       company,
       projectType: values.projectType as ProjectTypeId,
-      engagement: (values.engagement as EngagementId) || "",
-      budget: values.budget,
+      budget,
       message,
     },
   };

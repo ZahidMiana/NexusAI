@@ -35,7 +35,7 @@ export function TechStackSection() {
         eyebrow="Stack & playground"
         title="Tech Stack"
         accent="lime"
-        subtitle="The tools we use in real projects. Tap any of them to see how we used it, or type your own commands in the terminal."
+        subtitle="Everything our team works with, grouped by area. Tap a highlighted tool to see how we used it in real projects, or type your own commands in the terminal."
       />
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] lg:items-start">
         <Reveal>
@@ -53,11 +53,20 @@ export function TechStackSection() {
               return (
                 <div key={category.id}>
                   <h3 className={cn("mb-2.5 font-tech text-xs tracking-[0.14em] uppercase", tokens.text)}>{category.label}</h3>
-                  <div className="flex flex-wrap gap-2">
-                    {category.items.map((item) => (
-                      <TechBadge key={item.id} item={item} selected={item.id === selectedId} onSelect={explain} />
+                  {category.items.length > 0 && (
+                    <div className="flex flex-wrap gap-2">
+                      {category.items.map((item) => (
+                        <TechBadge key={item.id} item={item} selected={item.id === selectedId} onSelect={explain} />
+                      ))}
+                    </div>
+                  )}
+                  <ul className={cn("flex flex-wrap gap-1.5", category.items.length > 0 && "mt-2.5")} aria-label={`More ${category.label} tools`}>
+                    {category.alsoUsed.map((tool) => (
+                      <li key={tool} className="rounded border border-dashed border-line px-2 py-0.5 font-tech text-[11px] tracking-[0.08em] text-fg-muted uppercase">
+                        {tool}
+                      </li>
                     ))}
-                  </div>
+                  </ul>
                 </div>
               );
             })}

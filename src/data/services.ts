@@ -1,13 +1,11 @@
 import type { ServicePlan } from "@/types";
 
-/** Starting prices are examples. Adjust to your real rates. */
+/** How clients can work with the team. Pricing is quoted per project. */
 export const SERVICE_PLANS: readonly ServicePlan[] = [
   {
     id: "audit",
     name: "Architecture Audit",
     tagline: "A clear plan before you spend on building.",
-    price: "$12k",
-    priceNote: "fixed price",
     timeline: "2 weeks",
     accent: "cyan",
     featured: false,
@@ -23,8 +21,6 @@ export const SERVICE_PLANS: readonly ServicePlan[] = [
     id: "sprint",
     name: "Fixed Scope Sprint",
     tagline: "One AI product, designed and shipped to production.",
-    price: "$45k",
-    priceNote: "starting at",
     timeline: "6 to 8 weeks",
     accent: "pink",
     featured: true,
@@ -40,8 +36,6 @@ export const SERVICE_PLANS: readonly ServicePlan[] = [
     id: "squad",
     name: "Embedded Team",
     tagline: "Our engineers working as part of your team.",
-    price: "$38k",
-    priceNote: "per month",
     timeline: "3 month minimum",
     accent: "lime",
     featured: false,

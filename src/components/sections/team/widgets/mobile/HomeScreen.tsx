@@ -1,4 +1,4 @@
-import { Brain, Camera, type LucideIcon } from "lucide-react";
+import { Camera, ScanText, type LucideIcon } from "lucide-react";
 import { cn } from "@/lib/cn";
 import type { DeviceMode } from "./types";
 
@@ -11,8 +11,8 @@ interface AppTile {
 }
 
 const APPS: readonly AppTile[] = [
-  { mode: "llm", label: "Llama Local", caption: "On-Device Llama Quantized Models", icon: Brain, gradient: "from-cyber-lime/30 to-cyber-cyan/10" },
-  { mode: "cv", label: "Vision CV", caption: "Real-time CV Object Detection", icon: Camera, gradient: "from-cyber-pink/30 to-cyber-cyan/10" },
+  { mode: "ocr", label: "Vision to Markdown", caption: "Qwen2-VL QLoRA page to Markdown", icon: ScanText, gradient: "from-cyber-lime/30 to-cyber-cyan/10" },
+  { mode: "cv", label: "VisionAI Toolkit", caption: "ML Kit object and face detection", icon: Camera, gradient: "from-cyber-pink/30 to-cyber-cyan/10" },
 ];
 
 export interface HomeScreenProps {
@@ -23,7 +23,7 @@ export function HomeScreen({ onLaunch }: HomeScreenProps) {
   return (
     <div className="flex h-full flex-col gap-4 bg-[radial-gradient(circle_at_30%_10%,rgb(var(--accent-lime)_/_0.12),transparent_55%),radial-gradient(circle_at_80%_90%,rgb(var(--accent-pink)_/_0.12),transparent_55%)] px-4 pt-6">
       <div>
-        <p className="font-tech text-[11px] tracking-[0.14em] text-fg-muted uppercase">Nexus Edge OS</p>
+        <p className="font-tech text-[11px] tracking-[0.14em] text-fg-muted uppercase">Nexus Vision Lab</p>
         <p className="font-display text-lg font-black text-fg">Select a demo</p>
       </div>
       <div className="flex flex-col gap-3">
@@ -47,7 +47,7 @@ export function HomeScreen({ onLaunch }: HomeScreenProps) {
           </button>
         ))}
       </div>
-      <p className="mt-auto pb-3 text-center font-mono text-[11px] text-fg-muted">✈ Airplane mode · 100% offline inference</p>
+      <p className="mt-auto pb-3 text-center font-mono text-[11px] text-fg-muted">Simulated demos of real projects</p>
     </div>
   );
 }

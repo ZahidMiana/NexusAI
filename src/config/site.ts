@@ -11,8 +11,8 @@ export const siteConfig = {
   availability: "Available for new projects",
   responseTime: "Replies within one business day",
   contact: {
-    // TODO: replace with the real inbox before launch. Also set CONTACT_TO_EMAIL for the form.
-    email: "uplink@nexus-ai.dev",
+    // Public inbox. The contact form sends to CONTACT_TO_EMAIL (see .env.example).
+    email: "uplinknexussai@gmail.com",
     /** Optional Calendly (or similar) link. When set, "Book a call" buttons open it. */
     bookingUrl: undefined as string | undefined,
   },

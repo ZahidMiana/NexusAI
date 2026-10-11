@@ -2,6 +2,8 @@ import { Footer } from "@/components/layout/Footer";
 import { GridBackground } from "@/components/layout/GridBackground";
 import { Navbar } from "@/components/layout/Navbar";
 import { StickyMobileCta } from "@/components/layout/StickyMobileCta";
+import { WhatsAppWidget } from "@/components/layout/WhatsAppWidget";
+import { ChatWidget } from "@/components/chat/ChatWidget";
 import { AppProviders } from "@/components/providers/AppProviders";
 import { StructuredData } from "@/components/seo/StructuredData";
 import { ContactSection } from "@/components/sections/contact/ContactSection";
@@ -31,6 +33,8 @@ export default function HomePage() {
       </main>
       <Footer />
       <StickyMobileCta />
+      <WhatsAppWidget />
+      <ChatWidget />
     </AppProviders>
   );
 }

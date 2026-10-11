@@ -8,6 +8,7 @@ export const ORGANISATIONS: readonly string[] = [
   "FAST CYBER SECURITY SOCIETY",
   "HACK THE BOX",
   "SOLANA",
+  "HUGGING FACE",
 ];
 
 /** Verifiable certifications, roles and leadership from the team's resumes. */
@@ -71,5 +72,25 @@ export const CREDENTIALS: readonly Credential[] = [
     memberId: "zeeshan",
     accent: "lime",
     detail: "Built Web, Reverse Engineering and Pwn challenges and the containerised competition infrastructure.",
+  },
+  {
+    id: "oop-ta",
+    kind: "Role",
+    title: "Teaching Assistant, Object Oriented Programming",
+    org: "FAST NUCES",
+    period: "Spring 2025",
+    memberId: "zubair",
+    accent: "lime",
+    detail: "Designed and graded quizzes and assignments, and helped 40+ students understand OOP concepts and debug their code.",
+  },
+  {
+    id: "deans-list",
+    kind: "Award",
+    title: "Dean's List (SGPA 3.59)",
+    org: "FAST NUCES",
+    period: "Spring 2023",
+    memberId: "zubair",
+    accent: "cyan",
+    detail: "Awarded to the top-performing Computer Science students for an outstanding semester GPA.",
   },
 ];

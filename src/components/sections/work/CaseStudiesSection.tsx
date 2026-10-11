@@ -22,6 +22,8 @@ const SPANS = [
   "",
   "md:col-span-2 xl:col-span-2",
   "md:col-span-2 xl:col-span-2",
+  "md:col-span-2 xl:col-span-2",
+  "md:col-span-2 xl:col-span-2",
 ] as const;
 
 export function CaseStudiesSection() {

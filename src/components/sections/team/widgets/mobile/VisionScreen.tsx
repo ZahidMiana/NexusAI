@@ -2,7 +2,7 @@
 
 import { Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
-import { DETECTION_TEMPLATES } from "@/data/telemetry";
+import { DETECTION_TEMPLATES, type DetectorId } from "@/data/telemetry";
 import { useInterval } from "@/hooks/useInterval";
 import { useLiveMetric } from "@/hooks/useLiveMetric";
 import { accentTokens } from "@/lib/accent";
@@ -10,10 +10,12 @@ import { cn } from "@/lib/cn";
 import { randomBetween } from "@/lib/math";
 import { ScreenHeader } from "./ScreenHeader";
 
-const DETECTORS = [
-  { id: "yolo", label: "YOLOv8n INT8", fps: 58 },
-  { id: "ssd", label: "MobileNet-SSD", fps: 41 },
-] as const;
+const DETECTORS: readonly { id: DetectorId; label: string; fps: number }[] = [
+  { id: "objects", label: "ML KIT OBJECTS", fps: 30 },
+  { id: "faces", label: "ML KIT FACES", fps: 27 },
+];
+
+const MAX_BOXES = Math.max(...Object.values(DETECTION_TEMPLATES).map((templates) => templates.length));
 
 interface BoxState {
   dx: number;
@@ -25,12 +27,13 @@ export interface VisionScreenProps {
   onBack: () => void;
 }
 
-/** Simulated real-time object detection overlay on a mock camera feed. */
+/** Simulated ML Kit detection overlay on a mock camera feed (VisionAI Toolkit). */
 export function VisionScreen({ onBack }: VisionScreenProps) {
   const [overlays, setOverlays] = useState(true);
   const [detectorIndex, setDetectorIndex] = useState(0);
-  const [boxes, setBoxes] = useState<BoxState[]>(() => DETECTION_TEMPLATES.map(() => ({ dx: 0, dy: 0, confidence: 0.9 })));
+  const [boxes, setBoxes] = useState<BoxState[]>(() => Array.from({ length: MAX_BOXES }, () => ({ dx: 0, dy: 0, confidence: 0.9 })));
   const detector = DETECTORS[detectorIndex];
+  const templates = DETECTION_TEMPLATES[detector.id];
   const fps = useLiveMetric({ initial: detector.fps, amplitude: 3, min: detector.fps - 6, max: detector.fps + 3, intervalMs: 500 });
 
   useInterval(() => {
@@ -45,7 +48,7 @@ export function VisionScreen({ onBack }: VisionScreenProps) {
 
   return (
     <div className="flex h-full flex-col">
-      <ScreenHeader title="Vision CV" onBack={onBack} />
+      <ScreenHeader title="VisionAI Toolkit" onBack={onBack} />
 
       <div className="relative flex-1 overflow-hidden bg-[linear-gradient(160deg,#0b1a24_0%,#120a1a_55%,#050505_100%)]">
         <div aria-hidden className="absolute inset-0 bg-matrix-grid opacity-60" />
@@ -57,7 +60,7 @@ export function VisionScreen({ onBack }: VisionScreenProps) {
         <div aria-hidden className="absolute inset-x-0 top-0 h-1/3 animate-scan bg-gradient-to-b from-transparent via-cyber-lime/10 to-transparent" />
 
         {overlays &&
-          DETECTION_TEMPLATES.map((template, index) => {
+          templates.map((template, index) => {
             const tokens = accentTokens(template.accent);
             const box = boxes[index];
             return (
@@ -101,7 +104,7 @@ export function VisionScreen({ onBack }: VisionScreenProps) {
           onClick={() => setDetectorIndex((index) => (index + 1) % DETECTORS.length)}
           className="flex-1 rounded-xl border border-line py-2 font-tech text-[11px] tracking-[0.12em] text-fg-soft transition-colors hover:border-cyber-pink/60 hover:text-cyber-pink"
         >
-          MODEL: {detector.label}
+          {detector.label}
         </button>
       </div>
     </div>

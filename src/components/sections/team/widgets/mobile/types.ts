@@ -1,1 +1,1 @@
-export type DeviceMode = "home" | "llm" | "cv";
+export type DeviceMode = "home" | "ocr" | "cv";

@@ -70,20 +70,17 @@ export function MemberHeader({ member, compact = false }: MemberHeaderProps) {
 
 const HEXAGON = "polygon(25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%)";
 
-/** Portrait with a neon duotone treatment, or initials when no photo is set. */
+/** Hexagon portrait in natural colour, or initials when no photo is set. */
 function Avatar({ member }: { member: TeamMember }) {
   const tokens = accentTokens(member.accent);
   return (
     <div
-      className={cn("relative flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden border bg-inset font-display text-lg font-black", tokens.borderSoft, tokens.text)}
+      className={cn("relative flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden border bg-inset font-display text-lg font-black", tokens.borderSoft, tokens.text)}
       style={{ clipPath: HEXAGON }}
       aria-hidden={!member.photo}
     >
       {member.photo ? (
-        <>
-          <Image src={member.photo} alt={`Portrait of ${member.name}`} fill sizes="56px" className="object-cover grayscale contrast-125" />
-          <span aria-hidden className={cn("absolute inset-0 mix-blend-color opacity-80", tokens.bg)} />
-        </>
+        <Image src={member.photo} alt={`Portrait of ${member.name}`} fill sizes="64px" className="object-cover" />
       ) : (
         initials(member.name)
       )}
@@ -93,7 +90,7 @@ function Avatar({ member }: { member: TeamMember }) {
 
 type SocialKey = Brand | "website";
 
-const SOCIAL_LABELS: Record<SocialKey, string> = { github: "GitHub", linkedin: "LinkedIn", website: "website" };
+const SOCIAL_LABELS: Record<SocialKey, string> = { github: "GitHub", linkedin: "LinkedIn", whatsapp: "WhatsApp", website: "website" };
 
 function SocialIcon({ kind }: { kind: SocialKey }) {
   return kind === "website" ? <Globe className="h-4 w-4" aria-hidden /> : <BrandIcon brand={kind} className="h-4 w-4" />;
